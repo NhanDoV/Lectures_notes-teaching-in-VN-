@@ -1,8 +1,8 @@
 =================================================================================================================================================
 ||                                                          **Description**                                                                    ||
 =================================================================================================================================================
-The role of a data scientist is to turn raw data into actionable insights. 
-Much of the world's raw data—from electronic medical records to customer transaction histories—lives in organized collections of tables called relational databases. 
+The role of a data scientist is to turn raw data into actionable insights. Much of the world's raw data—from electronic medical records to customer
+transaction histories—lives in organized collections of tables called relational databases. 
 To be an effective data scientist, you must know how to wrangle and extract data from these databases using a language called SQL . 
 =================================================================================================================================================
 This folder includes :
@@ -11,19 +11,27 @@ This folder includes :
 =================================================================================================================================================
 ||                                                       1. INTRODUCTION.                                                                      ||
 `````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
-In this file (notebook / kernel); we discuss how to install `SQL packages` into `jupyter notebook` and creating table in SQL or  then saving & loading
+In this file (notebook / kernel); we discuss :
+> how to install `SQL packages` into `jupyter notebook` 
+> creating table in SQL or persist dataframe to database
+> how to save & load a given file.sqlite.
 =================================================================================================================================================
 =================================================================================================================================================
 ||                                                      2. SELECTING COLUMNS.                                                                  ||
 `````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
 This kernel_chapter provides a brief introduction to working with relational databases. 
-We'll learn about their structure, how to talk about them using database lingo, and how to begin an analysis using simple SQL commands to select and summarize columns from database tables.
+We'll learn about their structure: 
+> how to talk about them using database lingo, and 
+> how to begin an analysis using simple SQL commands to select and summarize columns from database tables.
 =================================================================================================================================================
 =================================================================================================================================================
 ||                                                         3. FILTERING ROWS.                                                                  ||
 `````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
 This chapter builds on the first by teaching us how to filter tables for rows satisfying some criteria of interest. 
-We'll learn how to use basic comparison operators, combine multiple criteria, match patterns in text, and much more.
+We'll learn how to: 
+> use basic comparison operators, 
+> combine multiple criteria, 
+> match patterns in text, and much more.
 =================================================================================================================================================
 =================================================================================================================================================
 ||                                                      4. AGGERATE FUNCTION.                                                                  ||
@@ -36,5 +44,3 @@ We'll also learn about arithmetic in SQL and how to use aliases to make your res
 `````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
 This chapter provides a brief introduction to sorting and grouping your results.
 =================================================================================================================================================
-
-
