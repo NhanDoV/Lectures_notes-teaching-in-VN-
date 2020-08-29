@@ -1,0 +1,34 @@
+=================================================================================================================================================
+||                                                          **Description**                                                                    ||
+=================================================================================================================================================
+In this course, we'll learn all about the power of joining tables while exploring interesting features of countries and their cities throughout 
+the world. 
+We will master inner and outer joins, as well as self joins, semi joins, anti joins and cross joins—fundamental tools in any `PostgreSQL 
+wizard's toolbox`. 
+Never fear set theory again after learning all about unions, intersections, and except clauses through easy-to-understand diagrams and examples. 
+Lastly, we'll be introduced to the challenging topic of subqueries. 
+We will be able to visually grasp these ideas by using Venn diagrams and other linking illustrations.
+=================================================================================================================================================
+||                                        **CHAP 1. Introduction to joins**                                                                    ||
+`````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
+In this chapter, we'll be introduced to the concept of joining tables, and will explore the different ways we can enrich your queries using 
+inner joins and self joins. 
+We'll also see how to use the case statement to split up a field into different categories.
+=================================================================================================================================================
+=================================================================================================================================================
+||                                        **CHAP 2. Outer joins and cross joins**                                                              ||
+`````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
+In this chapter, we'll come to grips with different kinds of outer joins. We'll learn how to gain further insights into your data through 
+left joins, right joins, and full joins. In addition to outer joins, you'll also work with cross joins.
+=================================================================================================================================================
+=================================================================================================================================================
+||                                                **CHAP 3. Set theory clauses**                                                               ||
+`````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
+In this chapter, you'll learn more about set theory using Venn diagrams and get an introduction to union, union all, intersect, and except clauses. 
+We'll finish by investigating semi joins and anti joins, which provide a nice introduction to subqueries.
+=================================================================================================================================================
+=================================================================================================================================================
+||                                                      **CHAP 4. Subqueries**                                                                 ||
+`````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````````
+In this closing chapter, we'll learn how to use nested queries and you'll use what you’ve learned in this course to solve three challenge problems.
+=================================================================================================================================================
