@@ -1,3 +1,37 @@
+=================================================================================================================================================
+||                                         **Description : SQL Fundamental Track**                                                             ||
+=================================================================================================================================================
+Gain the fundamental skills you need to interact with and query your data in SQL—a powerful language used by data-driven businesses large and 
+small to explore and manipulate their data to extract meaningful insights.
+In this track, you'll learn the skills you need to level up your data skills and leave Excel behind you. 
+Through hands-on exercises, you’ll discover how to quickly summarize, join tables, and use window functions and built-in PostgreSQL functions to
+analyze your data.
+=================================================================================================================================================
+COMMENTs
+=================================================================================================================================================
 Designed based on the courses at DataCamp I got certificate:
-
 https://github.com/Nhan121/Projects.py-DataCamp/tree/master/Certificate%20of%20DataCamp_tracks/SQL%20certificates
+=================================================================================================================================================
+Includes 5 courses:
+=================================================================================================================================================
+1) Introduction to SQL 
+Description : [Master the basic of querying tables in relational database; such as : MySQL; SQL Server and PostgreSQL]
+Link : https://github.com/Nhan121/Lectures_notes-teaching-in-VN-/tree/master/SQL%20practices/Introduction%20to%20using%20SQL%20%26%20ML%20prob%20on%20jupyter%20notebook
+=================================================================================================================================================
+2) Joining data in SQL
+Description : [Join more than 2 tables together into one, combine table using set-theory then works with subqueries in PostgreSQL]
+Link : https://github.com/Nhan121/Lectures_notes-teaching-in-VN-/tree/master/SQL%20practices/Joining%20data%20in%20SQL
+=================================================================================================================================================
+3) Intermediate SQL
+Description : [Master the complex SQL queries necessary to answer a wide variety of data science question & prepare robust data science]
+Link : https://github.com/Nhan121/Lectures_notes-teaching-in-VN-/tree/master/SQL%20practices/Intermediate%20SQL
+=================================================================================================================================================
+4) PostgreSQL Summary Stats & Window function
+Description : [Learn how to create queries for analytic & data engineering with window function, the SQL secret weapon]
+Link : https://github.com/Nhan121/Lectures_notes-teaching-in-VN-/tree/master/SQL%20practices/PostgreSQL%20stats%20%26%20window%20function
+=================================================================================================================================================
+5) Functions for Manipulating Data in PostgreSQL
+Description : [Learn the most important PostgreSQL function for manipulating, processing & transforming data]
+Link : https://github.com/Nhan121/Lectures_notes-teaching-in-VN-/tree/master/SQL%20practices/Functions%20for%20Manipulating%20Data%20in%20PostgreSQL
+=================================================================================================================================================
+
