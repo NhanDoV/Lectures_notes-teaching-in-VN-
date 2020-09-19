@@ -1,0 +1,50 @@
+|=============================================================================================================================|
+|                                                   GENERAL DESCRIPTIONS                                                      |
+|=============================================================================================================================|
+|     This course includes 8 fundamental chapters in Python_programming and I think this is really importance in case that    |
+|  you go on the DataFrame; Data Analyst; Computer Vision, Image Processing, Signal Processing, etc.                          |
+|      Below is the detail of each chapters                                                                                   |
+|*****************************************************************************************************************************|
+|                                             CHAPTER 1. VARIABLES & DATA TYPES.                                              |
+|-----------------------------------------------------------------------------------------------------------------------------|
+|    In this chapter, we will discuss the variables, naming variables and how to distinguish the various of datatypes in      |
+|  Python; such as: numeric, list, bool, date-time, ....                                                                      |
+|     Moreover, understanding the operations of string, numeric (int, float, binary, ...) is nescessary to study the other    |
+|  topics; e.g., data analyst, computer vision, natural language processing, and so on.                                       |
+|*****************************************************************************************************************************|
+|                                              CHAPTER 2. CONDITIONALS, LOOPING.                                              |
+|-----------------------------------------------------------------------------------------------------------------------------|
+|    In this chapter, we will study the definition of conditions, also how to make a loop, using for, while, and if, cases.   |
+|    Obviously, we will have a lots of exciting examples to illustrations! Don't be worried about this!                       |
+|*****************************************************************************************************************************|
+|                                         CHAPTER 3. FUNCTIONS & FUNCTION_ARGUMENTS.                                          |
+|-----------------------------------------------------------------------------------------------------------------------------|
+|    Understanding the function, writing the function and optimal your computation is a very useful technique to become a     |
+|  good programmers, also to deal with the complexity problems in the real life.                                              |
+|*****************************************************************************************************************************|
+|                                             CHAPTER 4. ERRORS & EXCEPTIONS                                                  |
+|-----------------------------------------------------------------------------------------------------------------------------|
+|    An error detected during execution of some Python code is called an exception. So what are they? and how many types of   |
+|  them? Go ahead and don't hesitage anymore.                                                                                 |
+|*****************************************************************************************************************************|
+|                                        CHAPTER 5. CLASSES, OBJECTS & LAMBDA FUNCTIONS                                       |
+|-----------------------------------------------------------------------------------------------------------------------------|
+|    In the 3rd chapter, we had undertood the function; so what is lambda function and why we called it be the anomyous func? |
+|    Section classes is beyond the scope of this document to provide a complete introduction to object oriented programming.  |
+|    In the section of class, we simply introduce the basic to define classes and create custom objects in Python.            |
+|*****************************************************************************************************************************|
+|                                             CHAPTER 6. MODULES & PACKAGES.                                                  |
+|-----------------------------------------------------------------------------------------------------------------------------|
+|    Understanding modules and packages is the first step to reach "Package Development"? A module is nothing else than a     |
+| Python file and the file name is the module name with suffix.py appended; so you must take care the folder modules_and_pack |
+| in my github!                                                                                                               |
+|*****************************************************************************************************************************|
+|                                           CHAPTER 7. GRAPHICS WITH MATPLOTLIB                                               |
+|-----------------------------------------------------------------------------------------------------------------------------|
+|    This is a nescessary for whom concerns Geomertrics, Computer vision, Data visualization, etc with only matplotlib.       |
+|*****************************************************************************************************************************|
+|                                       CHAPTER 8. WELCOME TO NUMPY, PANDAS, SEABORN, etc.                                    |
+|-----------------------------------------------------------------------------------------------------------------------------|
+|    In the final chapter, I will introduce some popular libraries that may we works daily in Python. The details and its     |
+|  applications will be discuss on the other courses. Now, finish this chapter and welcome to Python!                         |
+|*****************************************************************************************************************************|
