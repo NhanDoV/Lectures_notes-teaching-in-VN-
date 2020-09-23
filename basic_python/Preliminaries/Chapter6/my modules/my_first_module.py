@@ -28,11 +28,13 @@ def phan_vi(data, alpha):
     """
         Ham nay duoc su dung de tinh phan vi voi cac tham so:
             data (list or array of the numeric)
-            alpha : must be in (0, 1) is the quantiles level
+            alpha (float): must be in (0, 1) is the quantiles level
+            
+        This function returns the quantiles of your input_data
     """
     data.sort()   ## sap xep du lieu theo tu tu tang dan
     n = len(data) ## tinh so phan tu trong du~ lieu
-    p = int(alpha*n/100)
+    p = int(alpha*n)
     return data[p] + (alpha*n/100 - p - 0.5)*(data[p+1] - data[p])
 
 
@@ -40,6 +42,8 @@ def mode(data):
     """
         Ham nay se tra ra mode: gia tri xuat hien nhieu lan nhat trong du lieu
         hoac tra ra thong bao khong ton tai mode (co it nhat 2 gia tri co tan suat cao nhat)
+        
+        The output returns the mode in data and print out it existed or not
     """
     import numpy as np
     def count(data, value):
@@ -68,6 +72,7 @@ def box_plot_info(data):
             IQR = (Q3 - Q1)
             max, min
             outliers
+        output returns a tupple of (max, min, Q1, Q2, Q3, IQR, outliers)
     """
     data_max = max(data)
     data_min = min(data)
@@ -79,4 +84,4 @@ def box_plot_info(data):
     for outlier in data:
         if ((outlier < max(data_min, Q1 - 1.5*IQR)) or (outlier > min(data_max, Q3 + 1.5*IQR) ) ) :
             outliers.append(outlier)
-    return outliers
+    return datamax, datamin, Q1, Q2, Q3, IQR, outliers
