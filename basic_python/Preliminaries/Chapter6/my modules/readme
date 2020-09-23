@@ -1,0 +1,10 @@
+|---------------------------------------------------------------------------------------------------------------------------|
+|                                                   DESCRIPTIONS                                                            |
+|---------------------------------------------------------------------------------------------------------------------------|
+|   This folder contain many file.py of modules in Python; which be used to import in another file.py                       |
+|   For example:                                                                                                            |
+|        1) my_first_module: contains many tool uses in the summary_statistics                                              |
+|        2) my_second_module : contains may tool uses in splitting images,....                                              |
+|         ....                                                                                                              |
+|       etc.                                                                                                                |
+|---------------------------------------------------------------------------------------------------------------------------|
