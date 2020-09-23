@@ -8,6 +8,7 @@ def mean(data):
         trung_binh += x / len(data)
     return trung_binh
 
+## Tinh phuong sai hieu chinh
 def variance_hc(data):
     """ 
         This function is used to find the adjusted_variance of your data
@@ -17,6 +18,7 @@ def variance_hc(data):
         phuong_sai += (x - mean(data))**2 / (len(data) - 1)
     return phuong_sai
 
+## Tinh do lech chuan
 def standard_deviation(data):
     """
         Ham nay duoc viet de tinh do lech chuan cho phuong sai hieu chinh
@@ -24,6 +26,7 @@ def standard_deviation(data):
     import math
     return math.sqrt(variance_hc(data))
 
+## Ham tim phan vi
 def phan_vi(data, alpha):
     """
         Ham nay duoc su dung de tinh phan vi voi cac tham so:
@@ -32,12 +35,13 @@ def phan_vi(data, alpha):
             
         This function returns the quantiles of your input_data
     """
+    alpha = int(alpha*100) ## percentage_convert: e.g., 0.1 to 10%
     data.sort()   ## sap xep du lieu theo tu tu tang dan
     n = len(data) ## tinh so phan tu trong du~ lieu
-    p = int(alpha*n)
-    return data[p] + (alpha*n/100 - p - 0.5)*(data[p+1] - data[p])
+    p = int(alpha*n/100)
+    return data[p] + (alpha*(n - 1)/100 - p)*(data[p+1] - data[p])
 
-
+## Viet ham tinh mode
 def mode(data):
     """
         Ham nay se tra ra mode: gia tri xuat hien nhieu lan nhat trong du lieu
@@ -65,6 +69,7 @@ def mode(data):
     print("So %s xuat hien %s lan trong du lieu nay!"%(data_mode, count_max))
     return data_mode
 
+## Trich xuat cac du lieu chinh yeu trong boxplot: Q1,Q2,Q3, IQR, max, min, outliers
 def box_plot_info(data):
     """ 
         Ham nay chua cac thong tin co ban cua 1 boxplot gom`:
@@ -76,12 +81,12 @@ def box_plot_info(data):
     """
     data_max = max(data)
     data_min = min(data)
-    Q1 = phan_vi(data, 25)
-    Q2 = phan_vi(data, 50)
-    Q3 = phan_vi(data, 75)
+    Q1 = phan_vi(data, 0.25)
+    Q2 = phan_vi(data, 0.50)
+    Q3 = phan_vi(data, 0.75)
     IQR = Q3 - Q1
     outliers = []
     for outlier in data:
         if ((outlier < max(data_min, Q1 - 1.5*IQR)) or (outlier > min(data_max, Q3 + 1.5*IQR) ) ) :
             outliers.append(outlier)
-    return datamax, datamin, Q1, Q2, Q3, IQR, outliers
+    return data_max, data_min, Q1, Q2, Q3, IQR, outliers
