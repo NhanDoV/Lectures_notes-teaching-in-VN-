@@ -1,0 +1,34 @@
+|================================================================================================================================================|
+||                                                            COURSE DESCRIPTION                                                                ||
+|================================================================================================================================================|
+|   You have experience working with databases or, perhaps, you have heard how useful databases can be for organizing your data.                 |
+|   Have you ever wanted to create and manage your own databases but thought such knowledge is reserved for database administrators? Well, it    |
+| is not! This course teaches you the skills and knowledge necessary to create and manage your own PostgreSQL databases.                         |
+|   Topics that will be covered include the structure of PostgreSQL databases, PostgreSQL datatypes, and normalization of databases to           |
+| efficiently store data and avoid data loss.                                                                                                    |
+|   These topics will be taught using data from the U.S. Small Business Administration (SBA) to guide the lessons and provide context for the    |
+| concepts covered in the course .                                                                                                               |
+|================================================================================================================================================|
+|                                               CHAPTER 1: STRUCTURE OF POSTGRESQL DATABASE                                                      |
+|................................................................................................................................................|
+|   In this chapter, you will be introduced to the fundamental objects in a PostgreSQL database: the database, tables, and schemas. After        |
+| completing this chapter, you will know how to issue commands to create all three types of objects, and understand how each fits into the       |
+| hierarchy of PostgreSQL objects.                                                                                                               |
+|================================================================================================================================================|
+|                                                     CHAPTER 2: POSTGRESQL DATA TYPES                                                           |
+|................................................................................................................................................|
+|   In this chapter, you will be introduced to text, numeric, temporal, and boolean data types in PostgreSQL. After completing this chapter, you |
+| will be able to define the appropriate data types for table columns based on the data values to be stored.                                     |
+|================================================================================================================================================|
+|                                                    CHAPTER 3: DATABASE NORMALIZATION                                                           |
+|................................................................................................................................................|
+|   In this chapter, database normalization is introduced. Database normalization maintains data integrity and reduces data duplication. 1st,    |
+| 2nd, and 3rd Normal Form are defined as steps in the process of normalizing a database. Examples to clarify concepts are provided throughout   |
+| the chapter.                                                                                                                                   |
+|================================================================================================================================================|
+|                                                 CHAPTER 4: ACCESS CONTROL IN POSTGRESQL                                                        |
+|................................................................................................................................................|
+|   In this chapter, the topic of access control in PostgreSQL is introduced. Access control is presented as granting and revoking privileges to |
+| users and groups on database objects. Using these tools, a database and its objects can be protected from unauthorized access, helping to      |
+| ensure the integrity of the stored data.                                                                                                       |
+|================================================================================================================================================|
