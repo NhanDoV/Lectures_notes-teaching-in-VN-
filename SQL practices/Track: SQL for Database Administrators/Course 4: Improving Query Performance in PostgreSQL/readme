@@ -1,0 +1,33 @@
+|================================================================================================================================================|
+||                                                            COURSE DESCRIPTION                                                                ||
+|================================================================================================================================================|
+|   Losing time on slow queries? Hesitant to share your queries with more seasoned coworkers? In this course, you will learn how to structure    |
+| your PostgreSQL to run in a fraction of the time. Exploring intertwined data relating Olympic participation, country climate, and gross        |
+| domestic product, you will experience firsthand how changes in filtering method and using subqueries impact query performance. You will learn  |
+| the properties of a row oriented database while also seeing how Hawaii's volcanos impact air quality. Restructuring your queries with the query|
+| planner and the SQL order of operations, you will soon be dazzling your coworkers with your effortless efficiency.                             |
+|================================================================================================================================================|
+|                                                   CHAPTER 1: BRINGING TOGETHER THE DATA.                                                       |
+|................................................................................................................................................|
+|   Bundle up as you dive into the Winter Olympics! You will learn how to join, subquery, and create temporary tables while finding which Olympic|
+| athletes brave sub-freezing temperatures to train. You will also learn about the query planner and how its functionality can guide your SQL    |
+| structure to faster queries.                                                                                                                   |
+|================================================================================================================================================|
+|                                           CHAPTER 2. MINIMIZING RESULTS AND DESCREASING THE LOAD                                               |
+|................................................................................................................................................|
+|     Dig up those past algebra memories while learning the SQL order of operations. Find which countries "should" have the most athletes by     |
+| looking at population and gross domestic product (GDP) while learning the best way to filter. You will also learn when your query aggregates   |
+| (sums, counts, etc.) and how you can structure your query to optimize this process.                                                            |
+|================================================================================================================================================|
+|                                               CHAPTER 3. USING DATABASE DESIGNED PROPERTIES.                                                   |
+|................................................................................................................................................|
+|     Zero in on the properties that improve database performance. Discover when your table is not a table but a view. Learn how your database's |
+| storage structure (row or column oriented) impacts your query structure. You will explore volcanic smog while using partitions and indexes to  |
+| speed your queries.                                                                                                                            |
+|================================================================================================================================================|
+|                                                   CHAPTER 4. ASSESSING QUERY PERFORMANCE.                                                      |
+|................................................................................................................................................|
+|     Learn the lingo of the Query Lifecycle and dive into the query planner. Explore how the query planner creates and optimizes the query plan.|
+| Find your next vacation locale by looking for countries with recent population growth while also seeing how a join impacts the query steps.    |
+| Fine tune your optimization techniques by seeing how different filters speed your query times.                                                 |
+|================================================================================================================================================|
