@@ -1,0 +1,30 @@
+|================================================================================================================================================|
+||                                                            COURSE DESCRIPTION                                                                ||
+|================================================================================================================================================|
+|     In this course, you will learn how to use SQL to support decision making. It is based on a case study about an online movie rental company |
+| with a database about customer information, movie ratings, background information on actors and more.                                          |
+|     You will learn to apply SQL queries to study for example customer preferences, customer engagement, and sales development.                 |
+|     This course also covers SQL extensions for online analytical processing (OLAP), which makes it easier to obtain key insights from          |  
+| multidimensional aggregated data.                                                                                                              |
+|================================================================================================================================================|
+|                           CHAPTER 1. INTRODUCTION TO BUSINESS INTELLIGENCE FOR A ONLINE MOVIE RENTAL DATABASE.                                 |
+|................................................................................................................................................|
+|     The first chapter is an introduction to the use case of an online movie rental company, called MovieNow and focuses on using simple SQL    |
+| queries to extract and aggregated data from its database.                                                                                      |
+|================================================================================================================================================|
+|                                          CHAPTER 2. DECISION MAKING WITH SIMPLE SQL QUERIES.                                                   |
+|................................................................................................................................................|
+|     More complex queries with GROUP BY, LEFT JOIN and sub-queries are used to gain insight into customer preferences.                          |
+|================================================================================================================================================|
+|                                   CHAPTER 3. DATA-DRIVEN DECISION MAKING WITH ADVANCED SQL QUERIES.                                            |
+|................................................................................................................................................|
+|     The concept of nested queries and correlated nested queries is introduced and the functions EXISTS and UNION are used to categorize        |
+| customers, movies, actors, and more.                                                                                                           |
+|================================================================================================================================================|
+|                                     CHAPTER 4. DATA-DRIVEN DECISION MAKING WITH OLAP SQL QUERIES.                                              |
+|................................................................................................................................................|
+|     The OLAP extensions in SQL are introduced and applied to aggregated data on multiple levels.                                               |
+|     These extensions are the CUBE, ROLLUP and GROUPING SETS operators.                                                                         |
+|================================================================================================================================================|
+
+Source: https://learn.datacamp.com/courses/data-driven-decision-making-in-sql
