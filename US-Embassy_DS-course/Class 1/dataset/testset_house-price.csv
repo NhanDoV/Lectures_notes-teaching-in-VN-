@@ -1,0 +1,656 @@
+price,area,status,nb_bedroom,nb_bathroom,age,location,builder
+53.0,942,Ready to move,2,2.0,5.0,Iyyappanthangal,seller
+53.0,942,Ready to move,2,2.0,5.0,Iyyappanthangal,seller
+53.0,942,Ready to move,2,2.0,5.0,Iyyappanthangal,seller
+53.0,942,Ready to move,2,2.0,5.0,Iyyappanthangal,seller
+27.5,586,Ready to move,1,1.0,,Sembakkam,seller
+28.0,586,Ready to move,1,1.0,,Sembakkam,seller
+28.0,586,Ready to move,1,1.0,,Sembakkam,seller
+28.0,586,Ready to move,1,1.0,,Sembakkam,seller
+28.0,586,Ready to move,1,1.0,,Sembakkam,seller
+28.0,586,Ready to move,1,1.0,,Sembakkam,seller
+28.0,586,Ready to move,1,1.0,,Sembakkam,seller
+28.0,586,Ready to move,1,1.0,,Sembakkam,seller
+28.0,586,Ready to move,1,1.0,,Sembakkam,seller
+28.0,586,Ready to move,1,1.0,,Sembakkam,seller
+28.0,586,Ready to move,1,1.0,,Sembakkam,seller
+28.0,586,Ready to move,1,1.0,,Sembakkam,seller
+28.0,586,Ready to move,1,1.0,,Sembakkam,seller
+28.0,586,Ready to move,1,1.0,,Sembakkam,seller
+28.0,586,Ready to move,1,1.0,,Sembakkam,seller
+310.0,2400,Ready to move,3,3.0,6.0,Jamalia,seller
+35.0,953,Under Construction,2,2.0,,Pattabiram,seller
+460.0,4000,Ready to move,4,4.0,,Kilpauk,seller
+520.0,4000,Ready to move,4,3.0,,Adyar,seller
+26.2,655,Ready to move,1,2.0,,Madambakkam,seller
+35.0,700,Ready to move,2,2.0,4.0,Pattabiram,seller
+110.0,1405,Ready to move,3,2.0,,Adyar,seller
+25.0,650,Ready to move,2,2.0,4.0,Pattabiram,seller
+25.0,650,Ready to move,2,2.0,4.0,Pattabiram,seller
+25.0,650,Ready to move,2,2.0,4.0,Pattabiram,seller
+60.0,1386,Ready to move,3,3.0,,Avadi,seller
+540.0,5100,Under Construction,5,5.0,,Kottivakkam,seller
+35.0,750,Ready to move,2,1.0,,Medavakkam,seller
+35.0,750,Ready to move,2,1.0,,Medavakkam,seller
+35.0,750,Ready to move,2,1.0,,Medavakkam,seller
+35.0,750,Ready to move,2,1.0,,Medavakkam,seller
+36.0,809,Ready to move,2,2.0,,Sembakkam,seller
+30.0,905,Ready to move,2,2.0,4.0,Purasawalkam,seller
+39.5,809,Ready to move,2,2.0,,Sembakkam,seller
+39.5,809,Ready to move,2,2.0,,Sembakkam,seller
+39.5,809,Ready to move,2,2.0,,Sembakkam,seller
+39.5,809,Ready to move,2,2.0,,Sembakkam,seller
+39.5,809,Ready to move,2,2.0,,Sembakkam,seller
+62.0,1030,Ready to move,3,2.0,,Perungalathur,seller
+62.0,1030,Ready to move,3,2.0,,Perungalathur,seller
+62.0,1030,Ready to move,3,2.0,,Perungalathur,seller
+62.0,1030,Ready to move,3,2.0,,Perungalathur,seller
+62.0,1030,Ready to move,3,2.0,,Perungalathur,seller
+62.0,1030,Ready to move,3,2.0,,Perungalathur,seller
+62.0,1030,Ready to move,3,2.0,,Perungalathur,seller
+62.0,1030,Ready to move,3,2.0,,Perungalathur,seller
+62.0,1030,Ready to move,3,2.0,,Perungalathur,seller
+62.0,1030,Ready to move,3,2.0,,Perungalathur,seller
+62.0,1030,Ready to move,3,2.0,,Perungalathur,seller
+62.0,1030,Ready to move,3,2.0,,Perungalathur,seller
+62.0,1030,Ready to move,3,2.0,,Perungalathur,seller
+62.0,1030,Ready to move,3,2.0,,Perungalathur,seller
+62.0,1030,Ready to move,3,2.0,,Perungalathur,seller
+62.0,1030,Ready to move,3,2.0,,Perungalathur,seller
+42.8,855,Ready to move,2,2.0,,Pammal,seller
+62.0,1030,Ready to move,3,2.0,,Perungalathur,seller
+58.0,1030,Ready to move,3,2.0,,Perungalathur,seller
+87.0,1015,Under Construction,2,2.0,,Adambakam,seller
+85.0,1200,Ready to move,2,2.0,,tambaram west,seller
+71.0,1100,Under Construction,3,3.0,,Kolathur,seller
+165.0,1344,Ready to move,2,2.0,,Aminjikarai,seller
+165.0,1344,Ready to move,2,2.0,,Aminjikarai,seller
+49.0,1200,Ready to move,2,2.0,,Guduvancheri,seller
+106.0,1350,Ready to move,3,3.0,,West Mambalam,seller
+33.0,580,Ready to move,2,2.0,4.0,Perungalathur,seller
+45.0,1024,Ready to move,3,2.0,,Thirumullaivoyal,seller
+37.5,845,Ready to move,2,2.0,,Kundrathur,seller
+47.0,1505,Ready to move,3,3.0,5.0,Sriperumbudur,seller
+416.0,2315,Under Construction,3,3.0,,Alwarpet,seller
+72.0,1100,Under Construction,3,3.0,,Kolathur,seller
+34.99,1175,Ready to move,2,2.0,3.0,Veppampattu,Karthick
+21.99,600,Ready to move,1,2.0,3.0,Veppampattu,Karthick
+22.0,600,Ready to move,1,2.0,3.0,Veppampattu,Karthick
+29.0,800,Ready to move,2,2.0,3.0,Veppampattu,Karthick
+32.0,1000,Ready to move,2,2.0,3.0,Veppampattu,Karthick
+39.75,885,Under Construction,2,2.0,,Perumbakkam,HomeFirst
+65.8,1535,Under Construction,3,3.0,,Perumbakkam,HomeFirst
+41.0,1250,Ready to move,1,2.0,,Kelambakkam,Elite nisha
+33.0,1020,Ready to move,2,3.0,,Semmancheri,Elite nisha
+48.0,1270,Ready to move,2,1.0,,Kelambakkam,Elite nisha
+49.0,1110,Ready to move,2,2.0,,Navallur,Elite nisha
+47.0,1060,Ready to move,2,2.0,,Semmancheri,Elite nisha
+43.0,1350,Ready to move,2,2.0,,Kelambakkam,Elite nisha
+195.0,3850,Ready to move,5,5.0,5.0,Ponniammanmedu,JA Associates
+145.0,1000,Ready to move,2,1.0,3.0,Kodungaiyur West,JA Associates
+120.0,2400,Ready to move,4,4.0,,Kolathur,JA Associates
+73.56,1206,Under Construction,3,,0.0,Pammal,Murali
+78.75,1291,Under Construction,3,,0.0,Pammal,Murali
+74.96,1229,Under Construction,3,,0.0,Pammal,Murali
+56.1,1020,Under Construction,3,,0.0,Sembakkam,Individual Agent
+60.5,1100,Under Construction,3,,0.0,Sembakkam,Individual Agent
+58.0,900,Under Construction,2,,0.0,Poonamallee,THAMINA HOMES
+55.0,850,Under Construction,2,,0.0,Poonamallee,THAMINA HOMES
+48.0,750,Under Construction,2,,0.0,Poonamallee,THAMINA HOMES
+440.0,2452,Ready to move,3,3.0,,Nungambakkam,HomeFirst
+23.0,500,Ready to move,1,1.0,,Nanmangalam,MC Foundation
+62.08,1194,Ready to move,3,3.0,,Medavakkam,MC Foundation
+48.41,931,Ready to move,2,2.0,,Medavakkam,MC Foundation
+47.08,961,Ready to move,2,2.0,,Nanmangalam,MC Foundation
+39.4,788,Ready to move,2,2.0,,Perumbakkam,MC Foundation
+38.61,788,Ready to move,2,2.0,,Nanmangalam,MC Foundation
+45.08,980,Ready to move,2,2.0,,Nanmangalam,MC Foundation
+38.36,834,Ready to move,2,2.0,,Nanmangalam,MC Foundation
+36.57,795,Ready to move,2,2.0,,Nanmangalam,MC Foundation
+64.78,1117,Ready to move,3,3.0,,Sembakkam,MC Foundation
+78.0,1300,Ready to move,3,3.0,,Medavakkam,MC Foundation
+54.06,983,Ready to move,2,2.0,,Medavakkam,MC Foundation
+47.35,861,Ready to move,2,2.0,,Medavakkam,MC Foundation
+58.26,971,Ready to move,2,2.0,,Medavakkam,MC Foundation
+81.2,1400,Ready to move,3,3.0,,Sembakkam,MC Foundation
+69.35,1261,Ready to move,3,3.0,,Medavakkam,MC Foundation
+49.0,1000,Ready to move,2,2.0,,Nanmangalam,MC Foundation
+43.51,888,Ready to move,2,2.0,,Nanmangalam,MC Foundation
+69.35,1261,Ready to move,3,3.0,,Medavakkam,MC Foundation
+56.04,1019,Ready to move,2,2.0,,Medavakkam,MC Foundation
+58.26,971,Ready to move,2,2.0,,Medavakkam,MC Foundation
+81.2,1400,Ready to move,3,3.0,,Sembakkam,MC Foundation
+78.0,1300,Ready to move,3,3.0,,Medavakkam,MC Foundation
+54.06,983,Ready to move,2,2.0,,Medavakkam,MC Foundation
+47.35,861,Ready to move,2,2.0,,Medavakkam,MC Foundation
+31.2,600,Ready to move,1,1.0,,Medavakkam,MC Foundation
+74.87,1291,Ready to move,3,3.0,,Sembakkam,MC Foundation
+68.88,1148,Ready to move,3,3.0,,Medavakkam,MC Foundation
+53.76,896,Ready to move,2,2.0,,Medavakkam,MC Foundation
+56.88,1094,Ready to move,3,3.0,,Medavakkam,MC Foundation
+51.94,999,Ready to move,2,2.0,,Medavakkam,MC Foundation
+52.2,900,Ready to move,2,2.0,,Sembakkam,MC Foundation
+72.71,1322,Ready to move,3,3.0,,Medavakkam,MC Foundation
+64.78,1117,Ready to move,3,3.0,,Sembakkam,MC Foundation
+41.11,839,Ready to move,2,2.0,,Nanmangalam,MC Foundation
+43.68,840,Ready to move,2,2.0,,Medavakkam,MC Foundation
+54.05,932,Ready to move,2,2.0,,Kovilambakkam,MC Foundation
+53.41,1187,Ready to move,3,3.0,,Sithalapakkam,MC Foundation
+54.55,1091,Ready to move,3,3.0,,Perumbakkam,MC Foundation
+48.85,977,Ready to move,2,2.0,,Perumbakkam,MC Foundation
+51.96,896,Ready to move,2,2.0,,Kovilambakkam,MC Foundation
+53.39,1139,Ready to move,3,3.0,,Nanmangalam,MC Foundation
+70.6,1400,Ready to move,3,3.0,,Perumbakkam,MC Foundation
+43.15,863,Ready to move,2,2.0,,Perumbakkam,MC Foundation
+58.8,1200,Ready to move,3,3.0,,Nanmangalam,MC Foundation
+49.0,1000,Ready to move,2,2.0,,Nanmangalam,MC Foundation
+43.51,888,Ready to move,2,2.0,,Nanmangalam,MC Foundation
+45.99,1022,Ready to move,3,3.0,,Sithalapakkam,MC Foundation
+41.58,924,Ready to move,2,2.0,,Sithalapakkam,MC Foundation
+58.45,759,Ready to move,2,2.0,6.0,Nesapakkam,Balasubramani
+29.0,650,Ready to move,1,1.0,3.0,Pallikaranai,Propsource Realty Private Limited
+39.88,1050,Ready to move,2,2.0,,Thaiyur,Propsource Realty Private Limited
+89.0,950,Ready to move,2,2.0,,T Nagar,AKS REALTY SERVICES
+69.47,965,Under Construction,2,,0.0,Porur,ARB HOMES
+66.44,923,Under Construction,2,2.0,0.0,Porur,ARB HOMES
+92.65,1287,Under Construction,3,,0.0,Porur,ARB HOMES
+78.1,1085,Under Construction,3,3.0,0.0,Porur,ARB HOMES
+73.93,1027,Under Construction,2,,0.0,Porur,ARB HOMES
+69.9,971,Under Construction,2,,0.0,Porur,ARB HOMES
+69.54,966,Under Construction,2,,0.0,Porur,ARB HOMES
+85.0,1712,Ready to move,3,3.0,,Medavakkam,South Zone Realty Consulting Pvt Ltd
+430.0,6700,Ready to move,4,4.0,,Kovalam,HomeFirst
+240.0,3700,Ready to move,3,3.0,,Kovalam,HomeFirst
+205.0,1850,Ready to move,3,3.0,4.0,CIT Nagar,AKS REALTY SERVICES
+51.32,1283,Ready to move,3,3.0,,Selaiyur,MC Foundation
+45.04,1126,Ready to move,3,3.0,,Selaiyur,MC Foundation
+45.04,1126,Ready to move,3,3.0,,Selaiyur,MC Foundation
+29.72,743,Ready to move,2,2.0,,Selaiyur,MC Foundation
+53.85,1122,Ready to move,3,3.0,,Selaiyur,MC Foundation
+43.48,906,Ready to move,2,2.0,,Selaiyur,MC Foundation
+40.27,839,Ready to move,2,2.0,,Selaiyur,MC Foundation
+79.69,1172,Ready to move,2,2.0,,tambaram west,MC Foundation
+75.0,1655,Ready to move,3,3.0,1.0,Agaramthen,MC Foundation
+100.0,2100,Ready to move,3,3.0,,Selaiyur,MC Foundation
+70.0,1600,Ready to move,3,3.0,1.0,Agaramthen,MC Foundation
+100.0,2100,Ready to move,3,3.0,,Vengambakkam,MC Foundation
+95.0,2000,Ready to move,3,3.0,,Selaiyur,MC Foundation
+90.0,1900,Ready to move,3,3.0,,Selaiyur,MC Foundation
+95.0,2000,Ready to move,3,3.0,,Vengambakkam,MC Foundation
+85.0,1800,Ready to move,3,3.0,,Selaiyur,MC Foundation
+90.0,1900,Ready to move,3,3.0,,Vengambakkam,MC Foundation
+85.0,1800,Ready to move,3,3.0,,Vengambakkam,MC Foundation
+80.0,1700,Ready to move,3,3.0,,Selaiyur,MC Foundation
+80.0,1700,Ready to move,3,3.0,,Vengambakkam,MC Foundation
+75.0,1655,Ready to move,3,3.0,,Selaiyur,MC Foundation
+75.0,1655,Ready to move,3,3.0,,Vengambakkam,MC Foundation
+90.0,1667,Ready to move,3,3.0,,Selaiyur,MC Foundation
+70.0,1600,Ready to move,3,3.0,,Selaiyur,MC Foundation
+70.0,1600,Ready to move,3,3.0,,Vengambakkam,MC Foundation
+120.0,2000,Ready to move,3,3.0,,Sembakkam,MC Foundation
+100.0,2100,Ready to move,3,3.0,1.0,Agaramthen,MC Foundation
+100.0,1821,Ready to move,3,3.0,,Sembakkam,MC Foundation
+100.0,2100,Ready to move,3,3.0,,Selaiyur,MC Foundation
+95.0,2000,Ready to move,3,3.0,1.0,Agaramthen,MC Foundation
+95.0,1783,Ready to move,3,3.0,,Sembakkam,MC Foundation
+95.0,2000,Ready to move,3,3.0,,Selaiyur,MC Foundation
+85.0,1583,Ready to move,3,3.0,,Selaiyur,MC Foundation
+90.0,1900,Ready to move,3,3.0,1.0,Agaramthen,MC Foundation
+90.0,1624,Ready to move,3,3.0,,Sembakkam,MC Foundation
+90.0,1900,Ready to move,3,3.0,,Selaiyur,MC Foundation
+85.0,1800,Ready to move,3,3.0,1.0,Agaramthen,MC Foundation
+125.0,1800,Ready to move,3,3.0,,Rajakilpakkam,MC Foundation
+100.0,1874,Ready to move,3,3.0,,Selaiyur,MC Foundation
+85.0,1800,Ready to move,3,3.0,,Selaiyur,MC Foundation
+80.0,1700,Ready to move,3,3.0,,Selaiyur,MC Foundation
+80.0,1700,Ready to move,3,3.0,1.0,Agaramthen,MC Foundation
+95.0,1700,Ready to move,3,3.0,,Rajakilpakkam,MC Foundation
+75.0,1655,Ready to move,3,3.0,,Selaiyur,MC Foundation
+94.0,1793,Ready to move,3,3.0,,Selaiyur,MC Foundation
+100.0,2000,Ready to move,3,3.0,,Selaiyur,MC Foundation
+90.0,1674,Ready to move,3,3.0,,Selaiyur,MC Foundation
+95.0,1800,Ready to move,3,3.0,,Selaiyur,MC Foundation
+90.0,1740,Ready to move,3,3.0,,Selaiyur,MC Foundation
+84.0,1600,Ready to move,3,3.0,,Selaiyur,MC Foundation
+85.0,1664,Ready to move,3,3.0,,Selaiyur,MC Foundation
+100.0,2000,Ready to move,3,3.0,,tambaram west,MC Foundation
+95.0,1800,Ready to move,3,3.0,,tambaram west,MC Foundation
+110.0,2000,Ready to move,3,3.0,,Selaiyur,MC Foundation
+100.0,1839,Ready to move,3,3.0,,Selaiyur,MC Foundation
+90.0,1700,Ready to move,3,3.0,,tambaram west,MC Foundation
+95.0,1741,Ready to move,3,3.0,,Selaiyur,MC Foundation
+85.0,1621,Ready to move,3,3.0,,tambaram west,MC Foundation
+130.0,1385,Ready to move,3,3.0,,Chromepet,MC Foundation
+74.0,1300,Ready to move,3,3.0,,Madambakkam,MC Foundation
+69.0,1200,Ready to move,2,2.0,,Madambakkam,MC Foundation
+130.0,1961,Ready to move,3,3.0,,Rajakilpakkam,MC Foundation
+70.0,1600,Ready to move,3,3.0,,Selaiyur,MC Foundation
+140.0,2200,Under Construction,4,4.0,,Sembakkam,MC Foundation
+95.0,1900,Ready to move,3,3.0,,Perumbakkam,MC Foundation
+85.0,1800,Ready to move,3,3.0,,Perumbakkam,MC Foundation
+120.0,1321,Ready to move,3,3.0,,Chromepet,MC Foundation
+90.0,1800,Ready to move,4,4.0,,Madambakkam,MC Foundation
+120.0,1400,Ready to move,3,3.0,,Chitlapakkam,MC Foundation
+85.0,1683,Ready to move,3,3.0,,Madambakkam,MC Foundation
+80.0,1561,Ready to move,3,3.0,,Madambakkam,MC Foundation
+77.0,1483,Ready to move,3,3.0,,Madambakkam,MC Foundation
+110.0,1943,Ready to move,3,3.0,,Chromepet,MC Foundation
+110.0,1300,Ready to move,3,3.0,,Chitlapakkam,MC Foundation
+95.0,1783,Ready to move,3,3.0,,Chromepet,MC Foundation
+60.02,1225,Ready to move,3,3.0,,Chromepet,MC Foundation
+53.6,1094,Ready to move,3,3.0,,Chromepet,MC Foundation
+44.59,910,Ready to move,2,2.0,,Chromepet,MC Foundation
+40.18,820,Ready to move,2,2.0,,Chromepet,MC Foundation
+24.47,505,Ready to move,1,1.0,,Chromepet,MC Foundation
+108.0,1065,Ready to move,2,2.0,1.0,Saligramam,seller
+37.34,770,Under Construction,2,2.0,0.0,Ambattur,seller
+57.12,1190,Under Construction,3,3.0,,Nanmangalam,Vishnu Foundation Ltd
+64.0,1254,Ready to move,2,2.0,,Medavakkam,South Zone Realty Consulting Pvt Ltd
+23.0,594,Ready to move,1,2.0,3.0,Veppampattu,Karthick
+26.5,630,Ready to move,2,2.0,3.0,Veppampattu,Karthick
+34.99,1201,Ready to move,2,2.0,3.0,Veppampattu,Karthick
+28.99,751,Ready to move,2,2.0,3.0,Veppampattu,Karthick
+26.99,701,Ready to move,2,2.0,3.0,Veppampattu,Karthick
+29.99,847,Ready to move,2,2.0,3.0,Veppampattu,Karthick
+22.99,609,Ready to move,2,2.0,3.0,Veppampattu,Karthick
+32.0,800,Ready to move,2,2.0,,Mambakkam,Elite nisha
+48.0,1200,Ready to move,2,2.0,,Nallambakkam,Elite nisha
+46.0,1000,Under Construction,2,2.0,0.0,Mambakkam,Elite nisha
+53.0,1000,Ready to move,2,3.0,,Nallambakkam,Elite nisha
+57.0,1500,Ready to move,2,3.0,3.0,Peerakankaranai,Elite nisha
+33.0,1200,Ready to move,2,2.0,,Siruseri,Elite nisha
+36.0,900,Ready to move,1,2.0,3.0,Ottiyabakkam,Elite nisha
+58.0,1400,Ready to move,3,3.0,,Kelambakkam,Elite nisha
+57.0,1250,Ready to move,2,2.0,,Kelambakkam,Elite nisha
+53.0,1550,Ready to move,2,2.0,,Kelambakkam,Elite nisha
+52.0,1350,Ready to move,2,2.0,,Kelambakkam,Elite nisha
+46.0,1200,Ready to move,1,2.0,,Semmancheri,Elite nisha
+36.0,1000,Ready to move,2,2.0,,Semmancheri,Elite nisha
+54.0,1050,Ready to move,2,2.0,3.0,Peerakankaranai,Elite nisha
+50.0,1080,Ready to move,2,3.0,4.0,Rathinamangalam,Elite nisha
+58.0,1250,Ready to move,2,3.0,4.0,Rathinamangalam,Elite nisha
+48.0,1160,Ready to move,2,3.0,3.0,Peerakankaranai,Elite nisha
+47.0,1470,Ready to move,2,3.0,,Semmancheri,Elite nisha
+53.0,1060,Ready to move,2,3.0,3.0,Ottiyabakkam,Elite nisha
+48.0,1126,Ready to move,1,2.0,3.0,Ottiyabakkam,Elite nisha
+78.0,954,Ready to move,2,2.0,,Adambakam,Prabha Homes
+53.0,804,Ready to move,2,2.0,,Kovilambakkam,Prabha Homes
+42.0,509,Ready to move,1,1.0,,Adambakam,Prabha Homes
+48.87,905,Ready to move,2,2.0,,Selaiyur,MC Foundation
+46.54,862,Ready to move,2,2.0,,Selaiyur,MC Foundation
+41.52,769,Ready to move,2,2.0,,Selaiyur,MC Foundation
+69.6,1200,Ready to move,3,3.0,,Perungalathur,MC Foundation
+60.32,1040,Ready to move,2,2.0,,Perungalathur,MC Foundation
+54.17,934,Ready to move,2,2.0,,Perungalathur,MC Foundation
+51.56,889,Ready to move,2,2.0,,Perungalathur,MC Foundation
+66.08,1180,Ready to move,3,3.0,,tambaram west,MC Foundation
+57.12,1020,Ready to move,2,2.0,,tambaram west,MC Foundation
+52.08,930,Ready to move,2,2.0,,tambaram west,MC Foundation
+73.37,1249,Ready to move,3,3.0,,Sembakkam,MC Foundation
+69.26,1179,Ready to move,3,3.0,,Sembakkam,MC Foundation
+57.75,983,Ready to move,2,2.0,,Sembakkam,MC Foundation
+47.94,861,Ready to move,2,2.0,,Sembakkam,MC Foundation
+81.43,1404,Ready to move,3,3.0,,Chromepet,MC Foundation
+72.96,1258,Ready to move,3,3.0,,Chromepet,MC Foundation
+59.15,1183,Ready to move,3,3.0,,Chromepet,MC Foundation
+57.76,996,Ready to move,2,2.0,,Chromepet,MC Foundation
+47.15,943,Ready to move,2,2.0,,Chromepet,MC Foundation
+52.2,900,Ready to move,2,2.0,,Chromepet,MC Foundation
+76.5,1275,Ready to move,3,3.0,,Chitlapakkam,MC Foundation
+43.05,861,Ready to move,2,2.0,,Chromepet,MC Foundation
+69.96,1166,Ready to move,3,3.0,,Chitlapakkam,MC Foundation
+25.0,500,Ready to move,1,1.0,,Chromepet,MC Foundation
+60.0,1000,Ready to move,2,2.0,,Chitlapakkam,MC Foundation
+113.0,1668,Ready to move,3,3.0,,tambaram west,MC Foundation
+99.07,1457,Ready to move,3,3.0,,tambaram west,MC Foundation
+83.09,1222,Ready to move,2,2.0,,tambaram west,MC Foundation
+42.0,700,Ready to move,1,1.0,,Chitlapakkam,MC Foundation
+49.74,829,Ready to move,2,2.0,,Chitlapakkam,MC Foundation
+78.0,1300,Ready to move,3,3.0,,Chromepet,MC Foundation
+68.58,1143,Ready to move,3,3.0,,Chromepet,MC Foundation
+58.14,969,Ready to move,2,2.0,,Chromepet,MC Foundation
+47.1,785,Ready to move,2,2.0,,Chromepet,MC Foundation
+39.26,818,Ready to move,2,2.0,,Selaiyur,MC Foundation
+73.6,1269,Ready to move,3,3.0,,Selaiyur,MC Foundation
+69.07,1191,Ready to move,3,3.0,,Selaiyur,MC Foundation
+62.06,1070,Ready to move,2,2.0,,Selaiyur,MC Foundation
+57.71,995,Ready to move,2,2.0,,Selaiyur,MC Foundation
+55.85,963,Ready to move,2,2.0,,Selaiyur,MC Foundation
+51.85,894,Ready to move,2,2.0,,Selaiyur,MC Foundation
+47.56,820,Ready to move,2,2.0,,Selaiyur,MC Foundation
+78.4,1400,Ready to move,3,3.0,,Rajakilpakkam,MC Foundation
+72.8,1300,Ready to move,3,3.0,,Rajakilpakkam,MC Foundation
+66.58,1189,Ready to move,3,3.0,,Rajakilpakkam,MC Foundation
+57.34,1024,Ready to move,2,2.0,,Rajakilpakkam,MC Foundation
+53.98,964,Ready to move,2,2.0,,Rajakilpakkam,MC Foundation
+46.25,826,Ready to move,2,2.0,,Rajakilpakkam,MC Foundation
+43.96,785,Ready to move,2,2.0,,Rajakilpakkam,MC Foundation
+85.62,1427,Ready to move,3,3.0,9.0,Medavakkam,MC Foundation
+79.02,1317,Ready to move,3,3.0,9.0,Medavakkam,MC Foundation
+75.24,1254,Ready to move,3,3.0,9.0,Medavakkam,MC Foundation
+66.96,1116,Ready to move,3,3.0,9.0,Medavakkam,MC Foundation
+60.0,1000,Ready to move,2,2.0,9.0,Medavakkam,MC Foundation
+54.3,905,Ready to move,2,2.0,,Sembakkam,MC Foundation
+53.16,886,Ready to move,2,2.0,9.0,Medavakkam,MC Foundation
+50.1,835,Ready to move,2,2.0,,Sembakkam,MC Foundation
+45.06,751,Ready to move,2,2.0,9.0,Medavakkam,MC Foundation
+124.0,1537,Ready to move,3,,3.0,Nandambakkam,Luxclusive Homes
+117.0,1455,Ready to move,3,3.0,3.0,Nandambakkam,Luxclusive Homes
+123.0,1530,Ready to move,3,3.0,3.0,Nandambakkam,Luxclusive Homes
+58.32,1215,Under Construction,3,3.0,,Nanmangalam,Vishnu Foundation Ltd
+45.6,950,Under Construction,2,2.0,,Nanmangalam,Vishnu Foundation Ltd
+40.32,840,Under Construction,2,2.0,,Nanmangalam,Vishnu Foundation Ltd
+37.68,785,Under Construction,2,2.0,,Nanmangalam,Vishnu Foundation Ltd
+33.6,700,Under Construction,2,2.0,,Nanmangalam,Vishnu Foundation Ltd
+71.91,1383,Ready to move,3,3.0,,Sembakkam,MC Foundation
+60.63,1166,Ready to move,3,3.0,,Sembakkam,MC Foundation
+51.01,981,Ready to move,2,2.0,,Sembakkam,MC Foundation
+48.41,931,Ready to move,2,2.0,,Sembakkam,MC Foundation
+44.25,851,Ready to move,2,2.0,,Sembakkam,MC Foundation
+41.6,800,Ready to move,2,2.0,,Sembakkam,MC Foundation
+63.45,1269,Ready to move,3,3.0,,Rajakilpakkam,MC Foundation
+59.2,1184,Ready to move,3,3.0,,Rajakilpakkam,MC Foundation
+55.0,1100,Ready to move,3,3.0,,Rajakilpakkam,MC Foundation
+48.2,964,Ready to move,2,2.0,,Rajakilpakkam,MC Foundation
+45.0,900,Ready to move,2,2.0,,Rajakilpakkam,MC Foundation
+50.4,900,Ready to move,2,2.0,,tambaram west,MC Foundation
+48.0,1200,Ready to move,3,3.0,,Urapakkam,MC Foundation
+37.72,943,Ready to move,2,2.0,,Urapakkam,MC Foundation
+35.24,881,Ready to move,2,2.0,,Urapakkam,MC Foundation
+40.6,812,Ready to move,2,2.0,,Rajakilpakkam,MC Foundation
+91.2,1900,Ready to move,3,3.0,,Madambakkam,MC Foundation
+78.28,1631,Ready to move,3,3.0,,Madambakkam,MC Foundation
+71.42,1488,Ready to move,3,3.0,,Madambakkam,MC Foundation
+67.15,1399,Ready to move,3,3.0,,Madambakkam,MC Foundation
+48.81,1017,Ready to move,2,2.0,,Madambakkam,MC Foundation
+47.52,990,Ready to move,2,2.0,,Madambakkam,MC Foundation
+65.61,1238,Ready to move,3,3.0,,Madambakkam,MC Foundation
+61.85,1167,Ready to move,3,3.0,,Madambakkam,MC Foundation
+48.81,921,Ready to move,2,2.0,,Madambakkam,MC Foundation
+46.64,880,Ready to move,2,2.0,,Madambakkam,MC Foundation
+59.83,1108,Ready to move,3,3.0,,Selaiyur,MC Foundation
+58.96,1092,Ready to move,3,3.0,,Selaiyur,MC Foundation
+28.35,525,Ready to move,1,1.0,,Selaiyur,MC Foundation
+30.0,850,Ready to move,2,2.0,3.0,Veppampattu,JD Properties
+26.9,700,Ready to move,2,2.0,3.0,Veppampattu,JD Properties
+27.0,700,Ready to move,2,2.0,3.0,Veppampattu,JD Properties
+25.8,700,Ready to move,2,2.0,3.0,Veppampattu,JD Properties
+26.0,700,Ready to move,2,2.0,3.0,Veppampattu,JD Properties
+23.0,600,Ready to move,2,2.0,3.0,Veppampattu,JD Properties
+114.0,1342,Under Construction,3,,0.0,Madipakkam,Vishal D
+72.33,851,Under Construction,2,,0.0,Madipakkam,Vishal D
+126.0,1489,Under Construction,3,,0.0,Madipakkam,Vishal D
+83.04,977,Under Construction,2,,0.0,Madipakkam,Vishal D
+80.15,943,Under Construction,2,,0.0,Madipakkam,Vishal D
+33.63,885,Ready to move,2,,2.0,Kundrathur,mohammed
+35.41,932,Ready to move,2,,2.0,Kundrathur,mohammed
+33.47,881,Ready to move,2,,2.0,Kundrathur,mohammed
+27.17,715,Ready to move,2,,2.0,Kundrathur,mohammed
+51.06,690,Ready to move,2,2.0,6.0,Nesapakkam,MC Foundation
+132.0,1266,Ready to move,3,3.0,,Jafferkhanpet,MC Foundation
+102.0,980,Ready to move,2,2.0,,Jafferkhanpet,MC Foundation
+91.2,1200,Ready to move,3,3.0,6.0,Nesapakkam,MC Foundation
+55.5,750,Ready to move,2,2.0,6.0,Nesapakkam,MC Foundation
+88.1,881,Ready to move,2,2.0,,Arumbakkam,MC Foundation
+87.0,870,Ready to move,2,2.0,,Arumbakkam,MC Foundation
+85.5,900,Ready to move,2,2.0,,Koyambedu,MC Foundation
+81.7,860,Ready to move,2,2.0,,Koyambedu,MC Foundation
+39.0,937,Under Construction,2,2.0,,Selaiyur,ARB HOMES
+99.0,1560,Ready to move,3,3.0,,Medavakkam,ARB HOMES
+330.0,4724,Ready to move,4,,,Sholinganallur,ARB HOMES
+46.0,1006,Ready to move,2,2.0,4.0,Moolacheri,ARB HOMES
+46.12,1006,Ready to move,2,2.0,4.0,Moolacheri,ARB HOMES
+37.0,574,Ready to move,1,1.0,2.0,Gowrivakkam,ARB HOMES
+80.0,1527,Ready to move,3,2.0,1.0,Ambattur,ARB HOMES
+65.0,1002,Ready to move,2,2.0,2.0,Gowrivakkam,ARB HOMES
+80.0,1753,Ready to move,3,2.0,1.0,Medavakkam,ARB HOMES
+60.0,1340,Ready to move,2,2.0,1.0,Medavakkam,ARB HOMES
+53.0,974,Under Construction,2,2.0,0.0,Perungalathur,ARB HOMES
+30.0,612,Under Construction,2,2.0,0.0,Thalambur,ARB HOMES
+66.0,1366,Under Construction,3,2.0,0.0,Perungalathur,ARB HOMES
+47.0,1073,Under Construction,2,2.0,0.0,Thalambur,ARB HOMES
+95.0,1371,Ready to move,3,2.0,2.0,Vengaivasal,ARB HOMES
+42.0,591,Ready to move,2,1.0,2.0,Vengaivasal,ARB HOMES
+80.0,1237,Under Construction,2,2.0,0.0,Sholinganallur,ARB HOMES
+28.0,730,Under Construction,2,2.0,0.0,Thirumazhisai,ARB HOMES
+32.0,849,Under Construction,2,2.0,0.0,Thirumazhisai,ARB HOMES
+55.0,1286,Under Construction,3,2.0,,Selaiyur,ARB HOMES
+33.0,885,Under Construction,3,3.0,0.0,Thirumazhisai,ARB HOMES
+70.0,1148,Ready to move,2,2.0,2.0,Kolapakkam,ARB HOMES
+68.0,1024,Ready to move,2,2.0,3.0,Karapakkam,ARB HOMES
+170.0,2616,Ready to move,4,3.0,3.0,Karapakkam,ARB HOMES
+42.0,979,Under Construction,2,2.0,0.0,Navallur,ARB HOMES
+46.0,1262,Under Construction,3,2.0,0.0,Kelambakkam,ARB HOMES
+85.0,1234,Ready to move,2,2.0,2.0,Vengaivasal,ARB HOMES
+103.0,1469,Ready to move,3,3.0,2.0,Vengaivasal,ARB HOMES
+66.0,950,Under Construction,2,2.0,,Porur,ARB HOMES
+29.0,576,Ready to move,1,1.0,1.0,Kuthambakkam,ARB HOMES
+41.0,855,Ready to move,2,2.0,1.0,Kuthambakkam,ARB HOMES
+70.0,1080,Ready to move,2,2.0,,Perungalathur,ARB HOMES
+75.54,1545,Ready to move,2,2.0,,Semmancheri,ARB HOMES
+77.35,1645,Ready to move,3,2.0,,Semmancheri,ARB HOMES
+20.0,570,Under Construction,1,1.0,0.0,Thirumalpur,ARB HOMES
+53.0,1012,Ready to move,2,2.0,1.0,Ambattur,ARB HOMES
+40.0,588,Under Construction,2,1.0,0.0,Pallavaram,ARB HOMES
+85.0,1337,Ready to move,3,3.0,2.0,Gowrivakkam,ARB HOMES
+56.0,913,Ready to move,2,2.0,,Kovur,ARB HOMES
+51.0,1225,Ready to move,3,2.0,4.0,Moolacheri,ARB HOMES
+48.0,832,Ready to move,2,2.0,1.0,Mangadu,ARB HOMES
+64.0,959,Under Construction,2,2.0,0.0,Porur,ARB HOMES
+70.0,1370,Under Construction,3,2.0,0.0,Ayanambakkam,ARB HOMES
+40.0,930,Under Construction,2,2.0,,Siruseri,ARB HOMES
+26.0,571,Ready to move,2,2.0,1.0,Kelambakkam,ARB HOMES
+35.0,994,Under Construction,2,2.0,0.0,Kelambakkam,ARB HOMES
+97.0,1598,Under Construction,3,2.0,0.0,Sholinganallur,ARB HOMES
+80.0,1156,Ready to move,2,2.0,,Medavakkam,ARB HOMES
+23.0,620,Under Construction,1,1.0,0.0,Thirumalpur,ARB HOMES
+16.0,480,Ready to move,1,1.0,,Guduvancheri,ARB HOMES
+68.0,1024,Ready to move,2,2.0,3.0,Karapakkam,ARB HOMES
+40.0,588,Under Construction,1,1.0,0.0,Vanagaram,ARB HOMES
+44.56,918,Under Construction,3,,0.0,Padur,Dee Star Properties
+43.12,888,Under Construction,2,,0.0,Padur,Dee Star Properties
+37.77,778,Under Construction,2,,0.0,Padur,Dee Star Properties
+32.18,663,Under Construction,2,,0.0,Padur,Dee Star Properties
+85.0,1300,Ready to move,2,2.0,6.0,Pallavaram,Chennai Gated Community
+22.0,600,Ready to move,1,2.0,3.0,Veppampattu,Karthick
+28.0,850,Ready to move,2,2.0,3.0,Veppampattu,Karthick
+36.21,1050,Under Construction,2,,0.0,Kelambakkam,Dee Star Properties
+34.28,994,Under Construction,2,,0.0,Kelambakkam,Dee Star Properties
+43.52,1262,Under Construction,3,3.0,0.0,Kelambakkam,Dee Star Properties
+46.04,1335,Under Construction,3,,0.0,Kelambakkam,Dee Star Properties
+100.0,1188,Ready to move,3,,1.0,Velachery,Balaji
+84.66,996,Ready to move,2,,1.0,Velachery,Balaji
+61.64,1045,Under Construction,2,,0.0,Medavakkam,Balaji
+75.5,1280,Under Construction,3,,0.0,Medavakkam,Balaji
+214.0,1935,Under Construction,3,3.0,0.0,Perungudi,Luxclusive Homes
+405.0,3654,Under Construction,4,,0.0,Perungudi,Luxclusive Homes
+202.0,1820,Under Construction,3,,0.0,Perungudi,Luxclusive Homes
+415.0,3746,Under Construction,4,,0.0,Perungudi,Luxclusive Homes
+199.0,1793,Under Construction,3,2.0,0.0,Perungudi,Luxclusive Homes
+214.0,1930,Under Construction,3,,0.0,Perungudi,Luxclusive Homes
+26.0,700,Ready to move,2,2.0,3.0,Veppampattu,Karthick
+27.0,725,Ready to move,2,2.0,3.0,Veppampattu,Karthick
+60.0,1500,Ready to move,3,2.0,,Maraimalai Nagar,MrPincode
+62.0,1433,Ready to move,3,2.0,,Maraimalai Nagar,MrPincode
+57.0,1478,Ready to move,3,2.0,,Mahindra World City,MrPincode
+29.5,623,Ready to move,1,1.0,,Mahindra World City,MrPincode
+86.0,1927,Ready to move,3,3.0,4.0,Oragadam Industrial Corridor,24K Realtors
+78.0,1706,Ready to move,3,3.0,4.0,Oragadam Industrial Corridor,24K Realtors
+59.0,1437,Ready to move,2,2.0,4.0,Oragadam Industrial Corridor,24K Realtors
+87.0,1991,Ready to move,3,3.0,4.0,Oragadam Industrial Corridor,24K Realtors
+75.24,1254,Under Construction,3,,0.0,Gowrivakkam,MC Foundation
+54.3,905,Under Construction,2,,0.0,Gowrivakkam,MC Foundation
+85.62,1427,Under Construction,3,,0.0,Gowrivakkam,MC Foundation
+52.86,881,Under Construction,2,,0.0,Gowrivakkam,MC Foundation
+53.76,896,Under Construction,2,,0.0,Gowrivakkam,MC Foundation
+23.03,510,Under Construction,1,,0.0,Siruseri,Dee Star Properties
+35.02,824,Under Construction,2,,0.0,Siruseri,Dee Star Properties
+15.04,338,Under Construction,1,,0.0,Siruseri,Dee Star Properties
+38.08,896,Under Construction,3,,0.0,Siruseri,Dee Star Properties
+32.98,764,Under Construction,2,,0.0,Siruseri,Dee Star Properties
+84.0,1471,Ready to move,3,,4.0,Thaiyur,Dee Star Properties
+120.0,1896,Ready to move,4,3.0,4.0,Thaiyur,Dee Star Properties
+78.56,1376,Ready to move,3,,4.0,Thaiyur,Dee Star Properties
+93.8,1643,Ready to move,3,,4.0,Thaiyur,Dee Star Properties
+38.02,1001,Under Construction,2,,0.0,Thaiyur,Dee Star Properties
+47.33,1246,Under Construction,3,2.0,0.0,Thaiyur,Dee Star Properties
+40.3,1061,Under Construction,2,,0.0,Thaiyur,Dee Star Properties
+66.2,1270,Ready to move,2,,4.0,Thaiyur,Dee Star Properties
+50.45,1328,Under Construction,3,,0.0,Thaiyur,Dee Star Properties
+37.3,982,Under Construction,2,,0.0,Thaiyur,Dee Star Properties
+50.71,1335,Under Construction,3,,0.0,Thaiyur,Dee Star Properties
+78.52,837,Ready to move,2,2.0,,East Tambaram,GJ ESTATES
+86.0,1010,Ready to move,2,2.0,12.0,Velachery,Chennai Gated Community
+450.0,3000,Ready to move,3,4.0,9.0,Velachery,Chennai Gated Community
+28.02,637,Under Construction,2,,0.0,Thirumullaivoyal,Venkatesh
+29.61,673,Under Construction,2,,0.0,Thirumullaivoyal,Venkatesh
+29.21,664,Under Construction,2,,0.0,Thirumullaivoyal,Venkatesh
+30.62,696,Under Construction,2,,0.0,Thirumullaivoyal,Venkatesh
+29.12,662,Under Construction,2,,0.0,Thirumullaivoyal,Venkatesh
+230.0,1755,Under Construction,3,3.0,,Adyar,HomeFirst
+63.5,1312,Ready to move,2,2.0,,Kattupakkam,DJ Properties
+95.0,1564,Ready to move,2,3.0,,Karapakkam,24K Realtors
+69.0,1419,Ready to move,3,3.0,,Kattupakkam,DJ Properties
+25.85,650,Ready to move,2,2.0,3.0,Veppampattu,JD Properties
+25.9,650,Ready to move,2,2.0,3.0,Veppampattu,JD Properties
+26.5,700,Ready to move,2,2.0,3.0,Veppampattu,JD Properties
+26.0,650,Ready to move,2,2.0,3.0,Veppampattu,JD Properties
+18.0,599,Ready to move,1,2.0,3.0,Veppampattu,Karthick
+55.96,1142,Under Construction,3,,0.0,Rajakilpakkam,MC Foundation
+39.78,812,Under Construction,2,,0.0,Rajakilpakkam,MC Foundation
+42.0,762,Under Construction,2,2.0,0.0,Navallur,GJ ESTATES
+70.0,1024,Ready to move,2,2.0,3.0,Karapakkam,GJ ESTATES
+244.0,1574,Ready to move,3,2.0,,T Nagar,GJ ESTATES
+37.34,770,Under Construction,2,2.0,,Ragavendra Colony,seller
+42.19,870,Under Construction,2,2.0,,Ambattur,seller
+41.12,848,Under Construction,2,2.0,,Ragavendra Colony,seller
+42.19,870,Under Construction,2,2.0,,Ragavendra Colony,seller
+37.34,770,Under Construction,2,2.0,,Ragavendra Colony,seller
+42.19,870,Under Construction,2,2.0,,Ambattur INDUSTRIAL ESTATE,seller
+37.34,770,Under Construction,2,2.0,,Ambattur,seller
+41.12,848,Under Construction,2,2.0,,Ragavendra Colony,seller
+42.19,870,Under Construction,2,2.0,,Ragavendra Colony,seller
+25.0,749,Ready to move,2,2.0,3.0,Veppampattu,Karthick
+25.0,755,Ready to move,2,2.0,3.0,Veppampattu,Karthick
+28.9,920,Ready to move,2,2.0,3.0,Veppampattu,Karthick
+31.25,950,Ready to move,2,2.0,3.0,Veppampattu,Karthick
+25.0,755,Ready to move,2,2.0,3.0,Veppampattu,Karthick
+28.9,920,Ready to move,2,2.0,3.0,Veppampattu,Karthick
+31.25,950,Ready to move,2,2.0,3.0,Veppampattu,Karthick
+22.25,603,Ready to move,1,2.0,3.0,Veppampattu,Karthick
+34.5,1050,Ready to move,2,2.0,3.0,Veppampattu,Karthick
+27.0,812,Ready to move,2,2.0,3.0,Veppampattu,Karthick
+18.99,611,Ready to move,1,2.0,3.0,Veppampattu,Karthick
+49.5,900,Under Construction,2,,0.0,West Tambaram,Info Rich
+64.9,1180,Under Construction,3,,0.0,West Tambaram,Info Rich
+56.1,1020,Under Construction,3,,0.0,West Tambaram,Info Rich
+51.15,930,Under Construction,2,,0.0,West Tambaram,Info Rich
+65.7,1096,Under Construction,3,2.0,0.0,Keelkattalai,24K Realtors
+88.92,1588,Under Construction,3,2.0,,Sholinganallur,24K Realtors
+62.0,1020,Under Construction,2,2.0,0.0,Keelkattalai,24K Realtors
+45.0,700,Under Construction,2,2.0,,Mannivakkam,Dhivagaran
+45.0,800,Under Construction,2,2.0,,Ottiyabakkam,Dhivagaran
+50.0,1050,Ready to move,2,2.0,,Chromepet,SS PROPERTIES
+31.0,650,Ready to move,2,2.0,,Pammal,SS PROPERTIES
+90.0,1700,Under Construction,3,3.0,,Pammal,SS PROPERTIES
+23.0,500,Ready to move,2,2.0,,Pammal,SS PROPERTIES
+31.0,650,Ready to move,2,2.0,,Pammal,SS PROPERTIES
+85.0,1300,Under Construction,3,3.0,,Pammal,SS PROPERTIES
+22.0,500,Ready to move,1,1.0,,Pammal,SS PROPERTIES
+90.0,1900,Under Construction,3,3.0,,Pammal,SS PROPERTIES
+72.0,1300,Ready to move,3,3.0,,Pammal,SS PROPERTIES
+90.0,1700,Under Construction,3,3.0,,Pammal,SS PROPERTIES
+23.0,500,Ready to move,2,2.0,,Pammal,SS PROPERTIES
+22.0,500,Under Construction,1,1.0,,Pammal,SS PROPERTIES
+22.0,500,Under Construction,2,2.0,,Pammal,SS PROPERTIES
+65.0,1400,Under Construction,3,3.0,,Pammal,SS PROPERTIES
+69.0,1000,Ready to move,2,2.0,5.0,Iyyappanthangal,DJ Properties
+170.0,1750,Ready to move,4,3.0,,Valasaravakkam,DJ Properties
+26.8,700,Ready to move,2,2.0,3.0,Veppampattu,JD Properties
+22.8,600,Ready to move,2,2.0,3.0,Veppampattu,JD Properties
+26.75,700,Ready to move,2,2.0,3.0,Veppampattu,JD Properties
+42.19,870,Under Construction,2,2.0,,Ambattur INDUSTRIAL ESTATE,seller
+40.44,834,Under Construction,2,2.0,,Ambattur INDUSTRIAL ESTATE,seller
+41.12,848,Under Construction,2,2.0,,Ambattur INDUSTRIAL ESTATE,seller
+42.19,870,Under Construction,2,2.0,,Ambattur,seller
+37.34,770,Under Construction,2,2.0,,Ambattur,seller
+42.19,870,Under Construction,2,2.0,,Ambattur,seller
+42.19,870,Under Construction,2,2.0,,Ambattur INDUSTRIAL ESTATE,seller
+40.44,834,Under Construction,2,2.0,,Ambattur INDUSTRIAL ESTATE,seller
+41.12,848,Under Construction,2,2.0,,Ambattur INDUSTRIAL ESTATE,seller
+37.35,770,Under Construction,2,2.0,,Ambattur INDUSTRIAL ESTATE,seller
+108.0,1065,Ready to move,2,2.0,,Porur,seller
+108.0,1065,Ready to move,2,2.0,,Saligramam,seller
+108.0,1065,Ready to move,2,2.0,,Saligramam,seller
+108.0,1065,Ready to move,2,2.0,,Porur,seller
+65.0,638,Ready to move,2,1.0,3.0,Vadapalani,Chennai Gated Community
+75.0,1791,Ready to move,3,3.0,7.0,Kelambakkam,Chennai Gated Community
+320.0,2130,Ready to move,3,3.0,,Anna Nagar,HomeFirst
+75.0,1700,Ready to move,4,3.0,,Kattupakkam,DJ Properties
+462.0,3850,Ready to move,5,,2.0,Kilpauk,REALTY INDIA
+267.0,2230,Ready to move,4,,2.0,Kilpauk,REALTY INDIA
+345.0,2880,Ready to move,4,,2.0,Kilpauk,REALTY INDIA
+213.0,1775,Ready to move,3,,2.0,Kilpauk,REALTY INDIA
+104.0,1329,Ready to move,2,2.0,,Sholinganallur,GJ ESTATES
+57.88,1220,Under Construction,2,2.0,,Kil Ayanambakkam,seller
+37.34,770,Under Construction,2,2.0,,Ambattur,seller
+40.44,834,Under Construction,2,2.0,,Ambattur,seller
+41.12,848,Under Construction,2,2.0,,Ambattur,seller
+42.19,870,Under Construction,2,2.0,,Ambattur,seller
+37.34,770,Under Construction,2,2.0,,Ambattur,seller
+37.35,770,Under Construction,2,2.0,,Ambattur INDUSTRIAL ESTATE,seller
+40.44,834,Under Construction,2,2.0,,Ambattur INDUSTRIAL ESTATE,seller
+40.44,834,Under Construction,2,2.0,,Ambattur,seller
+40.44,834,Under Construction,2,2.0,,Ragavendra Colony,seller
+42.0,800,Under Construction,2,2.0,,Ottiyabakkam,Dhivagaran
+321.0,2380,Ready to move,3,3.0,,Adyar,HomeFirst
+323.0,1850,Under Construction,3,3.0,,Alwarpet,HomeFirst
+205.0,1283,Ready to move,3,3.0,,Anna Nagar,HomeFirst
+334.0,1860,Under Construction,3,3.0,,Besant Nagar,HomeFirst
+295.0,1641,Under Construction,3,3.0,,Besant Nagar,HomeFirst
+46.0,800,Ready to move,2,,1.0,Kundrathur,MAXWORTH PROPERTIES
+215.0,1930,Under Construction,3,3.0,0.0,Perungudi,24K Realtors
+95.0,1250,Ready to move,3,3.0,,Valasaravakkam,DJ Properties
+169.0,1610,Under Construction,3,,0.0,Kodambakkam,Luxclusive Homes
+100.0,956,Under Construction,2,,0.0,Kodambakkam,Luxclusive Homes
+89.23,1373,Under Construction,3,,0.0,Koyambedu,Luxclusive Homes
+97.93,1507,Under Construction,3,,0.0,Koyambedu,Luxclusive Homes
+96.64,1487,Under Construction,3,,0.0,Koyambedu,Luxclusive Homes
+76.81,1182,Under Construction,2,,0.0,Koyambedu,Luxclusive Homes
+66.61,1025,Under Construction,2,,0.0,Koyambedu,Luxclusive Homes
+97.09,1494,Under Construction,3,,0.0,Koyambedu,Luxclusive Homes
+67.13,1033,Under Construction,2,,0.0,Koyambedu,Luxclusive Homes
+108.0,1674,Under Construction,3,,0.0,Koyambedu,Luxclusive Homes
+70.7,1088,Under Construction,2,,0.0,Koyambedu,Luxclusive Homes
+83.51,1285,Under Construction,2,,0.0,Koyambedu,Luxclusive Homes
+73.43,1130,Under Construction,2,,0.0,Koyambedu,Luxclusive Homes
+90.14,1387,Under Construction,3,,0.0,Koyambedu,Luxclusive Homes
+73.24,1127,Under Construction,2,,0.0,Koyambedu,Luxclusive Homes
+112.0,1737,Under Construction,4,,0.0,Koyambedu,Luxclusive Homes
+95.34,1467,Under Construction,3,,0.0,Koyambedu,Luxclusive Homes
+73.5,1131,Under Construction,2,,0.0,Koyambedu,Luxclusive Homes
+76.0,1085,Under Construction,3,3.0,,Porur,GJ ESTATES
+88.0,1062,Under Construction,2,2.0,,Mogappair,GJ ESTATES
+73.71,1031,Under Construction,2,2.0,,Selaiyur,GJ ESTATES
+44.0,898,Under Construction,2,2.0,,Iyappanthangal,GJ ESTATES
+19.38,510,Ready to move,1,,2.0,Veppampattu,Karthick
+38.0,1000,Ready to move,2,,2.0,Veppampattu,Karthick
+22.8,600,Ready to move,1,,2.0,Veppampattu,Karthick
+20.9,550,Ready to move,1,,2.0,Veppampattu,Karthick
+30.4,800,Ready to move,2,,2.0,Veppampattu,Karthick
+24.7,650,Ready to move,2,,2.0,Veppampattu,Karthick
+45.6,1200,Ready to move,2,,2.0,Veppampattu,Karthick
+23.94,630,Ready to move,1,,2.0,Veppampattu,Karthick
+340.0,2030,Under Construction,4,3.0,,T Nagar,HomeFirst
+219.0,1310,Under Construction,3,3.0,,T Nagar,HomeFirst
+27.5,800,Ready to move,2,2.0,3.0,Veppampattu,Velan Housing Properties
+27.5,800,Ready to move,2,2.0,3.0,Veppampattu,Velan Housing Properties
+29.5,800,Ready to move,2,2.0,3.0,Veppampattu,Velan Housing Properties
+30.0,800,Ready to move,2,2.0,3.0,Veppampattu,Velan Housing Properties
+27.5,750,Ready to move,2,2.0,3.0,Veppampattu,Velan Housing Properties
+27.0,800,Ready to move,2,2.0,3.0,Veppampattu,Velan Housing Properties
+27.5,750,Ready to move,2,2.0,3.0,Veppampattu,Velan Housing Properties
+27.5,750,Ready to move,2,2.0,3.0,Veppampattu,Velan Housing Properties
+30.0,800,Ready to move,2,2.0,3.0,Veppampattu,Velan Housing Properties
+31.5,850,Ready to move,2,2.0,3.0,Veppampattu,Velan Housing Properties
+34.0,900,Ready to move,2,2.0,3.0,Veppampattu,Velan Housing Properties
