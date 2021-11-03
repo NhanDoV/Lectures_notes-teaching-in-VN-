@@ -3,6 +3,55 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from sklearn.model_selection import GridSearchCV, cross_val_score, KFold
 
+# /=================================================================================================\
+def MAPE(y_true, y_pred):
+    """
+        Compute the MAPE (mean absolute percentage error)
+        Input
+            y_true : actual value
+            y_pred : forecast value
+        Return 
+            MAPE_score
+    """
+    y_true = y_true[y_true != 0]
+    y_pred = y_pred[y_true != 0]
+    
+    return np.mean(np.abs(y_true - y_pred) / y_true)
+
+def MAE(y_true, y_pred):
+    """
+        Compute the MAE (mean absolute error)
+        Input
+            y_true : actual value
+            y_pred : forecast value
+        Return 
+            MAE_score
+    """
+    return np.mean(np.abs(y_true - y_pred))
+
+def MSE(y_true, y_pred):
+    """
+        Compute the MSE (mean square error)
+        Input
+            y_true : actual value
+            y_pred : forecast value
+        Return 
+            MAPE_score
+    """    
+    return np.mean((y_true - y_pred)**2)
+
+def RMSE(y_true, y_pred):
+    """
+        Compute the RMSE (root mean square error)
+        Input
+            y_true : actual value
+            y_pred : forecast value
+        Return 
+            MAPE_score
+    """    
+    return np.sqrt(MSE(y_true, y_pred))
+
+# /=================================================================================================\
 def count_null_show(data_train, data_test, figsize = (20, 6), rotation = 30):
     """
         This function is used to show the null_values at each column in train and test-set
@@ -31,7 +80,8 @@ def count_null_show(data_train, data_test, figsize = (20, 6), rotation = 30):
         ax[k].set_title(titles[k])
         ax[k].set_xlabel('column_names')
     plt.show()
-    
+   
+# /=================================================================================================\
 def count_unique_and_mode(df_train, df_test):
     """
         Print out the dataframe of the number of unique, statistical_mode-value from the input datasets.
@@ -62,7 +112,7 @@ def count_unique_and_mode(df_train, df_test):
         if df_train[col].dtype != 'object':
             data.loc[col, 'is_all-test_contained_in_train ?'] = 'Ignored! This column is numeric'
         else:
-            in_test_not_in_train = set(df_train[col].unique()) - set(df_train[col].unique())
+            in_test_not_in_train = set(df_test[col].unique()) - set(df_train[col].unique())
             if len(in_test_not_in_train) > 0:
                 data.loc[col, 'is_all-test_contained_in_train ?'] = False, in_test_not_in_train
             else:
@@ -70,7 +120,7 @@ def count_unique_and_mode(df_train, df_test):
 
     return data
 
-
+# /=================================================================================================\
 def Q_Q_plot(model, X_train, X_test, y_train, y_test):
     """
         A Q-Q plot is a plot of the quantiles of the first data set against the quantiles of the second data set.
@@ -98,7 +148,7 @@ def Q_Q_plot(model, X_train, X_test, y_train, y_test):
         ax[k].set_xlabel('actual')
         ax[k].set_ylabel('forecast')
 
-        
+# /=================================================================================================\        
 def load_data(data, fill_vl = None, 
               target_col = 'price', 
               inp_col_names = ['age', 'area', 'nb_bedroom', 'nb_bathroom']):
@@ -160,6 +210,7 @@ def load_data(data, fill_vl = None,
 
     return X, y
 
+# /=================================================================================================\
 def load_data2(data, 
                fill_vl = None, 
                target_col = 'price', 
@@ -212,6 +263,39 @@ def load_data2(data,
     
     return X, y
 
+# /=================================================================================================\
+def avg_std_KFold_plot_(model, nb_folds_min, nb_folds_max, 
+                        X_train , y_train):
+    """
+        This function is used to plot the avg(score) and stdev(score)
+        Input
+            - model (base estimators)
+            - nb_folds_min (int)
+            - nb_folds_max (int)
+            - X_train, y_train : your train-set
+        Return:
+            charts of avg and stdev_score
+    """
+    model.fit(X_train, y_train)
+    m_scores = []
+    s_scores = []
+    kfold_range = range(nb_folds_min, nb_folds_max + 1)
+    for n_folds in kfold_range:
+        kfold_cv = KFold(n_splits = n_folds, shuffle=True, random_state=53)
+        kfold_scores = cross_val_score(estimator = model, X = X_train, y = y_train, cv = kfold_cv)
+        m_scores.append(kfold_scores.mean())
+        s_scores.append(kfold_scores.std())
+    
+    titles = ['avg_score on K-fold-cross_validate', 'std_score on K-fold-cross_validate']
+    all_scores = [m_scores, s_scores]
+    
+    fig, ax = plt.subplots(nrows = 1, ncols = 2, figsize = (20, 6))
+    for k in range(2):
+        ax[k].plot(kfold_range, all_scores[k])
+        ax[k].set_title(titles[k])
+        ax[k].set_xlabel('number of folds')
+
+# /=================================================================================================\        
 def Grid_search_values(X_train, y_train, X_test, y_test, alg, grid_params, cv_kfolds):
     """
         |==============================================================================================
@@ -267,9 +351,20 @@ def Grid_search_values(X_train, y_train, X_test, y_test, alg, grid_params, cv_kf
     mean_kfold_score = kfold_scores.mean()
     stdv_kfold_score = kfold_scores.std()
     fit_time = time.time() - t0
+    mins = int(fit_time // 60)
+    secs = np.round(fit_time - 60*mins, 2)
+    fit_time = "{} mins {} seconds".format(mins, secs)
     
     train_score = grid_clf.score(X_train, y_train)
     test_score = grid_clf.score(X_test, y_test)
     best_params = grid_clf.best_params_
     
-    return alg_name, fit_time, best_params, train_score, test_score, mean_kfold_score, stdv_kfold_score
+    train_shape = X_train.shape, X_test.shape   
+    y_pred = grid_clf.predict(X_test)
+    mape = MAPE(y_test, y_pred)
+    mae = MAE(y_test, y_pred)
+    rmse = RMSE(y_test, y_pred)
+    mse = MSE(y_test, y_pred)
+    corr = np.corrcoef(y_test, y_pred)[0, 1]
+    
+    return alg_name, train_shape, fit_time, best_params, stdv_kfold_score, train_score, test_score, mape, mae, mse, corr
