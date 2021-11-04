@@ -205,7 +205,7 @@ def load_data(data, fill_vl = None,
         X = X.fillna(fill_vl)
     else:
         X = X.fillna(X.median())
-    X = (X - X.mean()) / X.std()
+    #X = (X - X.mean()) / X.std()
     y = data[target_col]
 
     return X, y
@@ -255,11 +255,12 @@ def load_data2(data,
     else:
         X = X.fillna(fill_vl)
 
-    X[x1_name] = np.log(X[x1_name] + c1)
+    X[x1_name] = np.log(X[x1_name] + c1) / np.log(2)
     X[new_feat_name] = X[x2_name] / X[[x3_name, x4_name]].sum(axis=1)
     X[x2_name] = np.log(X[x2_name] + c2)
-    X = (X - X.mean()) / X.std()
-    y = np.log(y) / np.log(2)
+    #X = (X - X.mean()) / X.std()
+    y = np.log(y) / np.log(10)
+    X = X.drop(columns = [x3_name, x4_name])
     
     return X, y
 
@@ -368,3 +369,56 @@ def Grid_search_values(X_train, y_train, X_test, y_test, alg, grid_params, cv_kf
     corr = np.corrcoef(y_test, y_pred)[0, 1]
     
     return alg_name, train_shape, fit_time, best_params, stdv_kfold_score, train_score, test_score, mape, mae, mse, corr
+
+# /=================================================================================================\
+#                                                 THE END
+# /=================================================================================================\
+def test_predict(train_db, test_db, inp_col_names, tar_col, 
+                 model_hyp, algorithm, imputed_by, constant,
+                 *new_values):
+    """
+        This function
+        Input parameters
+            - train_db
+            - test_db
+            - inp_col_names
+            - model_hyp, 
+            - algorithm
+            - *new_values = (area, status, nb_bedroom, nb_bathroom, age) depends on your input_model
+        
+    """
+    train_db = train_db.drop_duplicates()
+    test_db = test_db.drop_duplicates()
+    
+    X_train = train_db[inp_col_names], y_train = train_db[tar_col]    
+    X_test = test_db[inp_col_names], y_test = test_db[tar_col]    
+    
+    # imputed method
+    if imputed_by == 'median':
+        X_train = X_train.fillna(X_train.median())
+        X_test = X_test.fillna(X_test.median())
+        
+    elif imputed_by == 'mean':
+        X_train = X_train.fillna(X_train.mean())
+        X_test = X_test.fillna(X_test.mean())
+        
+    elif imputed_by == 'constant':
+        X_train = X_train.fillna(constant)
+        X_test = X_test.fillna(constant)
+    
+    # decide the model
+    if model_hyp == 'linear':
+        X_train, y_train = X_train, y_train
+        X_test, y_test = X_test, y_test
+        
+    elif model_hyp == 'log2':
+        y_train = np.log(y_train + 1) / np.log(2)
+        y_test = np.log(y_test + 1) / np.log(2)
+        
+    elif model_hyp == 'log10':
+        y_train = np.log(y_train + 1) / np.log(10)
+        y_test = np.log(y_test + 1) / np.log(10)
+
+    elif model_hyp == 'log':
+        y_train = np.log(y_train + 1)
+        y_test = np.log(y_test + 1)
