@@ -9,15 +9,48 @@ def MAPE(y_true, y_pred):
     """
         Compute the MAPE (mean absolute percentage error)
         Input
-            y_true : actual value
-            y_pred : forecast value
+            y_true (series/ list/ array): actual value
+            y_pred (series/ list/ array): forecast value
         Return 
             MAPE_score
+        |/==========================================================================\
+        |
+        |  Example.
+        |
+        |=========================================================================
+        | >>> MAPE(y_true = [1,2,3], 
+        |          y_pred = [2,3,4]
+        |         )
+        | 0.5
+        |-----------------------------------------------------------------------------
+        | >>> MAPE(y_true = [1, 0, 3, 3],
+        |          y_pred = [1, 0, 2, 0]
+        |          )
+        |----------------------------------------------------------------------------- 
+        | your actual_values contains many zero values, make the MAPE values won't be correct
+        | 0.4444444444444444
+        |
+        | >>> MAPE(y_true = pd.Series([1,0,3,3]), 
+        |          y_pred = [1, 0, 2, 2]
+        | your actual_values contains many zero values, make the MAPE values won't be correct
+        | 0.2222222222222222
+        |--------------------------------------------------------------------------------\
+        |/=================================================================================
+    )
     """
-    y_true = y_true[y_true != 0]
-    y_pred = y_pred[y_true != 0]
+    y_true = np.array(y_true)
+    y_pred = np.array(y_pred)
     
-    return np.mean(np.abs(y_true - y_pred) / y_true)
+    if len(y_true[y_true==0]) > 0:
+        print("your actual_values contains many zero values, make the MAPE values won't be correct")
+        y_tr = y_true[y_true != 0]
+        y_pr = y_pred[y_true != 0]
+        res = np.mean(np.abs(y_tr - y_pr) / y_tr)
+    
+    else:        
+        res = np.mean(np.abs(y_true - y_pred) / y_true)
+        
+    return res
 
 def MAE(y_true, y_pred):
     """
@@ -416,6 +449,26 @@ def Grid_search_values(X_train, y_train, X_test, y_test, alg, grid_params, cv_kf
     corr = np.corrcoef(y_test, y_pred)[0, 1]
     
     return alg_name, train_shape, fit_time, best_params, stdv_kfold_score, train_score, test_score, mape, mae, mse, corr
+
+# /=================================================================================================\
+def split_data(data, cate_cols, test_size):
+    """
+        Parameters
+            - data (dataframe)
+            - cate_cols (list of columns) : columns name that contain the category
+            - test_size (float) : size of the test-set.
+            
+        Returns
+            - train_set, test_set
+    """
+    from sklearn.model_selection import train_test_split
+    X = data.drop(columns = cate_cols)
+    y = data[cate_cols]
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42, stratify = y)
+    df_train = pd.concat([X_train, y_train], axis = 1)
+    df_test = pd.concat([X_test, y_test], axis = 1)
+    
+    return df_train, df_test
 
 # /=================================================================================================\
 #                                                 THE END.
