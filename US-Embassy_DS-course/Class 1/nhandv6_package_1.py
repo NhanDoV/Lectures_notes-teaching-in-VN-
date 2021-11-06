@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.model_selection import GridSearchCV, cross_val_score, KFold
 
@@ -50,6 +51,49 @@ def RMSE(y_true, y_pred):
             MAPE_score
     """    
     return np.sqrt(MSE(y_true, y_pred))
+
+# /=================================================================================================\
+def regression_compare(df_train, df_test, target_col, h = 5):
+    """
+        This function is used to compare the basic_charts in regression problems.
+        Paramters:
+            - df_train, df_test (dataframes)
+            - target_col (str) : target column from the dataset
+            - h (float) : the height of each cell_image
+            
+        Return / Display : 
+            - scatter plot of all the input-feature and target column, and,
+            - heatmaps of the correlation matrix to the target 
+            - distribution plots of the target column
+    """
+    df_train['flg'] = 'train-set'
+    df_test['flg'] = 'test-set'
+    df_full = pd.concat([df_train, df_test])
+    df_full = df_full.reset_index()
+
+    rem_cols = list(df_full.corr()[[target_col]].sort_values(by=target_col, ascending = False).index)
+    temp_df = df_full.drop(columns = ['index', target_col])
+    cols = temp_df._get_numeric_data().columns
+    if len(cols) % 2 == 0:
+        cols = cols
+    else:
+        cols = list(set(cols) - set(rem_cols[-1]))
+    
+    nrows = 1 + len(cols) // 2
+    height = h*nrows
+    fig, ax = plt.subplots(nrows = nrows, ncols = 2, figsize = (20, height))
+    ax = ax.ravel()
+    
+    for idx, col in enumerate(cols):
+        if idx < 2*(nrows - 1):
+            sns.scatterplot(x = col, y = target_col, hue = 'flg', data = df_full, ax = ax[idx])
+
+    sns.heatmap(df_train.corr(), annot=True, cmap='Reds', fmt='.3g', ax = ax[2*(nrows - 1)])
+    ax[2*(nrows - 1)].set_title('train-set')
+    sns.heatmap(df_test.corr(), annot=True, cmap='Reds', fmt='.3g', ax = ax[1 + 2*(nrows - 1)])
+    ax[2*(nrows - 1) + 1].set_title('test-set')
+    
+    sns.displot(data = df_full, x = target_col, hue = 'flg', kind='kde', fill=True, height=5, aspect=3)
 
 # /=================================================================================================\
 def count_null_show(data_train, data_test, figsize = (20, 6), rotation = 30):
@@ -163,7 +207,9 @@ def load_data(data, fill_vl = None,
         | Output
         |    cleaned data and its target.    
         |/======================================================================================================\
+        |
         | Example.
+        |
         |\******************************************************************************************************/
         | >>> data = pd.DataFrame({'x': [1, 2, 1, 0, 2],
         |                          'y': [1, 3, 1, '', 3],
@@ -196,8 +242,7 @@ def load_data(data, fill_vl = None,
         |  3    2
         | Name: z, dtype: int64)
         | 
-        |/==========================================================================================================\
-        
+        |/==========================================================================================================\        
     """
     data = data.drop_duplicates()
     X = data[inp_col_names]
@@ -205,7 +250,7 @@ def load_data(data, fill_vl = None,
         X = X.fillna(fill_vl)
     else:
         X = X.fillna(X.median())
-    #X = (X - X.mean()) / X.std()
+
     y = data[target_col]
 
     return X, y
@@ -239,7 +284,9 @@ def load_data2(data,
         | Output
         |    cleaned data and its target.    
         |/======================================================================================================\
+        |
         | Example.
+        |
         |\******************************************************************************************************/
         | Read the specific example on my github!
         |      https://github.com/Nhan121/Lectures_notes-teaching-in-VN-/tree/master/US-Embassy_DS-course/Class%201
@@ -255,10 +302,10 @@ def load_data2(data,
     else:
         X = X.fillna(fill_vl)
 
-    X[x1_name] = np.log(X[x1_name] + c1) / np.log(2)
+    X[x1_name] = np.log(X[x1_name] + c1) / np.log(10)
     X[new_feat_name] = X[x2_name] / X[[x3_name, x4_name]].sum(axis=1)
     X[x2_name] = np.log(X[x2_name] + c2)
-    #X = (X - X.mean()) / X.std()
+
     y = np.log(y) / np.log(10)
     X = X.drop(columns = [x3_name, x4_name])
     
@@ -371,7 +418,7 @@ def Grid_search_values(X_train, y_train, X_test, y_test, alg, grid_params, cv_kf
     return alg_name, train_shape, fit_time, best_params, stdv_kfold_score, train_score, test_score, mape, mae, mse, corr
 
 # /=================================================================================================\
-#                                                 THE END
+#                                                 THE END.
 # /=================================================================================================\
 def test_predict(train_db, test_db, inp_col_names, tar_col, 
                  model_hyp, algorithm, imputed_by, constant,
