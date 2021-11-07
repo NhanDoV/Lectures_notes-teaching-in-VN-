@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import seaborn as sns
+from scipy import stats
 import matplotlib.pyplot as plt
 from sklearn.model_selection import GridSearchCV, cross_val_score, KFold
 
@@ -122,9 +123,9 @@ def regression_compare(df_train, df_test, target_col, h = 5):
             sns.scatterplot(x = col, y = target_col, hue = 'flg', data = df_full, ax = ax[idx])
 
     sns.heatmap(df_train.corr(), annot=True, cmap='Reds', fmt='.3g', ax = ax[2*(nrows - 1)])
-    ax[2*(nrows - 1)].set_title('train-set')
+    ax[2*(nrows - 1)].set_xlabel('train-set')
     sns.heatmap(df_test.corr(), annot=True, cmap='Reds', fmt='.3g', ax = ax[1 + 2*(nrows - 1)])
-    ax[2*(nrows - 1) + 1].set_title('test-set')
+    ax[2*(nrows - 1) + 1].set_xlabel('test-set')
     
     sns.displot(data = df_full, x = target_col, hue = 'flg', kind='kde', fill=True, height=5, aspect=3)
 
@@ -470,6 +471,35 @@ def split_data(data, cate_cols, test_size):
     
     return df_train, df_test
 
+# /=================================================================================================\
+def normality_testing(data, muy, sigma, alternative, alpha):
+    """
+        Testing normality
+        Input
+            data
+            muy
+            sigma
+            alternative
+            alpha : significan value
+        Return
+            Conclusion
+    """
+    T_stats, p_val = stats.kstest(data, alternative = alternative,
+                                  cdf = stats.norm(loc = muy, 
+                                                   scale = sigma).cdf)
+    
+    print("|{}\n|{}Testing normality.".format(100*"=", 40*" "))
+    print("{}{}{}".format('|', 100*"*", '|'))
+    print("|\n|\tYour statistical_testing = {}, p_value = {}".format(T_stats, p_val))
+    
+    if p_val > alpha:
+        print("|\n|\tFor confidence_level = {}% and alternative = '{}', your data is normality".format(100*(1 - alpha), alternative) )
+        
+    else:
+        print("|\n|\tFor confidence_level = {}% and alternative = '{}', your data is not normality distribution".format(100*(1 - alpha), alternative) )
+        
+    print("|\n{}{}{}".format('|/', 98*"=", '\|'))  
+    
 # /=================================================================================================\
 #                                                 THE END.
 # /=================================================================================================\
