@@ -676,3 +676,4 @@ def view_top(data, product_col, trans_col, client_col, quan_col, sale_date, top_
     display(nb_products_per_basket[:top_N].sort_values(client_col))
     
     nb_products_per_basket['order_canceled'] = nb_products_per_basket['InvoiceNo'].apply(lambda x:int('C' in x))
+    
