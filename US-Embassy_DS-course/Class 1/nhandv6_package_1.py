@@ -178,6 +178,8 @@ def count_unique_and_mode(df_train, df_test):
                            ])
     data['col_name'] = df_train.columns
     data = data.set_index('col_name')
+    numeric_cols = df_train._get_numeric_data().columns
+    
     for col in df_train.columns:
 
         data.loc[col, 'col_type'] = df_train[col].dtype
@@ -187,7 +189,7 @@ def count_unique_and_mode(df_train, df_test):
         data.loc[col, '(mode-vl, freq, Nb_unique)_train-set'] = train_mode_values.loc[0, 'index'], train_mode_values.loc[0, col], len(df_train[col].unique())
         data.loc[col, '(mode-vl, freq, Nb_unique)_test-set'] = test_mode_values.loc[0, 'index'], test_mode_values.loc[0, col], len(df_test[col].unique())
         
-        if df_train[col].dtype != 'object':
+        if col in numeric_cols:
             data.loc[col, 'is_all-test_contained_in_train ?'] = 'Ignored! This column is numeric'
         else:
             in_test_not_in_train = set(df_test[col].unique()) - set(df_train[col].unique())
@@ -210,7 +212,7 @@ def Q_Q_plot(model, X_train, X_test, y_train, y_test):
         The more the data-points scattered arround the diagonal, the better your model.
     """
     from sklearn.metrics import r2_score
-    
+    model.fit(X_train, y_train)
     fig, ax = plt.subplots(nrows = 1, ncols = 2, figsize = (20, 6))
     X = [X_train, X_test]
     y = [y_train, y_test]
@@ -500,6 +502,95 @@ def normality_testing(data, muy, sigma, alternative, alpha):
         
     print("|\n{}{}{}".format('|/', 98*"=", '\|'))  
     
+# /=================================================================================================\
+def df_encode_category(data, target_col):
+    """
+    
+    """
+    from sklearn.preprocessing import LabelEncoder
+    # Split into feature_input and target
+    y = data[[target_col]]
+    data = data.drop(columns = target_col)
+    
+    # Pre-processing the feature
+    nume_cols = data._get_numeric_data().columns
+    conditon1 = (data.dtypes == 'category').sum()
+    condition2 = len(nume_cols)
+    
+    if (conditon1 > 0):
+        cate_cols = data.columns[data.dtypes == 'category']
+        categ_df = pd.DataFrame({})
+        for col in cate_cols:
+            LE = LabelEncoder() 
+            categ_df[col] = LE.fit_transform(data[col])
+        
+        if (condition2 > 0):
+            numer_df = data[nume_cols]
+            
+            # categ_df = pd.get_dummies(data[cate_cols])
+            get_df = pd.concat([numer_df, categ_df], axis = 1)
+        
+        else:
+            get_df = categ_df
+            
+    elif (conditon1 == 0) & (condition2 > 0):
+        numer_df = data[nume_cols]
+        get_df = numer_cols
+
+    return pd.concat([y, get_df], axis = 1).dropna()
+# /=================================================================================================\
+def kernel(data, point, xmat, k):
+    m,n = np.shape(xmat)
+    ws = np.mat(np.eye((m)))
+    for j in range(m):
+        diff = point - data[j]
+        ws[j,j] = np.exp(diff*diff.T/(-2.0*k**2))
+    return ws
+# /=================================================================================================\ 
+def local_weight(data, point, xmat, ymat, k):
+    wei = kernel(data, point, xmat, k)
+    return (data.T*(wei*data)).I*(data.T*(wei*ymat.T))
+# /=================================================================================================\     
+def local_weight_regression(xmat, ymat, k):
+    m,n = np.shape(xmat)
+    ypred = np.zeros(m)
+    for i in range(m):
+        ypred[i] = xmat[i]*local_weight(xmat, xmat[i],xmat,ymat,k)
+    return ypred
+
+target_col = ''
+# /=================================================================================================\
+def view_local_simple_regression(data, target_col, input_col):
+    
+    X = np.array(data[input_col])
+    y = np.array(data[target_col])
+
+
+    m = y.shape[0]
+    mtip = np.mat(X)
+    data = np.hstack((np.ones((m, 1)), np.mat(y).T))
+    ypred = local_weight_regression(data, mtip, 0.5)
+    indices = data[:,1].argsort(0)
+    xsort = data[indices][:,0]
+
+    fig = plt.figure()
+    ax = fig.add_subplot(1,1,1)
+    ax.scatter(y, X, color='green')
+    ax.plot(xsort[:,1],
+            ypred[indices], 
+            color = 'red', linewidth=3
+           )
+    plt.xlabel(input_col)
+    plt.ylabel(target_col)
+    MSE = np.mean((ypred - y)**2)
+    SST = np.mean((y - y.mean())**2)
+    SSR = np.mean((ypred[indices] - y)**2)
+    R2_score = 1 - (SSR / SST) 
+    RMSLE = np.mean(np.sqrt(np.log(np.abs(ypred) + 1) - np.log(np.abs(y) + 1))**2)
+    plt.title("MSE = {}, RMSLE = {}.".format(np.round(MSE, 3),
+                                                   np.round(RMSLE, 3)
+                                                   ))
+    plt.show()
 # /=================================================================================================\
 #                                                 THE END.
 # /=================================================================================================\
