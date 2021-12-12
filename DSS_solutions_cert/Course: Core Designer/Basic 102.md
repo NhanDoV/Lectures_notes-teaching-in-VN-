@@ -38,3 +38,28 @@ https://academy.dataiku.com/path/core-designer/basics-102/
 ```
 - [x] **False. If a column appears to be a Date column that has not yet been parsed, DSS recognizes it and suggests the "Parse date" processor.**
 - [ ] ~~True. If a column appears to be a Date column, there is no need to parse it in order to use it as a Date column.~~
+
+### Quiz 2. Interactive Visual Statistics.
+``` diff
+@@ Question 1:  What is the default sampling method that is applied to the dataset in the worksheet?@@
+```
+- [x] **First records**
+- [ ] ~~Last records~~
+- [ ] ~~Random~~
+- [ ] ~~No sampling~~
+
+``` diff
+@@ Question 2: Which of these options is not available in the Worksheet drop-down menu?@@
+```
+- [x] **Publish**
+- [ ] ~~Rename~~
+- [ ] ~~New Worksheet~~
+- [ ] ~~Delete~~
+
+``` diff
+@@ Question 3: What card menu gives you the option to group your dataset by a specified variable, so that you can perform computations on each data subgroup?@@
+```
+- [ ] ~~Sampling menu~~
+- [ ] ~~Group by menu~~
+- [ ] ~~Configuration menu~~
+- [x] **Split by menu**
