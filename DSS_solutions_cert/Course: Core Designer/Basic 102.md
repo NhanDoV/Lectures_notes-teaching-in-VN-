@@ -63,3 +63,24 @@ https://academy.dataiku.com/path/core-designer/basics-102/
 - [ ] ~~Group by menu~~
 - [ ] ~~Configuration menu~~
 - [x] **Split by menu**
+
+### Quiz 3. Group the Data.
+``` diff
+@@ Question 1: What are the two components used to configure the Group recipe?@@
+```
+- [ ] ~~Input and output datasets~~
+- [x] **Group key and aggregations**
+- [ ] ~~Key columns and filters~~
+- [ ] ~~Aggregations and column headings~~
+ 
+``` diff
+@@ Question 2: Although the Group recipe allows you to select an unlimited number of aggregations, you may only select one column as the group key.@@
+```
+- [ ] ~~True. In the Group recipe, only one column can serve as the group key at a time. You can open a code notebook to group by more than one column at a time.~~
+- [x] **False. When initiating a Group recipe, you must first choose one column to group by. However, on the following Group step, it is possible to add more columns to the group key.**
+
+``` diff
+@@ Question 3: If a dataset of six rows with three distinct customers is grouped by customers, the output dataset will also contain six rows.@@
+```
+- [ ] ~~True. The Group recipe keeps the original dimensions of the input dataset and appends the aggregations to the dataset.~~
+- [x] **False. The Group recipe reduces the input dataset to the number of distinct values in the group key. For example, in the above scenario, the output dataset would only contain three rows.**
