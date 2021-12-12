@@ -84,7 +84,7 @@ Before moving on to the next course/lesson, take this short quiz to test your co
 - [ ] True.
   
 ``` diff  
-@@ Question . An SQL Notebook can list the tables generated in my project? @@
+@@ Question 4. An SQL Notebook can list the tables generated in my project? @@
 ```
 - [ ] False. 
 - [x] True.
@@ -105,8 +105,8 @@ Before moving on to the next course/lesson, take this short quiz to test your co
 ``` diff 
 @@ Question 3.   When writing data from DSS to a database, you must specify the column names and storage types. @@
 ```
-- [x] True. You must explicitly provide the table schema to the database.
-- [ ] False. DSS provides the table schema to the database.
+- [ ] True. You must explicitly provide the table schema to the database.
+- [x] False. DSS provides the table schema to the database.
   
 ``` diff 
 @@ Question 4. An SQL query requires a primary SELECT statement that DSS can use to write the final INSERT INTO a table. @@
@@ -114,3 +114,42 @@ Before moving on to the next course/lesson, take this short quiz to test your co
 - [x] True.
 - [ ] False.
  
+``` diff 
+@@ Question 5. If you specify use of the database engine when creating charts on an SQL dataset, what portion of the dataset will be used to create the charts? @@
+``` 
+| | | | |
+|-|-|-|-|
+|<ul><li> - [ ] The first 100,000 rows </li> | <ul><li> - [ ] A random sample of 100,000 rows </li> |  <ul><li> - [ ] The same sample used in the explore view </li> |  <ul><li> - [x] The entire dataset </li> |
+  
+``` diff 
+@@ Question 6. SQL datasets in DSS are pointers to database tables. That is, the datasets are present only in your SQL database, but not duplicated in DSS. @@
+``` 
+- [ ] False. The datasets are present both in your SQL database and in DSS.
+- [x] True. The datasets are present only in your SQL database.
+  
+``` diff 
+@@ Question 7. An SQL notebook cannot be linked to multiple SQL connections. @@
+```
+- [ ] False. 
+- [x] True.
+  
+``` diff   
+@@ Question 8. When you run an SQL query, DSS handles these tasks, EXCEPT for: @@
+```
+- [ ] Table creation and deletion
+- [ ] Insertion into the output table
+- [ ] Detection of the table schema
+- [x] Specification of the storage location for the output dataset.
+
+``` diff   
+@@ Question 9. The output of an SQL script can be stored using a different database connection than the input. @@
+```
+- [ ] True. You can specify a different database connection for the output data than the one used by the input data.
+- [x] False. This option is available for the SQL query, but not for the SQL script.
+  
+``` diff   
+@@ Question 10. By default, DSS renders charts on a dataset using: @@
+```
+| | | | |
+|-|-|-|-|
+|<ul><li> - [ ] The first 100,000 rows </li> | <ul><li> - [ ] A random sample of 100,000 rows </li> |  <ul><li> - [x] The same sample used in the explore view </li> |  <ul><li> - [ ] The entire dataset </li> |
