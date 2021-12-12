@@ -68,23 +68,49 @@ Before moving on to the next course/lesson, take this short quiz to test your co
 ``` diff
 @@ Question 1. An SQL Notebook can be linked to multiple SQL connections? @@
 ```
-- [] False 
-- [ ] True 
+- [x] False. 
+- [ ] True.
 
 ``` diff   
 @@ Question 2. : An SQL Notebook is not represented by an icon in the flow? @@
 ```
-- [ ] False 
-- [] True 
+- [ ] False.
+- [x] True.
   
 ``` diff  
 @@ Question 3. An SQL Notebook writes a query output as a new dataset in your SQL database? @@
 ```
-- [x] False 
-- [ ] True 
+- [x] False.
+- [ ] True.
   
 ``` diff  
 @@ Question . An SQL Notebook can list the tables generated in my project? @@
 ```
-- [ ] False 
-- [x] True 
+- [ ] False. 
+- [x] True.
+
+### Quiz final. 
+``` diff 
+@@ Question 1. The Sync recipe and the Prepare recipe are the only visual recipes that you can use to write data to an SQL database. @@
+```
+- [ ] True. Other visual recipes, such as the Group, Join, and Window recipes, allow you to write data only to a local filesystem.
+- [x] False. Other visual recipes, such as the Group, Join, and Window recipes, also allow you to write data to an SQL database.
+  
+``` diff 
+@@ Question 2.  An SQL notebook writes a query output as a new dataset in your SQL database. @@
+```
+- [ ] True.
+- [x] False.
+  
+``` diff 
+@@ Question 3.   When writing data from DSS to a database, you must specify the column names and storage types. @@
+```
+- [x] True. You must explicitly provide the table schema to the database.
+- [ ] False. DSS provides the table schema to the database.
+  
+``` diff 
+@@ Question 4. An SQL query requires a primary SELECT statement that DSS can use to write the final INSERT INTO a table. @@
+``` 
+- [x] True.
+- [ ] False.
+ 
