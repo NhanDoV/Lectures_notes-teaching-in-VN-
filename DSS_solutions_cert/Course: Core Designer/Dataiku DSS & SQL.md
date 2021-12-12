@@ -8,22 +8,22 @@ Before moving on to the next course/lesson, take this short quiz to test your co
 @@ Question 1. Which statement is true when creating an SQL dataset in DSS? @@
 ``` 
 
-- [x] The data is written both in the DSS local server and the database 
-- [ ] The data is written in the local server only
-- [ ] The data is written in the SQL database only
-- [ ] The data is saved on your local computer
+- [x] **The data is written both in the DSS local server and the database**
+- [ ] ~~The data is written in the local server only~~
+- [ ] ~~The data is written in the SQL database only~~
+- [ ] ~~The data is saved on your local computer~~
               
 ```diff 
 @@ Question 2. When writing data to your SQL database, Dataiku DSS prompts you to write a “CREATE TABLE” query? @@
 ```
-- [x] False 
-- [ ] True 
+- [x] **False** 
+- [ ] ~~True~~
 
 ```diff  
 @@ Question 3. If a database connection has been set up in DSS, you can import data into DSS directly from the database without having to sync or prepare tables? @@
 ```
-- [ ] False
-- [x] True
+- [ ] ~~False~~
+- [x] **True**
              
 ### Quiz 2. SQL Recipe
 ```diff
