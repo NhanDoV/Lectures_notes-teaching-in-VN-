@@ -62,4 +62,29 @@ Before moving on to the next course/lesson, take this short quiz to test your co
 - [ ] It depends on the amount of memory available to your machine
 - [x] It depends on the engine that you select
 - [ ] 100,000 rows
-- [ ] There is no limit, no matter the selected engine
+- [ ] There is no limit, no matter the selected engine.
+  
+### Quiz 4. SQL recipe.
+``` diff
+@@ Question 1. An SQL Notebook can be linked to multiple SQL connections? @@
+```
+- [] False 
+- [ ] True 
+
+``` diff   
+@@ Question 2. : An SQL Notebook is not represented by an icon in the flow? @@
+```
+- [ ] False 
+- [] True 
+  
+``` diff  
+@@ Question 3. An SQL Notebook writes a query output as a new dataset in your SQL database? @@
+```
+- [x] False 
+- [ ] True 
+  
+``` diff  
+@@ Question . An SQL Notebook can list the tables generated in my project? @@
+```
+- [ ] False 
+- [x] True 
