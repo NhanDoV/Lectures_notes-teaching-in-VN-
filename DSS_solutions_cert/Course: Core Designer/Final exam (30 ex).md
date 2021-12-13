@@ -270,3 +270,12 @@
 - [ ]  Centralize AI initiatives from data to impact
 - [ ]  Streamline the path to production
 - [x]  Govern AI projects at scale
+
+``` diff
+@@ Question 35. Dataiku DSS provides the ability to create different data visualizations using the drag and drop chart interface. Which of the following chart types is most suitable for observing the distribution of a column divided into equal-width bins?@@
+```
+- [ ]  Pie chart
+- [x]  Scatterplot
+- [ ]  Line chart
+- [ ]  Histogram
+
