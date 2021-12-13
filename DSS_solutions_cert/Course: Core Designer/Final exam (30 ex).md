@@ -67,9 +67,9 @@
 @@ Question 9. According to the Value Proposition of Dataiku, by automating both design and production to reduce repetitive work and maximize quality, Dataiku helps organizations to: @@
 ```
 - [ ] Streamline the path to production
-- [x] **Govern AI projects at scale**
+- [ ] **Govern AI projects at scale**
 - [ ] Centralize AI initiatives from data to impact
-- [ ] Unify diverse teams working on AI
+- [x] Unify diverse teams working on AI
 
 ``` diff
 @@ Question 10. Which of the following cannot be changed once it is created in Dataiku DSS?@@
@@ -114,9 +114,9 @@
 ``` diff
 @@ Question 15. You are working with two datasets.  One contains listings of Homes_For_Sale and the other contains a listing of Realtors for which you have contact information. You want to create a new dataset that contains only the homes for sale that also have a realtor for whom you have contact information. How can you accomplish this in the Join recipe?@@
 ```
-- [x] A Cross join type with Homes_For_Sale on the left.
+- [ ] A Cross join type with Homes_For_Sale on the left.
 - [ ] A Left join type with Realtors on the left.
-- [ ] An Inner join type.
+- [x] An Inner join type.
 - [ ] A Left join type with Homes_For_Sale on the left.
 
 ``` diff
