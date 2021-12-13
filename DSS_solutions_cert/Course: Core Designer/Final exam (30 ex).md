@@ -91,9 +91,9 @@
 @@ Question 12. Which of the following represent ways to find outliers in the values in the column of a dataset? (Choose three.)@@
 ```
 - [ ] Schema
-- [ ] Charts tab
+- [x] Charts tab
 - [x] Analyze window
-- [ ] Statistics tab
+- [x] Statistics tab
 
 ``` diff
 @@ Question 13. When in the Explore tab of a dataset with default settings, actions like sorting and filtering return fast results. What property of DSS makes this possible?@@
@@ -239,3 +239,34 @@
 - [ ] the mundane and the moonshot
 - [ ] rationality and creativity
 - [x] **technology and business**
+
+``` diff
+@@ Question 31. Consider a dataset with a column, product_id. Most of the values in the column contain only whole numbers, while some values contain both whole numbers and letters. Dataiku DSS has assigned the meaning of "integer" to the column which means the values that contain letters are considered invalid. Since you know the values to be valid, what is the best course of action?@@
+```
+- [ ] Remove the rows that contain values marked as invalid.
+- [ ] Set the meaning of the column to Text.
+- [ ] Change the sampling method from first records to random number of records.
+- [x] Set the storage type of the column to String.
+
+``` diff
+@@ Question 32. According to the Value Proposition of Dataiku, what is needed to deliver value from AI at scale?@@
+```
+- [ ] Mastering tensions
+- [ ] Centralizing AI initiatives
+- [ ] Streamlining the path to production
+- [x]  All of these options
+- [ ] A systemized approach
+
+``` diff
+@@ Question 33. Even though AI is commonplace, the task of delivering value from AI at scale is difficult.@@
+```
+- [ ] False. Because AI is commonplace, it is easy for organizations to get everyone across the company using AI every day.
+- [x] True. The task of delivering value from AI at scale is difficult. Dataiku helps organizations master the tensions involved in delivering value from AI at scale by following a systemized approach.
+
+``` diff
+@@ Question 34. According to the Value Proposition of Dataiku, by providing the capabilities for managing operational risks and ensuring legal and regulatory compliance, Dataiku helps organizations to:@@
+```
+- [ ]  Unify diverse teams working on AI
+- [ ]  Centralize AI initiatives from data to impact
+- [ ]  Streamline the path to production
+- [x]  Govern AI projects at scale
