@@ -19,8 +19,8 @@
 @@ Question 3. Use the CO2 Emissions project to answer this question. In the dataset that aggregates (averages) across the years 2008-2012, what is the median of the GDP per capita column? @@
 ```
 - [ ] 7875.2
-- [x] 36710.7
-- [ ] 7442.5
+- [ ] 36710.7
+- [x] 7442.5
 - [ ] 70946.9
 
 ``` diff
@@ -275,7 +275,31 @@
 @@ Question 35. Dataiku DSS provides the ability to create different data visualizations using the drag and drop chart interface. Which of the following chart types is most suitable for observing the distribution of a column divided into equal-width bins?@@
 ```
 - [ ]  Pie chart
-- [x]  Scatterplot
+- [ ]  Scatterplot
 - [ ]  Line chart
-- [ ]  Histogram
+- [x]  Histogram
+
+``` diff
+@@ Question 36. Which of the following are included in the schema of a DSS dataset?  (Choose two).@@
+```
+- [ ] Column validity
+- [ ] Column sort preference
+- [x] Column storage type
+- [x] Column name
+
+``` diff
+@ Question 37. Which of the following is NOT included in the results from the Dataiku global search bar?@@
+```
+- [ ] DSS items from current or recently-opened projects
+- [x] Screens and settings within the product
+- [ ] Articles from the Dataiku Community
+- [ ] The catalog
+
+``` diff
+@@ Question 38. What are 'Formulas' in a Prepare recipe used for?@@
+```
+- [ ] Write out model specifications
+- [x] Write functions like in a spreadsheet
+- [ ] Write Python code in Dataiku DSS
+- [ ] Query data from other datasets
 
