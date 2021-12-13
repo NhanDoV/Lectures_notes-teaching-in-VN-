@@ -12,8 +12,8 @@
 ```
 - [ ] Deploy analysis done in a statistics worksheet to the Flow.
 - [x] Deploy the Script from a Visual Analysis as a Prepare recipe.
-- [x] Deploy a chart created in a Visual Analysis as output.
-- [ ] Deploy a notebook as a code recipe.
+- [ ] Deploy a chart created in a Visual Analysis as output.
+- [x] Deploy a notebook as a code recipe.
 
 ``` diff
 @@ Question 3. Use the CO2 Emissions project to answer this question. In the dataset that aggregates (averages) across the years 2008-2012, what is the median of the GDP per capita column? @@
@@ -34,10 +34,10 @@
 ```diff
 @@ Question 5. Use the CO2 Emissions project to answer this question. In the univariate analysis on the prepared dataset, the median meat supply in kg per capita is lowest for which year? (Hint: The notation [2001,2002) refers to the year 2001)@@
 ```
-- [x] 2011
+- [ ] 2011
 - [ ] 2010
 - [ ] 2009
-- [ ] 2008
+- [x] 2008
 
 ``` diff
 @@ Question 6. You can perform univariate, bivariate, and principal components analysis in which tab of a dataset?@@
@@ -171,9 +171,9 @@
  ``` diff
  @@ Question 22. Which of the following are true of sampling in DSS? (Choose three.)@@
 ```
-- [x] The default sampling method is to take a random sample, to ensure that the sample is representative of the full dataset.
+- [ ] The default sampling method is to take a random sample, to ensure that the sample is representative of the full dataset.
 - [x] Sampling settings are configurable.
-- [ ] Sampling enables users to work interactively with huge datasets.
+- [x] Sampling enables users to work interactively with huge datasets.
 - [x] When preparing your dataset or building a chart, DSS uses a sample of the dataset, by default.
 
 ``` diff
