@@ -59,17 +59,17 @@
 @@ Question 8. A Prepare recipe's Script can have many steps.  Which of the following is the best option to make it easier for a coworker to understand the workflow within a Script of many steps? @@
 ```
 - [ ] Choose processors that complete multiple operations in a single step.
-- [ ] Organize individual steps into Groups of steps within the Script.
+- [x] Organize individual steps into Groups of steps within the Script.
 - [ ] Divide the steps into multiple Prepare recipes.
-- [x] None of the other options.
+- [ ] None of the other options.
 
 ``` diff
 @@ Question 9. According to the Value Proposition of Dataiku, by automating both design and production to reduce repetitive work and maximize quality, Dataiku helps organizations to: @@
 ```
-- [ ] Streamline the path to production
-- [ ] **Govern AI projects at scale**
+- [x] Streamline the path to production
+- [ ] Govern AI projects at scale
 - [ ] Centralize AI initiatives from data to impact
-- [x] Unify diverse teams working on AI
+- [ ] Unify diverse teams working on AI
 
 ``` diff
 @@ Question 10. Which of the following cannot be changed once it is created in Dataiku DSS?@@
@@ -99,9 +99,9 @@
 @@ Question 13. When in the Explore tab of a dataset with default settings, actions like sorting and filtering return fast results. What property of DSS makes this possible?@@
 ```
 - [ ] Proprietary algorithms
-- [x] A powerful DSS server
+- [ ] A powerful DSS server
 - [ ] Connections to powerful computation engines
-- [ ] These actions are performed on only a sample of the dataset.
+- [x] These actions are performed on only a sample of the dataset.
 
 ``` diff
 @@ Question 14. Which tab on the project homepage shows a high-level overview of user contributions to a project?@@
@@ -165,8 +165,8 @@
 ```
 - [ ] Spain
 - [ ] Argentina
-- [x] Australia
-- [ ] Denmark
+- [ ] Australia
+- [x] Denmark
 
  ``` diff
  @@ Question 22. Which of the following are true of sampling in DSS? (Choose three.)@@
@@ -244,9 +244,9 @@
 @@ Question 31. Consider a dataset with a column, product_id. Most of the values in the column contain only whole numbers, while some values contain both whole numbers and letters. Dataiku DSS has assigned the meaning of "integer" to the column which means the values that contain letters are considered invalid. Since you know the values to be valid, what is the best course of action?@@
 ```
 - [ ] Remove the rows that contain values marked as invalid.
-- [ ] Set the meaning of the column to Text.
+- [x] Set the meaning of the column to Text.
 - [ ] Change the sampling method from first records to random number of records.
-- [x] Set the storage type of the column to String.
+- [ ] Set the storage type of the column to String.
 
 ``` diff
 @@ Question 32. According to the Value Proposition of Dataiku, what is needed to deliver value from AI at scale?@@
@@ -288,11 +288,11 @@
 - [x] Column name
 
 ``` diff
-@ Question 37. Which of the following is NOT included in the results from the Dataiku global search bar?@@
+@@ Question 37. Which of the following is NOT included in the results from the Dataiku global search bar?@@
 ```
 - [ ] DSS items from current or recently-opened projects
-- [x] Screens and settings within the product
-- [ ] Articles from the Dataiku Community
+- [ ] Screens and settings within the product
+- [x] Articles from the Dataiku Community
 - [ ] The catalog
 
 ``` diff
