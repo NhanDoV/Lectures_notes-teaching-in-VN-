@@ -136,8 +136,7 @@
 - [ ] None of these.
 
 ``` diff
-@@ Question 18. Use the CO2 Emissions project to answer this question. What country has the 5th highest CO2 emissions per capita for the year 2010? (Hint: You can use options from the context menu of the column headers since the entire data fits in the dataset sample)
-@@
+@@ Question 18. Use the CO2 Emissions project to answer this question. What country has the 5th highest CO2 emissions per capita for the year 2010? (Hint: You can use options from the context menu of the column headers since the entire data fits in the dataset sample)@@
 ```
 - [ ] Trinidad and Tobago
 - [ ] Bahrain
