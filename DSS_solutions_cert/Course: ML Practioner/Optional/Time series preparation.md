@@ -121,10 +121,10 @@
 ``` diff
 @@ Question 1. For an input dataset containing multiple time series, which of the following is REQUIRED in order to apply the Resampling recipe? Select all that apply.@@
 ```
-- [x] Long format
-- [ ] No more than one measurement for each timestamp in a time series
-- [x] A parsed date column
-- [x] Wide format
+- [ ] Long format
+- [x] **No more than one measurement for each timestamp in a time series**
+- [x] **A parsed date column**
+- [ ] Wide format
 
 ``` diff
 @@ Question 2. Which recipe of the Time Series Preparation plugin would be best suited to smooth the data in order to reduce noise and volatility? @@
@@ -137,10 +137,10 @@
 ``` diff
 @@ Question 3. Which of the following factors determine the number of rows in the output dataset of an Extrema Extraction recipe? (Choose two.) @@
 ```
-- [x] The extremum chosen (global maximum or minimum)
-- [ ] The number of independent time series in the dataset
-- [x] The width of the window frame
-- [ ] The number of duplicate extrema values
+- [ ] The extremum chosen (global maximum or minimum)
+- [x] **The number of independent time series in the dataset**
+- [ ] The width of the window frame
+- [x] **The number of duplicate extrema values**
 
 ``` diff
 @@ Question 4. In order to ensure that every interval has at least seven days, which parameter of the Interval Extraction recipe would you adjust?@@
@@ -185,8 +185,8 @@
 ```
 - [ ] Minimal valid value
 - [ ] Maximum valid value
-- [ ] Acceptable deviation
-- [x] Minimal segment duration
+- [x] **Acceptable deviation**
+- [ ] Minimal segment duration
 
 ``` diff
 @@ Question 10. Before using any of the other recipes in the Time Series Preparation Plugin, you first MUST use the Resampling recipe in order to equispace the timestamps.@@
