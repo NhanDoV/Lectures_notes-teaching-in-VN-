@@ -91,3 +91,76 @@
 - [x] True. For example, The keyword "CURRENT_MONTH" can be used to specify the target identifier, which would compute the partition identifier corresponding to the current month.
 
 ### Final
+``` diff
+@@ Question 1. What is the value of using partition redispatching in a Flow? (Select all that apply.)@@
+```
+- [x] **You can go from a non-partitioned dataset to a partitioned dataset.**
+- [ ] You can synchronize partitions between inputs and outputs.
+- [ ] You can go from a partitioned dataset to a non-partitioned dataset.
+- [x] **You can partition a dataset in a Flow even when the input dataset's underlying structure does not have defined partitions.**
+
+``` diff
+@@ Question 2. Which of the following are ways that partitioning can bring value to a Flow? (Select all that apply.)@@
+```
+- [x] Using scenarios to refresh partitions.
+- [ ] Processing several partitions at once--in parallel.
+- [x] Optimization of time-based computations, such as by day or month.
+- [x] Targeting data processing on partition identifiers.
+
+``` diff
+@@ Question 3. What are some of the things you can do with a dataset partitioned by the time dimension value of "Day"? (Select all that apply.)@@
+```
+- [x] Create a visual chart on a specific range of days.
+- [x] Compute metrics on one or more partitions.
+- [x] Automatically build the previous day using a keyword in a scenario.
+- [x] Automatically build the last seven days using a scenario.
+- [x] Create a univariate analysis on a specific day.
+
+``` diff
+@@ Question 4. Which of the following is not one of the three main elements making up the partition dependency computations in Dataiku DSS?@@
+```
+- [ ] The input partition identifier
+- [ ] The target partition identifier
+- [ ] The partition dependency function type that maps the target partition identifier to the input partition identifier
+- [x] The recipe itself
+
+``` diff
+@@ Question 5. Which of the following are true about partitioned datasets in DSS? (Select all that apply.)@@
+```
+- [ ] Multiple time dimensions can be activated on a single dataset.
+- [x] Multiple discrete dimensions can be activated on a single dataset.
+- [x] Computations can be performed on some or all partitions.
+- [x] The dataset sample can be configured to include some or all partitions.
+
+``` diff
+@@ Question 6. Which of the following statements are true about job activities when building partitioned datasets in Dataiku DSS? (Select all that apply.)@@
+```
+- [x] **An activity is the run of a recipe on a specific partition.**
+- [ ] Activities start before the computation of partition dependencies.
+- [ ] A job is always composed of a single activity.
+- [x] **A job can have more than one activity.**
+
+``` diff
+@@ Question 7. Which of the following is representative of one of the ways scenarios can add value when building a Flow with partitioned datasets?@@
+```
+- [ ] Both the dataset and the target identifier can be specified either in a Sequence of Steps or a Custom Python Script
+- [ ] Scenario-level variables can be defined and then used to specify the target identifier, such as a date range or specific period of time.
+- [ ] To add flexibility, variables can be defined and then used to build the partition identifier.
+- [ ] Use of a keyword, such as "PREVIOUS_DAY", in place of the target identifier
+- [x] All of these are true.
+
+``` diff
+@@ Question 8. Which of the following is true about partitioned dataset metrics? (Choose one.)@@
+```
+- [ ] Metrics are not available when interacting with a partitioned dataset.
+- [ ] Metrics can only be computed on the distinct data partitions.
+- [ ] Metrics can only be computed on the entire dataset.
+- [x] Metrics can be computed on both the distinct partitions and the entire dataset.
+
+``` diff
+@@ Question 9. Which outcome is possible when adding a  Sync recipe to  a non-partitioned dataset?@@
+```
+- [ ] Collect partitioning according to the values of the output columns.
+- [ ] Collect partitioning according to the values of the input columns.
+- [ ] Redispatch partitioning according to the values of the output columns.
+- [x] Redispatch partitioning according to the values of the input columns.
