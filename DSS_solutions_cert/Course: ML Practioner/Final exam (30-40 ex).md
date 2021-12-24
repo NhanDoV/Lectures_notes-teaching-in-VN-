@@ -263,6 +263,7 @@
 ``` diff
 @@ Question 34. Using the Variables importance summary shown below, which of these features appears to be least important?@@
 ```
+![alt text](https://github.com/Nhan121/Lectures_notes-teaching-in-VN-/blob/master/DSS_solutions_cert/Course:%20ML%20Practioner/feat_importance.jpg)
 - [ ] Distance traveled by the cab during the trip, in kilometers.
 - [ ] The difference in latitude from the pickup point to the drop-off point.
 - [ ] The hour of the pickup time.
