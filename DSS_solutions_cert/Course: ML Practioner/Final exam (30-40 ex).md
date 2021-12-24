@@ -2,8 +2,8 @@
 @@ Question 1. What kind of insights does the Individual explanations tool give you?@@
 ```
 - [ ] The number of records that were correctly predicted.
-- [x] How the predictions vary depending on a specific feature.
-- [ ] Which features were the most important in the prediction for a specific record.
+- [ ] How the predictions vary depending on a specific feature.
+- xx] Which features were the most important in the prediction for a specific record.
 - [ ] Statistics about the predictions, such as average and standard deviation.
 
 ``` diff
@@ -47,9 +47,9 @@
 ``` diff
 @@ Question 7. Which three of the following actions you can perform in the Design Tab of the Visual ML tool?@@
 ```
-- [ ] Choose how you want to split the data into the training set and testing set.
+- [x] Choose how you want to split the data into the training set and testing set.
 - [x] Customize the evaluation metric you want to optimize.
-- [x] Visualize the performance of your previous sessions to update your model.
+- [ ] Visualize the performance of your previous sessions to update your model.
 - [x] Process your features (cleaning, feature generation, etc).
 
 ``` diff
@@ -243,5 +243,33 @@
 - [ ] Cluster profiles
 - [ ] Confusion matrix
 - [ ] ROC Curve
+
+``` diff
+@@ Question 32. What kind of columns can be used as inputs to the PCA card?@@
+```
+- [x] Only numerical variables.
+- [ ] Any kind of variables (numerical, categorical, text, dates, vectors...).
+- [ ] Only categorical variables.
+- [ ] Both numerical and categorical variables.
+
+``` diff
+@@ Question 33. Which two of the following statements are true about the PCA card heatmap?@@
+```
+- [ ] The darker a cell color, the weaker the relationship between the column and the principal component.
+- [x] A blue color means the column has a negative relationship with the component.
+- [x] The darker a cell color, the stronger the relationship between the column and the principal component.
+- [ ] A blue color means the column has a positive relationship with the component.
+
+``` diff
+@@ Question 34. Using the Variables importance summary shown below, which of these features appears to be least important?@@
+```
+- [ ] Distance traveled by the cab during the trip, in kilometers.
+- [ ] The difference in latitude from the pickup point to the drop-off point.
+- [ ] The hour of the pickup time.
+- [x] The distance of the drop-off point from LaGuardia Airport.
+
+ ``` diff
+ @@ Question 35.@@
+ ```
 
 21 / 30
