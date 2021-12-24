@@ -3,7 +3,7 @@
 ```
 - [ ] The number of records that were correctly predicted.
 - [ ] How the predictions vary depending on a specific feature.
-- xx] Which features were the most important in the prediction for a specific record.
+- [x] Which features were the most important in the prediction for a specific record.
 - [ ] Statistics about the predictions, such as average and standard deviation.
 
 ``` diff
@@ -267,9 +267,3 @@
 - [ ] The difference in latitude from the pickup point to the drop-off point.
 - [ ] The hour of the pickup time.
 - [x] The distance of the drop-off point from LaGuardia Airport.
-
- ``` diff
- @@ Question 35.@@
- ```
-
-21 / 30
