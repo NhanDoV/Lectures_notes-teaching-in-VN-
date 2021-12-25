@@ -144,16 +144,16 @@
 ```
 - [ ] Order column
 - [ ] Post-filter step
-- [x] Window frame
+- [x] **Window frame**
 - [ ] Partitioning column
 
 ``` diff
 @@ Question 4. Which of the following are features of the Pivot recipe? Select two.@@
 ```
 - [ ] It always recomputes the output schema when running.
-- [ ] Multiple columns can be defined as group keys simultaneously
-- [x] Possible aggregations include: count, max, sum and average
-- [x] Both Pre-Filter and Post-Filter can be leveraged as steps in the Pivot recipe
+- [x] **Multiple columns can be defined as group keys simultaneously**
+- [x] **Possible aggregations include: count, max, sum and average**
+- [ ] Both Pre-Filter and Post-Filter can be leveraged as steps in the Pivot recipe
 
 ``` diff
 @@ Question 5. Imagine a Group recipe that computes the average order price for every unique customer in a dataset of retail transactions. Which of the following would you use to retain only rows of customers with an average order price higher than some value?@@
@@ -184,17 +184,17 @@
 In the Window recipe, a window frame limited by the 5 preceding rows and -1 following rows will include how many rows? Assume this row is not one of the very first rows where the full window frame is not possible.@@
 ```
 - [ ] 4
-- [x] 5
+- [x] **5**
 - [ ] Cannot be determined.
 - [ ] 6
 
 ``` diff
 @@ Question 9. To calculate the cumulative sum of a column using the Window recipe, what component(s) must be set in the Window definition step? Select all that apply.@@
 ```
-- [x] Partitioning column
-- [x] Order column
-- [x] Post-filter
-- [x] Window frame
+- [ ] Partitioning column
+- [x] **Order column**
+- [ ] Post-filter
+- [x] **Window frame**
 
 ``` diff
 @@ Question 10. Many processors in the Prepare recipe allow you to use regular expression patterns. Which of the following does NOT?@@
