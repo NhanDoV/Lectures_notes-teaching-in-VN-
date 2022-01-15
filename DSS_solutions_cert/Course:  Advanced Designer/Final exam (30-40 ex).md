@@ -173,7 +173,7 @@
 ``` diff
 @@ Question 20. Use the Advanced Designer Certificate Assessment project to answer this question. From your calculations of the top 5 customers from each year, which customerid represented the third highest total revenue in 2009?@@
 ```
-- [x] 15061
+- [x] **15061**
 - [ ] 17450
 - [ ] 13694
 - [ ] 14191
@@ -186,7 +186,7 @@
 - [ ] 2565, 5598
 - [ ] 5598, 4398
 - [ ] 2565, 3571
-- [x] 5598, 2565
+- [x] **5598, 2565**
 
 
 ``` diff
@@ -202,9 +202,9 @@
 @@ Question 23. Use the Advanced Designer Certificate Assessment project to answer this question. After retaining only records with a quantity greater than or equal to 2000 units, what was the 4 week rolling average on total quantity sold for the stock item 84077 on 2010-11-29?@@
 ```
 - [ ] 3809
-- [ ] 3097.5
+- [x] **3097.5**
 - [ ] 3318.38
-- [x] 3732.75
+- [ ] 3732.75
 
 ``` diff
 @@ Question 24. Use the Advanced Designer Certificate Assessment project to answer this question. The Group recipe that creates the Product_Aggregated Dataset uses a Post-filter step to remove products with low quantities of sales. It would have been more efficient to use a Pre-filter step.@@
