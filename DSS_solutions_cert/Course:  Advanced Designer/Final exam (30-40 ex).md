@@ -19,10 +19,9 @@
 @@ Question 3. Imagine a Flow with more than 100 datasets and recipes. Which views are most likely to provide useful information for identifying the parts that take a long time to compute? Select two choices.@@
 ```
 - [x] The “Count of records” view to identify the largest datasets in the Flow.
-- [x] The “Last build” view to see which datasets were built recently.
-- [ ] The “Connections” and “Recipe engines” views to see if connections and engines can be optimized for heavy-computation areas.
+- [ ] The “Last build” view to see which datasets were built recently.
+- [x] The “Connections” and “Recipe engines” views to see if connections and engines can be optimized for heavy-computation areas.
 - [ ] The “Creation” view to see when objects were created.
-
 
 ``` diff
 @@ Question 4. Which two settings are required in order to run a Top N recipe? Select two answers.@@
@@ -227,9 +226,9 @@
 ``` diff
 @@ Question 26. Use the Advanced Designer Certificate Assessment project to answer this question. For stock item 22197, what was the largest gap in days between any two weeks of qualifying purchases in the windowed output?@@
 ```
-- [ ] 14
+- [x] 14
 - [ ] 182
-- [x] 84
+- [ ] 84
 - [ ] 7
 
 ``` diff
