@@ -140,11 +140,10 @@
 ``` diff
 @@ Question 16. Which of the following statements about the Window recipe is true?@@
 ```
-- [ ] In order to correctly compute the rank for each row, an Order column must be specified.
+- [x] In order to correctly compute the rank for each row, an Order column must be specified.
 - [ ] If you define multiple windows, each window must be computed with the same Partitioning columns.
-- [x] In order for a Window recipe to work, all three Window definitions (Partitioning columns, Order columns, and Window frame) need to be activated.
+- [ ] In order for a Window recipe to work, all three Window definitions (Partitioning columns, Order columns, and Window frame) need to be activated.
 - [ ] On the Aggregations step, you can compute custom aggregations with the DSS formula language.
-
 
 ``` diff
 @@ Question 17. Which of the following are the two minimum required components for a functioning scenario? Select two.@@
@@ -175,7 +174,7 @@
 ``` diff
 @@ Question 20. Use the Advanced Designer Certificate Assessment project to answer this question. From your calculations of the top 5 customers from each year, which customerid represented the third highest total revenue in 2009?@@
 ```
-- [ ] 15061
+- [x] 15061
 - [ ] 17450
 - [ ] 13694
 - [ ] 14191
