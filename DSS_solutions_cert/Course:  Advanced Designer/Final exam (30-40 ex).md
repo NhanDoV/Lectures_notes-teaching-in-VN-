@@ -109,8 +109,8 @@
 ``` diff
 @@ Question 13. Metrics and checks cannot be computed on which of the following objects?@@
 ```
-- [x] Models
-- [ ] Recipes
+- [ ] Models
+- [x] Recipes
 - [ ] Datasets
 - [ ] Managed Folders
 
@@ -130,7 +130,7 @@
 - [ ] The accuracy of a machine learning model
 - [ ] The minimum value of a column
 - [ ] The most frequent values of a column
-- [x] Whether or not a column has more than three missing values
+- [x] **Whether or not a column has more than three missing values**
 - [ ] The number of files in a folder
 
 
