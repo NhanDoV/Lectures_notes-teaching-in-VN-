@@ -43,9 +43,9 @@
 ``` diff
 @@ Question 6. Which of the following statements about plugins are true? Select three that apply.@@
 ```
-- [ ] A plugin that has been customized by a user can still receive future updates from the store.
+- [x] A plugin that has been customized by a user can still receive future updates from the store.
 - [x] Once a plugin is installed on an instance of Dataiku, it can be used in any project on the instance.
-- [x] Any user (with any permission) can install plugins from the Dataiku plugin store.
+- [ ] Any user (with any permission) can install plugins from the Dataiku plugin store.
 - [x] Plugins can contain multiple components, such as recipes or processors.
 - [ ] A plugin's source code can be changed after installing it from the plugin store.
 
