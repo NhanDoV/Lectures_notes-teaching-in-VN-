@@ -43,12 +43,11 @@
 ``` diff
 @@ Question 6. Which of the following statements about plugins are true? Select three that apply.@@
 ```
-- [x] A plugin that has been customized by a user can still receive future updates from the store.
+- [ ] A plugin that has been customized by a user can still receive future updates from the store.
 - [x] Once a plugin is installed on an instance of Dataiku, it can be used in any project on the instance.
 - [x] Any user (with any permission) can install plugins from the Dataiku plugin store.
-- [ ] Plugins can contain multiple components, such as recipes or processors.
+- [x] Plugins can contain multiple components, such as recipes or processors.
 - [ ] A plugin's source code can be changed after installing it from the plugin store.
-
 
 ``` diff
 @@ Question 7. Use the Advanced Designer Certificate Assessment project to answer this question. Why did the schema consistency check fail after updating the Prepare recipe?@@
@@ -120,19 +119,18 @@
 @@ Question 14. Use the Advanced Designer Certificate Assessment project to answer this question. At what step in the "Initial Build" scenario, does the scenario fail?@@
 ```
 - [ ] At Step #2, only a subset of the metric calculations can be performed.
-- [x] At Step #5, the dataset to be built cannot be found.
-- [ ] At Step #3, a check on column counts fails or cannot be evaluated.
+- [ ] At Step #5, the dataset to be built cannot be found.
+- [x] At Step #3, a check on column counts fails or cannot be evaluated.
 - [ ] At Step #6, the project variable is not defined as a JSON object.
 - [ ] At Step #1, the initial project is in an inconsistent state.
-
 
 ``` diff
 @@ Question 15. Which of the following is NOT an example of a metric?@@
 ```
 - [ ] The accuracy of a machine learning model
-- [x] The minimum value of a column
+- [ ] The minimum value of a column
 - [ ] The most frequent values of a column
-- [ ] Whether or not a column has more than three missing values
+- [x] Whether or not a column has more than three missing values
 - [ ] The number of files in a folder
 
 
@@ -148,10 +146,10 @@
 @@ Question 17. Which of the following are the two minimum required components for a functioning scenario? Select two.@@
 ```
 - [ ] A reporter to send scenario information via several available channels.
-- [ ] A code snippet to stop the scenario on certain conditions.
-- [x] Trigger(s) that activate the scenario.
-- [x] Metrics and checks defined for any dataset built by the scenario.
-- [ ] A sequence of steps or a custom script to run when the scenario launches.
+- [x] A code snippet to stop the scenario on certain conditions.
+- [ ] Trigger(s) that activate the scenario.
+- [ ] Metrics and checks defined for any dataset built by the scenario.
+- [x] A sequence of steps or a custom script to run when the scenario launches.
 
 
 ``` diff
@@ -270,15 +268,14 @@
 - [ ] Processors
 
 
-16/30
 ``` diff
 @@ Question 31. Use the Advanced Designer Certificate Assessment project to answer this question. What are the two most popular colors among product descriptions according to the word cloud on the distinct dataset? Select two.@@
 ```
 - [ ] Red
-- [x] Pink
-- [ ] Blue
-- [ ] White
-- [x] Black
+- [ ] Pink
+- [x] Blue
+- [x] White
+- [ ] Black
 
 ``` diff
 @@ Question 32. The ___________ recipe offers a Computed Columns step to create a new column with a ___________. Assuming the input dataset is SQL-based, select two choices that are true.@@
@@ -295,3 +292,5 @@
 - [x] Yes, this will take care of it with the minimal amount of computation.
 - [ ] A simple non-recursive build will do it!
 - [ ] You need a forced recursive build if there are schema changes.
+
+23 / 30.
