@@ -5,8 +5,8 @@ def find_sample_size(alpha=0.05, beta=0.2, Base_rt=0.3, MDE_Rt=0.45):
         Xác định sample size khi có các nhân tố 
             MDE_rate : minimum detectable effort rate
             Base_rt: Baseline conversion rate
-            alpha: 
-            beta:    
+            alpha: significance value
+            beta (1 - beta): statistical power
     """
     za = norm.ppf(alpha/2)
     zb = norm.ppf(beta)
