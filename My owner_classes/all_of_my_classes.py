@@ -1,6 +1,8 @@
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
+from scipy.stats import t, norm
+
 #======================= DEFINE KERNEL FUNCTION =========================
 def rect_kernel(t):
     """
@@ -202,45 +204,84 @@ from scipy.stats import norm, t, chisquare
 # Hypothesis class 
 class prop_testing:
     """
-        Importance parameters:
+        Input parameters:
             alternative = {"equal (two_side)", "lower_tail (less)", "upper_tail (greater)"}
             alpha (float in [0, 1]) = significance level / then (1 - alpha) be the confidence_level
+        =================================================================================
+        Attributes:
+            prop_1_test(n, y, p0)
+            prop_2_test(n1, n2, p1, p2)
+        =================================================================================
+        Example
+            >> my_prop_test = prop_testing(alter='two_side', alpha=0.05)
+            >> my_prop_test.prop_1_test(n=800, y=600, p0=0.77)
+            -----------------------
+                0.17888190308175522
+                {'p_value': 0.17888190308175522,
+                 'statistical_testing': -1.3442056254199006,
+                 'sample_estimates': 0.75,
+                 'conf_interval': [0.7199943020227793, 0.7800056979772207],
+                 'final_claim': 'Not engough evidence to reject H0',
+                 'alternative': 'p != p0 (not.equal)'}
+            -----------------------
+            # Testing tỷ lệ 2 mẫu
+            >> my_prop_test.prop_2_test(n1=600,n2=800,y1=350,y2=390)
+            -----------------------
+                {'p_value': 0.00037828752742052885,
+                 'statistical_testing': 3.5547855260901673,
+                 'sample_estimates (prop_samp1, prop_samp2)': (0.5833333333333334, 0.4875),
+                 'conf_interval': [0.043337122902925504, 0.14832954376374125],
+                 'final_claim': 'Reject H0',
+                 'alternative': 'p != p0 (not.equal)'}         
     """
     def __init__(self, alpha, alter = "equal"):
+        valid_alter = ["less", "equal", "greater", "two_side", "lower_tail", "upper_tail"]
         self.alpha = alpha
         self.alter = alter
+        if alter not in valid_alter:
+            raise ValueError("Alternative (đối thuyết) phải là một trong các dạng sau đây,\n", valid_alter)
+        if (alpha < 0) or (alpha > 1):
+            raise ValueError("Mức ý nghĩa (significance level) alpha phải nằm trong (0, 1)")
     
     def prop_1_test(self, n, y, p0):
         """
-            p0: theorictic_proportion
-            n: sample size
-            y: total the elements in population that satisfies a property
+            Testing tỷ lệ cho cùng một mẫu
+            Input params:
+                p0: theorictic_proportion
+                n: sample size
+                y: total the elements in population that satisfies a property
+            Lý thuyết:
+                ************************************************************************
+                |   Case   |      Test statistics (Z0)        |        p_value         |
+                |----------|----------------------------------|------------------------|
+                | two_side | (p.hat - p0) / sqrt(p0*(1-p0)/n) | 2 min(P(Z<Z0), P(Z>Z0))|
+                | less     | (p.hat - p0) / sqrt(p0*(1-p0)/n) | P(Z < Z0)              |
+                | greater  | (p.hat - p0) / sqrt(p0*(1-p0)/n) | P(Z > Z0)              |
+                ************************************************************************     
         """
         p_hat = y / n # proportion in empirical sample
         Z0 = (p_hat - p0)/np.sqrt(( p0 * (1 - p0))/n) # statistical testing'
         
         # for two_sided alternative
-        if self.alter == "equal":
-            p_value = 1 - norm.cdf(Z0)
+        if self.alter in ["equal", "two_side"]:
+            p_value = 2*min(1 - norm.cdf(Z0), norm.cdf(Z0))
             dung_sai = abs(norm.ppf(self.alpha / 2))*np.sqrt(( p_hat * (1 - p_hat))/n)
             conf_int = [p_hat - dung_sai, p_hat + dung_sai]
-            alter = "p = p0 (equal)"
+            alter = "p != p0 (not.equal)"
             
         # if alternative = "p < p0"
-        elif self.alter == "less":
+        elif self.alter in ["less", "lower_tail"]:
             p_value = norm.cdf(Z0)
             dung_sai = abs(norm.ppf(self.alpha))*np.sqrt(( p_hat * (1 - p_hat))/n)
             conf_int = [0, p_hat + dung_sai]
             alter = "p < p0 (less)"
             
-        elif self.alter == "greater":
-            p_value = 2*min(1 - norm.cdf(Z0), norm.cdf(Z0))
+        elif self.alter in ["greater", "upper_tail"]:
+            p_value = 1 - norm.cdf(Z0)
             dung_sai = abs(norm.ppf(self.alpha))*np.sqrt(( p_hat * (1 - p_hat))/n)
             conf_int = [p_hat - dung_sai, 1]
             alter = "p > p0 (greater)"
-        else:
-            raise ValueError("no alternative like %s, please type help to get more details"%format(alter))
-        
+        print(p_value)
         if p_value < self.alpha:
             claim = "Reject H0"
         else:
@@ -256,8 +297,24 @@ class prop_testing:
     
     def prop_2_test(self, n1, n2, y1, y2):
         """
-            n1, n2: sample_size of 2 samples
-            y1, y2: total the elements in population that satisfies a property
+            Testing tỷ lệ cho 2 mẫu
+            Input params:
+                n1, n2: sample_size of 2 samples
+                y1, y2: total the elements in population that satisfies a property
+            Lý thuyết:
+                *********************************************************
+                |   Case   |  Test statistics  |        p_value         |
+                |----------|-------------------|------------------------|
+                | two_side |        Z0         | 2 min(P(Z<Z0), P(Z>Z0))|
+                | less     |        Z0         | P(Z < Z0)              |
+                | greater  |        Z0         | P(Z > Z0)              |
+                *********************************************************
+            trong đó:
+                Z0 = (p1_hat - p2_hat) / np.sqrt(p_hat*(1 - p_hat)*( 1/n1 + 1/n2))
+            và
+                p1 = y1 / n1
+                p2 = y2 / n2
+                p_hat = (y1 + y2) / (n1 + n2)            
         """
         p1_hat = y1 / n1
         p2_hat = y2 / n2
@@ -266,26 +323,24 @@ class prop_testing:
         diff_prop = p1_hat - p2_hat
         
         # for two_sided alternative
-        if self.alter == "equal":
-            p_value = 1 - norm.cdf(Z0)
+        if self.alter in ["equal", "two_side"]:
+            p_value =  2*min(1 - norm.cdf(Z0), norm.cdf(Z0))
             dung_sai = abs(norm.ppf(self.alpha / 2))*np.sqrt((p1_hat*(1-p1_hat)/ n1) + (p2_hat*(1-p2_hat)/ n2) )
             conf_int = [diff_prop - dung_sai, diff_prop + dung_sai]
-            alter = "p = p0 (equal)"
+            alter = "p != p0 (not.equal)"
             
         # if alternative = "p < p0"
-        elif self.alter == "less":
+        elif self.alter in ["less", "lower_tail"]:
             p_value = norm.cdf(Z0)
             dung_sai = abs(norm.ppf(self.alpha))*np.sqrt((p1_hat*(1-p1_hat)/ n1) + (p2_hat*(1-p2_hat)/ n2) )
             conf_int = [0, diff_prop + dung_sai]
             alter = "p < p0 (less)"
             
-        elif self.alter == "greater":
-            p_value = 2*min(1 - norm.cdf(Z0), norm.cdf(Z0))
+        elif self.alter in ["greater", "upper_tail"]:
+            p_value = 1 - norm.cdf(Z0)
             dung_sai = abs(norm.ppf(self.alpha))*np.sqrt((p1_hat*(1-p1_hat)/ n1) + (p2_hat*(1-p2_hat)/ n2) )
             conf_int = [diff_prop - dung_sai, 1]
             alter = "p > p0 (greater)"
-        else:
-            raise ValueError("no alternative like %s, please type help to get more details"%format(alter))
         
         if p_value < self.alpha:
             claim = "Reject H0"
@@ -300,49 +355,190 @@ class prop_testing:
                 "alternative": alter
                }
     
-## independent test
+## testing on sample-mean
+class mean_test:
+    """
+        Kiểm định trung bình của một / 2 mẫu với các giả định
+            - 1 mẫu khi biết phương sai tổng thể (known variance)
+            - 1 mẫu khi không biết phương sai tổng thể (Unknown variance)
+            - 2 mẫu khi biết phương sai
+        =====================================================================
+        Attributes:
+            avg_1sample(x, muy0, alter, sigma)
+            avg_2sample(x1, x2, muy1, muy2, alter, sigma)
+    """
+    def __init__(self, alpha, alter = "equal", sigma="unknown"):
+        valid_alter = ["less", "equal", "greater", "two_side", "lower_tail", "upper_tail"]
+        self.alpha = alpha
+        self.alter = alter
+        self.sigma = sigma        
+        if alter not in valid_alter:
+            raise ValueError("Alternative (đối thuyết) phải là một trong các dạng sau đây,\n", valid_alter)
+        if (alpha < 0) or (alpha > 1):
+            raise ValueError("Mức ý nghĩa (significance level) alpha phải nằm trong (0, 1)")
+        if (sigma != 'unknown') and (type(sigma) not in [int, float]) and (sigma != None):
+            raise ValueError("giá trị hợp lệ của sigma là `unknown` hay một số thực cụ thể, e.g. 5.1, 1.0 ")
     
+    def get_params(self):
+        print(f"Alternative (đối thuyết): {self.alter}")
+        print(f"significance value (alpha): {self.alpha}")
+        print(f"sigma (giả thuyết phương sai): {self.sigma}")
+
+    def avg_1sample(self, x, muy0):
+        """
+            Kiểm định giả thuyết trung bình của 1 mẫu
+            ============================================
+            kịch bản 1. alternative = 2 side
+                *************************************************************************************************************
+                |         Case             |           Test Statistic         |                    p.value                  |
+                *************************************************************************************************************
+                | X is normal, σ known     |(X.bar - muy) / (sigma / sqrt(n)) |2*min(P[X>Z0], 1-P[X>Z0]) where X is normal  |      |      
+                | n_large, X is not normal |(X.bar - muy) / (std.X / sqrt(n)) |2*min(P[X>Z0], 1-P[X>Z0]) where X apprx norm |
+                | X is normal, σ un-known  |(X.bar - muy) / (std.X / sqrt(n)) |2*min(P[X>Z0], 1-P[X>Z0]) where X is St(n-1) | 
+                ************************************************************************************************************|
+            trong đó
+                St(n-1) là phân phối Student với n-1 bậc tự do
+             ============================================
+             kịch bản 2. alternative = greater
+                 Được thực hiện tương tự như kịch bản 1, ta chỉ thay đổi p.value thành P[X > Z0], tức là                 
+                *************************************************************************************************
+                |         Case             |           Test Statistic         |               p.value           |
+                *************************************************************************************************
+                | X is normal, σ known     |(X.bar - muy) / (sigma / sqrt(n)) |P[X > Z0]     where X is normal  |      
+                | n_large, X is not normal |(X.bar - muy) / (std.X / sqrt(n)) |P[X > Z0]     where X apprx norm |
+                | X is normal, σ un-known  |(X.bar - muy) / (std.X / sqrt(n)) |P[X > Z0]     where X is St(n-1) | 
+                ************************************************************************************************|                 
+             ============================================
+             kịch bản 3. alternative = less
+                 Lúc này ta cũng chỉ thay đổi p.value thành P[X < Z0]
+                *************************************************************************************************
+                |         Case             |           Test Statistic         |               p.value           |
+                *************************************************************************************************
+                | X is normal, σ known     |(X.bar - muy) / (sigma / sqrt(n)) |P[X < Z0]     where X is normal  |      
+                | n_large, X is not normal |(X.bar - muy) / (std.X / sqrt(n)) |P[X < Z0]     where X apprx norm |
+                | X is normal, σ un-known  |(X.bar - muy) / (std.X / sqrt(n)) |P[X < Z0]     where X is St(n-1) | 
+                ************************************************************************************************|                                  
+        """
+        n = len(x)
+        # Biện luận Test-statistics theo sigma
+        if self.sigma != None:
+            Z0 = (np.mean(x) - muy0) / (self.sigma / n**0.5)
+            
+            # Biện luận p_value theo các đối thuyết
+            if self.alter in ["equal", "two_side"]:
+                p_value = 2*min(1 - norm.cdf(Z0), norm.cdf(Z0))
+            elif self.alter in ["less", "lower_tail"]:
+                p_value = norm.cdf(Z0)
+            elif self.alter in ["greater", "upper_tail"]:
+                p_value = 1 - norm.cdf(Z0)
+            
+        else:
+            std_x = np.std(x)
+            Z0 = (np.mean(x) - muy0) / (std_x / n**0.5)
+            
+            # trước khi biện luận theo đối thuyết cần chú ý kỹ giả thuyết sample-size 
+            # vì nó tương ứng với Student hoặc normal distribution
+            if n > 30:
+                if self.alter in ["equal", "two_side"]:
+                    p_value = 2*min(1 - norm.cdf(Z0), norm.cdf(Z0))
+                elif self.alter in ["less", "lower_tail"]:
+                    p_value = norm.cdf(Z0)
+                elif self.alter in ["greater", "upper_tail"]:
+                    p_value = 1 - norm.cdf(Z0)
+            # Lúc này nó tương ứng với pp student n-1 bậc tự do
+            # note: df meant degree of freedom
+            else:
+                if self.alter in ["equal", "two_side"]:
+                    p_value = 2*min(1 - t.cdf(Z0), t.cdf(Z0, df=n-1))
+                elif self.alter in ["less", "lower_tail"]:
+                    p_value = t.cdf(Z0, df=n-1)
+                elif self.alter in ["greater", "upper_tail"]:
+                    p_value = 1 - t.cdf(Z0, df=n-1)
+        print("Bác bỏ H0 nếu p_value < alpha")
+        return {'p-value':p_value, 'T_stats': Z0}
+    
+    def avg_2sample(self, x1, x2, muy1, muy2, alter, sigma):
+        """
+        
+        """
+        pass
+
 #============================================
 class Polynomial_Univariate_Regression:
     """
         This class is used to solve the polynomial assumption of univariate-regression
 
                 Y = a0 + a1 X + a2 X^2 + ... + a_d X^d
+        ================================================================================
+        Example.
+            ############################################################################
+            >> X = [1, 2, -1]
+            >> y = [1, -1, -1]
+            >> clf = Polynomial_Univariate_Regression(X, deg = 3)
+            >> clf.coef()
+            -------------------
+                w_0:  -1.0000000000000004
+                w_1:  1.0000000000000007
+                w_2:  1.000000000000001
+            #*********************************************
+            #
+            # this meant y = w2 * x^2 + w1 * x + w0
+            # or         y =    x^2   +    x  -  1
+            #
+            #*********************************************
+            >> clf.predict(np.array([1,2,4]))
+            ---------------------
+                [ 1.  5. 19.]
+            #*********************************************
+            # Note that
+            #              1 = w2*1^2 + w1*1 + w0
+            #              5 = w2*2^2 + w1*2 + w0
+            #             19 = w2*4^2 + w1*4 + w0
+            #*********************************************
+            >> clf.MSE_score([1,2,4], [2,3,3])
+            ----------------------
+                87.00000000000023
+            ############################################################################
     """
     def __init__(self, X, y, deg):
         self.X = np.array(X)
         self.y = np.array(y)
         self.deg = deg
         
-    def coef(self):
+    def coef(self, if_printed=True):
         coefs = np.polyfit(self.X, self.y, self.deg)
+        if if_printed:
+            for d in range(self.deg + 1):
+                print(f"w_{d}: \t {coefs[d]}")
         return coefs
     
-    def predict(self):
-        coefs = self.coef()
-        X_bar = np.array([self.X**k for k in range(self.deg + 1)])
+    def predict(self, X_new):
+        coefs = self.coef(if_printed=False)
+        X_new = np.array(X_new)
+        X_bar = np.array([X_new**k for k in range(self.deg + 1)])
         y_pred = np.sum(np.array(coefs.reshape(-1, 1)*X_bar), axis = 0)
+        
         return y_pred
 
-    def MSE_score(self):
-        coefs = self.coef()
-        y_pred = self.predict()
-        return np.mean([(self.y[k] - y_pred[k])**2 for k in range((np.array(self.X).shape[0]))])
+    def MSE_score(self, X_new, y_new):
+        coefs = self.coef(if_printed=False)
+        y_pred = self.predict(X_new)
+        return np.mean([(y_new[k] - y_pred[k])**2 for k in range((np.array(X_new).shape[0]))])
     
-    def R2_score(self):
-        coefs = self.coef()
-        y_pred = self.predict()
+    def R2_score(self, X_new, y_new):
+        coefs = self.coef(if_printed=False)
+        y_pred = self.predict(X_new)
         
         # sum of square_error
         SSE = np.sum([(self.y[k] - y_pred[k])**2 for k in range((np.array(self.X).shape[0]))])
         
         # total_sum of square = SSE + Sum_squared_regression
-        SST = SSE + np.sum([(y_pred[k] - np.mean(self.y))**2 for k in range((np.array(self.X).shape[0]))])
+        SST = SSE + np.sum([(y_pred[k] - np.mean(y_new))**2 for k in range((np.array(X_new).shape[0]))])
         
         return 1 - (SSE / SST)
     
     def plot(self):
-        coefs = self.coef()
+        coefs = self.coef(if_printed=False)
         y_pred = self.predict()
         plt.plot(self.X, self.y, '*', label = 'actual')
         plt.plot(self.X, y_pred, '--', label = 'pred')
