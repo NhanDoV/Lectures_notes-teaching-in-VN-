@@ -1,9 +1,24 @@
 import numpy as np
-from math import sqrt, gcd, acos, asin
+from math import sqrt, gcd, lcm, acos, asin, comb
 
+#=============================================================================
 def fibo_by_golden_rt(a, b , n):
     """
         Tổng quát cho Fibonacci với 2 số hạng đầu lần lượt là a và b
+        tức là
+            |-----|---------------|-------------------------------------|
+            |  n  | F.standard(n) |                  F(n)               |
+            |-----|---------------|-------------------------------------|
+            |  0  |       1       |                   a                 |
+            |  1  |       1       |                   b                 |
+            |  2  |       2       |                 a + b               |
+            |  3  |       3       |                 a + 2b              |
+            |  4  |       5       |                2a + 3b              |
+            | ... |      ...      |                  ...                |
+            | k-2 |F_standard(k-2)|                                     |
+            | k-1 |F_standard(k-1)|                                     |
+            |  k  | F_standard(k) |a*F_standard(k-2) + b*F_standard(k-1)|
+            |-----|---------------|-------------------------------------|
     """
     def fibo_coef(n):
         """
@@ -19,9 +34,20 @@ def fibo_by_golden_rt(a, b , n):
     else:
         return (a*fa + b*fb)
     
+#=============================================================================    
 def check_Smith_number(n):
     """
-        Smith number: 4, 27, 58, 22, 121, 378, 2050918644
+        Smith number: 4, 22, 27, 58, 22, 121, 378, 2050918644
+        Điều kiện
+            Tổng các ước số nguyên tố (dạng thừa số nguyên tố)
+            bằng với
+            tổng các chữ số trong chính nó
+        Ví dụ
+            4 = 2^2            và     0+4  = 2+2
+            22 = 2 * 11        và     2+2  = 2 + (1 + 1)
+            27 = 3^3           và     2+7  = 3+3+3
+            58 = 2*29          và     5+8  = 2+(2+9)
+            378 = 2*(3^3)*7    và    3+7+8 = 2+(3*3)+7
     """
     prime_factors = []
     N = n 
@@ -45,7 +71,8 @@ def check_Smith_number(n):
         print(f"{n} is a Smith number")
     else:
         print(f"{n} is not a Smith number")
-    
+        
+#=============================================================================    
 def is_prime(x):
     """
         Kiểm tra số nguyên tố
@@ -60,6 +87,7 @@ def is_prime(x):
     else:
         return 0
     
+#=============================================================================    
 def triangle_type_3edges(a, b, c):
     """
         Nhập vào 3 cạnh của 1 tam giác, kiểm tra xem nó có hợp lệ hay không
@@ -79,7 +107,8 @@ def triangle_type_3edges(a, b, c):
     else:
         print("Not a triangle")
         return 0
-
+    
+#=============================================================================
 def triangle_area_3edges(a, b, c):
     """
         Tính diện tích của một tam giác dựa vào 3 cạnh cho trước
@@ -92,7 +121,8 @@ def triangle_area_3edges(a, b, c):
         return S**0.5
     else:
         print("Tam giác không hợp lệ")
-
+        
+#=============================================================================
 def cosine_triangle_3edges(a, b, c):
     """
         By law of cosine, we have
@@ -129,7 +159,8 @@ def cosine_triangle_3edges(a, b, c):
         return A, B, C
     else:
         print("Tam giác không hợp lệ")
-
+        
+#=============================================================================
 def R_triangle_3edges(a, b, c):
     """ 
         We have
@@ -151,7 +182,8 @@ def R_triangle_3edges(a, b, c):
         return R
     else:
         print("Tam giác không hợp lệ")
-
+        
+#=============================================================================
 def line_equation_via_2points(A, B):
     """        
         VTCP AB = (xB - xA, yB - yA)
@@ -202,3 +234,290 @@ def line_equation_via_2points(A, B):
     print(f"Phuong trinh tong quat di qua A:{A} va B:{B} la:\n\t {y_AB}*y + {b}*x + {c} = 0")
     print(f"Slope: {y_AB}/{x_AB}")
     print(100*"=")
+    
+#=============================================================================    
+def right_triangle_triplets(limits):
+    """
+        Tìm 3 cạnh a,b,c của một tam giác vuông sao cho a,b,c <= given limits
+        ===================
+        Example
+        >> right_triangle_triplets(25)
+        ..............................
+                3 4 5
+                8 6 10
+                5 12 13
+                15 8 17
+                12 16 20
+                7 24 25
+        =====================================================================
+    """
+    c, m = 0, 2
+    # Limiting c would limit  
+    while c < limits :           
+        # Now loop on n from 1 to m-1 
+        for n in range(1, m) : 
+            a = m * m - n * n 
+            b = 2 * m * n 
+            c = m * m + n * n 
+  
+            # if c is greater than 
+            # limit then break it 
+            if c > limits : 
+                break
+            print(a, b, c) 
+        m = m + 1
+        
+#=============================================================================
+def nCr_table(n):
+    """
+        In ra bảng các hệ số trong các tổ hợp khi khai triển (a + b)^n
+        ================================
+        Ví dụ
+        >> nCr_table(5)
+        ...................................................................................
+                    1 2 1
+                   1 3 3 1
+                  1 4 6 4 1
+                1 5 10 10 5 1
+        >> nCr_table(20)
+        ...................................................................................
+                                                            1 2 1                                                     
+                                                           1 3 3 1                                                    
+                                                          1 4 6 4 1                                                   
+                                                        1 5 10 10 5 1                                                 
+                                                       1 6 15 20 15 6 1                                               
+                                                     1 7 21 35 35 21 7 1                                              
+                                                    1 8 28 56 70 56 28 8 1                                            
+                                                 1 9 36 84 126 126 84 36 9 1                                          
+                                             1 10 45 120 210 252 210 120 45 10 1                                      
+                                           1 11 55 165 330 462 462 330 165 55 11 1                                    
+                                         1 12 66 220 495 792 924 792 495 220 66 12 1                                  
+                                     1 13 78 286 715 1287 1716 1716 1287 715 286 78 13 1                              
+                                  1 14 91 364 1001 2002 3003 3432 3003 2002 1001 364 91 14 1                          
+                              1 15 105 455 1365 3003 5005 6435 6435 5005 3003 1365 455 105 15 1                       
+                          1 16 120 560 1820 4368 8008 11440 12870 11440 8008 4368 1820 560 120 16 1                   
+                      1 17 136 680 2380 6188 12376 19448 24310 24310 19448 12376 6188 2380 680 136 17 1               
+                   1 18 153 816 3060 8568 18564 31824 43758 48620 43758 31824 18564 8568 3060 816 153 18 1            
+               1 19 171 969 3876 11628 27132 50388 75582 92378 92378 75582 50388 27132 11628 3876 969 171 19 1        
+         1 20 190 1140 4845 15504 38760 77520 125970 167960 184756 167960 125970 77520 38760 15504 4845 1140 190 20 1 
+    ===============================================================================================================================
+    """
+    max_length = len(' '.join([ str(comb(n, i)%10**9) for i in range(n+1)]))
+    for k in range(2, n+1):
+        res = ' '.join([ str(comb(k, i)%10**9) for i in range(k+1)])
+        print(f"{res: ^{max_length+2}}")
+        
+#=============================================================================
+## Ma trận lũy linh
+def check_nilpotent(matrix):
+    """
+        Một ma trận lũy linh M phải thỏa
+            - ma trận vuông 
+            - tồn tại một số nguyên N sao cho M^n = 0_{n x n} (0_{n x n} tức là ma trận 0 cấp n)
+        Ví dụ
+            A = [[0, 1], [0, 0]] là lũy linh vì A^2 = 0
+        ====================================================================
+        Tuy nhiên đôi lúc chúng ta không thể sử dụng
+            while n > 0:
+                if M^n == 0_{n x n}
+        vì nó đéo tối ưu!
+        ===================================================================
+        Ta có một hệ quả từ ma trận lũy linh M 
+            - giả sử n là cấp của ma trận vuông M
+            - khi đó tất cả các trị riêng (eigenvalue) của nó đều bằng 0 (tức là 0 là nghiệm bội n) 
+        ======================================================================
+        >> res=check_nilpotent([[0, 1], [0, 0]])
+            lũy linh
+        >> res=check_nilpotent([[2, -1], [4, -2]])
+            lũy linh
+        >> res=check_nilpotent([[2, 4], [-1, -2]])
+            lũy linh
+        >> res=check_nilpotent([[2, 4], [0, -2]])
+            vuông nhưng đéo lũy linh
+        >> res=check_nilpotent([[2, 4, 0], [0, -2, 1]])
+            đéo vuông nên đéo care
+    """    
+    M = np.array(matrix)
+    n_col, n_row = M.shape
+    if n_col == n_row:
+        eigenvalues, eigenvectors = LA.eig(M)
+        # Loại trừ trường hợp các giá trị được hiển thị dưới dạng 0.000000000002
+        count_zeros = [x for x in eigenvalues if np.abs(x) < 1e-9]
+        if len(count_zeros) == n_col:
+            print("Lũy linh")
+            return 1
+        else:
+            print("vuông nhưng đéo lũy linh")
+            return 0
+    else:
+        print("đéo vuông nên đéo care")
+        return 0
+        
+#=============================================================================
+# Ma trận gọi là lũy đẳng
+def check_idempotent(matrix):
+    """
+        Một ma trận gọi là lũy đẳng (idempotent) nếu
+            - nó là ma trận vuông
+            - khi nhân với chính nó, sẽ cho ra chính nó
+        =====================================================================
+        Example
+        >> res=check_idempotent([[1,0],[0,1]]) 
+            Lũy đẳng
+        >> res=check_idempotent([[1,2], [2,1]])
+            vuông nhưng đéo lũy đẳng
+        >> res=check_idempotent([[3,-6], [1,-2]])
+            Lũy đẳng
+        >> res=check_idempotent([[3,1], [-6,-2]])
+            Lũy đẳng
+        >> res=check_idempotent([[1,2,1], [0,1,-2]])
+            đéo vuông nên đéo care
+    """
+    M = np.array(matrix)
+    n_col, n_row = M.shape
+    if n_col == n_row:
+        mat_2 = np.matmul(matrix, matrix)
+        res = (mat_2 - matrix)
+        if (np.abs(res) < 1e-9).all():
+            print("Lũy đẳng")
+            return 1
+        else:
+            print("vuông nhưng đéo lũy đẳng")
+            return 0
+    else:
+        print("đéo vuông nên đéo care")
+        return 0
+    
+#=============================================================================
+def fibo_gcd(indexes):
+    """
+        Cho các chỉ số trong dãy Fibonacci, tìm UCLN của giá trị tương ứng các chỉ số đó, ví dụ
+        >> indexes = [2, 3, 5]
+        >> fibo_gcd(indexes) = 1
+        *********** Giải thích
+            Fibo(2) = 1
+            Fibo(3) = 2
+            Fibo(5) = 5
+        *******************************
+        >> fibo_gcd([3,6,9,12]) = 2
+        >> fibo_gcd([4*k for k in range(1,8)]) = 3
+        =======================================================================================        
+    """
+    
+    fibo_list = [fibo_by_golden_rt(1,1,idx-1) for idx in indexes]
+    init_gcd = gcd(fibo_list[0], fibo_list[1]) 
+    for i in range(2, len(fibo_list)):
+        init_gcd = gcd(init_gcd, fibo_list[i])
+    return init_gcd
+#=============================================================================
+def fibo_lcm(indexes):
+    """
+        Cho các chỉ số trong dãy Fibonacci, tìm BCNN của giá trị tương ứng các chỉ số đó, ví dụ
+        >> indexes = [2, 3, 5]
+        >> fibo_lcm(indexes) = 10
+        *********** Giải thích
+            Fibo(2) = 1
+            Fibo(3) = 2
+            Fibo(5) = 5
+        *******************************
+        >> fibo_lcm([3,6,9,12]) = 2448
+        >> fibo_lcm([1,2,6,7,9]) = 1768
+        =======================================================================================
+    """
+    
+    fibo_list = [fibo_by_golden_rt(1,1,idx-1) for idx in indexes]
+    init_lcm = lcm(fibo_list[0], fibo_list[1]) 
+    for i in range(2, len(fibo_list)):
+        init_lcm = lcm(init_lcm, fibo_list[i])
+    return init_lcm
+
+#=============================================================================
+def multiples_closest(z, mod):
+    """
+        Returns the multiples of mod which nearest to z
+        ======================================================================================
+        Example
+        >> multiples_closest(10, 3) = 9
+        ............... vì 3*3 = 9 gần 10 hơn là 3*4
+        >> multiples_closest(11, 3) = 12
+        ............... vì 3*4 = 12 gần 11 hơn là 3*3
+        >> multiples_closest(28, 5) = 30
+        >> multiples_closest(27, 5) = 25
+    """
+    if mod > 0:
+        low = z // mod * mod
+        high = low + mod
+        return low if z - low <= high - z else high
+    else:
+        print(f"Your calculation is invalid since the quotient {mod} must be not equal to 0!!")
+        pass
+
+#=============================================================================
+def smallest_mutilple_of_9(n):
+    """
+        Tìm bội số nhỏ nhất của 9 sao cho chỉ chứa các digits 0 và 9 và chia hết cho n
+        ==============================================================================
+        Ví dụ
+        >> smallest_mutilple_of_9(1)  =    9
+        >> smallest_mutilple_of_9(2)  =   90
+        >> smallest_mutilple_of_9(7)  =  9009
+        >> smallest_mutilple_of_9(8)  =  9000
+        >> smallest_mutilple_of_9(23) = 990909
+        >> smallest_mutilple_of_9(31) = 999099
+        ==============================================================================        
+    """
+    # if n is a divisor of 9 (for instance 1, 3, 9)
+    if 9 % n == 0:
+        return 9
+    # otherwise
+    # initialize a list of only 0 and 9
+    li = [['0','9']]
+    while True:
+        # empty list of results
+        nums = []
+        # Generate a list of increasing digits {0, 9 | 00, 09, 90, 99 | 000, 009 ..., 990, 999 | ...}
+        oldNums = li[-1]
+        # Append 0 and 9 until the num % n
+        for suffix in oldNums:
+            nums.append('0' + suffix)
+
+        for suffix in oldNums:
+            string = '9' + suffix
+            num = int(string)
+            if num % n == 0:
+                return num
+            nums.append(string)
+        li.append(nums) 
+        
+#=============================================================================
+def lengthOfLongestSubstring(s: str):
+    """
+        Tìm chuỗi con dài nhất trong một chuỗi cho trước và độ dài chuỗi con đó
+        ======================================================================
+        Example
+        >> lengthOfLongestSubstring('aabaab!bb') 
+            "ab!" 
+            3
+        >> lengthOfLongestSubstring('abcdas')
+            "abcd"
+            4
+        ======================================================================                
+    """
+    letter_to_index = {}
+    max_length = 0
+    substr_begin = 0
+    s_ls = []
+    for i, c in enumerate(s):
+        cond = str(c in letter_to_index)
+        if c in letter_to_index:
+            substr_begin = max(letter_to_index[c] + 1, substr_begin)
+            s_ls.append( (cond, max(max_length, i + 1 - substr_begin), s[i-max_length: i]) )      
+        letter_to_index[c] = i
+        max_length = max(max_length, i + 1 - substr_begin)
+    
+    if len(s) == max_length:
+        substr = s
+    else:
+        substr = max(s_ls, key=lambda item: item[1])[-1]
+        
+    return substr, len(substr)
