@@ -521,3 +521,154 @@ def lengthOfLongestSubstring(s: str):
         substr = max(s_ls, key=lambda item: item[1])[-1]
         
     return substr, len(substr)
+
+#=============================================================================
+def square_by_dot(n, symb="o"):
+    """
+        Vẽ hình vuông bằng các ký tự     
+        ================
+        Example:
+        >> square_by_dot(10)
+                 o  o  o  o  o  o  o  o  o  o 
+                 o  o  o  o  o  o  o  o  o  o 
+                 o  o  o  o  o  o  o  o  o  o 
+                 o  o  o  o  o  o  o  o  o  o 
+                 o  o  o  o  o  o  o  o  o  o 
+                 o  o  o  o  o  o  o  o  o  o 
+                 o  o  o  o  o  o  o  o  o  o 
+                 o  o  o  o  o  o  o  o  o  o 
+                 o  o  o  o  o  o  o  o  o  o 
+                 o  o  o  o  o  o  o  o  o  o 
+        >> square_by_dot(3, "*")
+             *  *  * 
+             *  *  * 
+             *  *  *
+    """
+    s = n*f" {symb} "
+    for _ in range(n):
+        print(f"{s: ^{n}}")
+        
+#=============================================================================        
+def pine_plot(max_height=10, max_width=7):
+    """
+        Vẽ cây thông
+        ====================
+        Example
+        >> pine_plot(5, 3)
+                *    
+               ***   
+              *.*.*  
+             *..*..* 
+                *    
+                *    
+        >> pine_plot(8, 7)
+                *        
+               ***       
+              *.*.*      
+             *..*..*     
+            *...*...*    
+           *....*....*   
+          *.....*.....*  
+         *......*......* 
+                *        
+                *        
+                *                
+    """
+    l = 2*max_width + 1
+    print(f"{'*': ^{l+2}}")
+    for _ in range(max_width):
+        space = ' '*(max_width-_)
+        symb_str = f"*{'.'*_}*{'.'*_}*"    
+        print(f"{space: ^{max_width-_}}{symb_str: ^{_}}{space: ^{max_width-_}}")        
+    if max_height > max_width + 1:        
+        for _ in range(max_height - max_width):
+            print(f"{'*': ^{l+2}}")
+    else:
+        for _ in range(3):
+            print(f"{'*': ^{l+2}}")        
+
+#=====================================================================================
+def map_generate(n):
+    """
+        Tạo một bản đồ hình vuông với các ký hiệu
+            | (wall): tường thành
+            ^ (mountain): núi
+            x (war.zone)
+            $ (mine)
+            ? (unknown)
+            @ (village)
+            # (river)
+        -----------------------------------------------
+        Example
+        >> map_generate(8)
+            o--------------------o
+            |        |  @  #  ^  |
+            |     @  |  #        |
+            |  x  #              |
+            |     #        #  #  |
+            |  @  @              |
+            |        @        @  |
+            o--------------------o
+        >> map_generate(30)
+            o--------------------------------------------------------------------------------------o
+            |  @  #     @     |        #                          #  |  ^        #     #        #  |
+            |  x  ^  @  #     |        @  #  ^  $  #                 ^  #  |  x  |     #     #     |
+            |     #  @        #  |  |           |  #           |           ^  #  #                 |
+            |  #  ^        x     |                 @  #        @           ^  @     ^           |  |
+            |        #  #  |  x              #        #  |     ^     |  #  #     |     |     #  ^  |
+            |  @     #     x  #     @        #  @                    x  #     ^  x        #  #     |
+            |        #     #        #        #  #     x        @     #  @  @  @              ^  @  |
+            |  #  #  #  @        @  |  #  x  ^        ^  ^     |     @  #  ^        @           #  |
+            |     |     ^  @  #  #        x           #  #  #  #        @     @  @  |  @     |     |
+            |  @  #  x  #                 x              ^     #  @  |           #  ^  #  #        |
+            |  #        #  ^  #  |  @        |  #  |  #  |     #     #  ^  |  #        $     #  #  |
+            |              #     #           @     |     #  @              |  #  $  #        @  @  |
+            |           #     ^  |     ^  #     |  #  @        #     $     @           @     @     |
+            |              #     |  #  #     #  #  |  @     ^  @           #  |  #  |  #        #  |
+            |        x  @  #  x     |     |           #  |  #     #           #  @  |     @        |
+            |     #           |     ^     ^  |  |     #  |  ^     @     |           @  |  #        |
+            |        @           @  #           |     ^  x        #  #  #  ^     @     |  #     #  |
+            |  #     @     |  |  x  ^  |           #  ^  ^  #     ^        @     |     #  @     #  |
+            |        x     ^  @        |     #     #     #  #  #  #     #  ^        ^  |        #  |
+            |  #     |  |        |  @  #        $     #  #        #     |  @     @           ^  #  |
+            |                          #     #  x  |  #  #  |  ^     @  |  #     #           @  @  |
+            |  @  #     |                 x  #        |  @     #  #  @  #              #        #  |
+            |  ^  #  |  @  ^     #        x        @  ^  |  |     ^                 x           |  |
+            |     @  |  #  #              @  @           #  #  #        |  |  x     @  |  @  #     |
+            |  @  |     ^  #  ^  ^     |  x  @  #  @     @        @  #  @     @  @        #     ^  |
+            |     ^           #  #  #  $        |  #  #              #     $  |           |     x  |
+            |     #     |  #  |           x           #  #  #  @           $              #  |     |
+            |  #     #  @     |  @        #  #              |        x  #     #     x  ^  |  |     |
+            o--------------------------------------------------------------------------------------o
+    """
+    A = np.random.choice([0,1,2,3,4,5,6], 
+                         size=n*n, 
+                         p=[0.5, 0.1, 0.1, 0.05, 0.04, 0.01, 0.2])
+    A = np.array(A).reshape(n, n)
+    A[0, :] = 1
+    A[n-1, :] = 1
+    A[:, 0] = 1
+    A[:, n-1] = 1
+    B = []
+    for row in range(n):
+        for col in range(n):
+            if A[row, col] == 0:
+                B.append(' ')
+            elif A[row, col] == 2:
+                B.append('@')
+            elif A[row, col] == 3:
+                B.append('^')
+            elif A[row, col] == 4:
+                B.append('x')
+            elif A[row, col] == 5:
+                B.append('$')
+            elif A[row, col] == 6:
+                B.append('#')
+            else:
+                B.append('|')
+    B = np.array(B).reshape(n,n)
+    for k in range(n):
+        if (k==0) or (k==n-1):
+            print(f"o{'-'*(3*(n-1) - 1)}o")
+        else:
+            print('  '.join(B[k]))

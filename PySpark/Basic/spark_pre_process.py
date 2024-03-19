@@ -4,16 +4,152 @@ from pyspark.sql import functions as sf
 from pyspark.sql import SparkSession
 from pyspark import SparkConf, SparkContext
 from pyspark.sql.window import Window
-from pyspark.sql.functions import col, substring
+from pyspark.sql.functions import col, \
+                                    substring, lit, concat, \
+                                    sin, exp, \
+                                    datediff, months_between, \
+                                    date_format, to_date, to_timestamp, date_add, date_sub, hour, date_trunc
 
-# ===========================================================================================
+#===========================================================================================================
 def pre_process_string_sparkdf(sparkdf, input_col, output_col, n_substrings):
     """
-    
+        Trích xuất một số phần tử đầu / cuối, ghép nối
+        ===========
+        Example
+        >> !wget https://jacobceles.github.io/knowledge_repo/colab_and_pyspark/cars.csv
+        >> df = spark.read.csv('cars.csv', header=True, sep=";")        
+        >> ndf = pre_process_string_sparkdf(df, 'Car', 'first_4_letter', 4)
+        >> ndf.show(5)
+            +--------------------+----------+----------+--------------+---------------+
+            |                 Car|4st_letter|4ls_letter|2nd-5th_letter|concat(4ls-4st)|
+            +--------------------+----------+----------+--------------+---------------+
+            |Chevrolet Chevell...|      Chev|      libu|          hevr|      Chev-libu|
+            |   Buick Skylark 320|      Buic|       320|          uick|      Buic- 320|
+            |  Plymouth Satellite|      Plym|      lite|          lymo|      Plym-lite|
+            |       AMC Rebel SST|      AMC |       SST|          MC R|      AMC - SST|
+            |         Ford Torino|      Ford|      rino|          ord |      Ford-rino|
+            +--------------------+----------+----------+--------------+---------------+
+            only showing top 5 rows
     """
-    sparkdf.select(col(input_col),
-                   substring(col(input_col), 1, n_substrings).alias(output_col))
+    sparkdf = sparkdf.select(col(input_col),
+                             substring(col(input_col), 1, n_substrings).alias(output_col))
+    sparkdf = sparkdf.select(col(input_col), col(output_col),
+                             substring(col(input_col), -4, n_substrings).alias('4ls_letter'))
+    sparkdf = sparkdf.select(col(input_col), col(output_col), col('4ls_letter'),
+                             substring(col(input_col), 2, n_substrings).alias('2nd-5th_letter'))
+    sparkdf = sparkdf.select(col(input_col), col(output_col), 
+                             col('4ls_letter'), col('2nd-5th_letter'),
+                             concat(col(output_col), lit("-"), col('4ls_letter')).alias('concat(4ls-4st)'))
+    
     return sparkdf
+
+#===========================================================================================================
+def numeric_preprocess(sparkdf, col1, col2, col3, col4):
+    """
+        Một số xử lý cơ bản như +-*/
+        ===============================
+        Example
+        >> !wget https://jacobceles.github.io/knowledge_repo/colab_and_pyspark/cars.csv
+        >> df = spark.read.csv('cars.csv', header=True, sep=";")
+        >> ndf = numeric_preprocess(df, 'MPG', 'Cylinders', 'Weight', 'Acceleration')
+        >> ndf.show(5)
+            +----+------+---------+------------+-----------------------+------------------+
+            | MPG|Weight|Cylinders|Acceleration|(weight*mpg+3)/cylinder| exp(acceleration)|
+            +----+------+---------+------------+-----------------------+------------------+
+            |18.0| 3504.|        8|        12.0|               7884.375|162754.79141900392|
+            |15.0| 3693.|        8|        11.5|                6924.75|  98715.7710107605|
+            |18.0| 3436.|        8|        11.0|               7731.375| 59874.14171519782|
+            |16.0| 3433.|        8|        12.0|               6866.375|162754.79141900392|
+            |17.0| 3449.|        8|        10.5|                 7329.5|36315.502674246636|
+            +----+------+---------+------------+-----------------------+------------------+
+            only showing top 5 rows        
+    """
+    sparkdf = sparkdf.select(col(col1), col(col3), col(col2), col(col4),
+                             ((col(col1)*col(col3)+lit(3))/col(col2)).alias('(weight*mpg+3)/cylinder'),
+                             (exp(col(col4))).alias('exp(acceleration)')
+                            )
+
+    return sparkdf 
+
+#===========================================================================================================
+def preprocess_timestamp(sparkdf, date_col):
+    """
+        Một số xử lý cơ bản về date-time trong Sparks như
+        - trích xuất một số phần tử ngày / tháng / giờ
+        - tìm số ngày đến thời điểm nào đó
+        - tìm ngày trước và ngày sau tại một thời điểm
+        ======================
+        Example
+        >> Mdf = spark.createDataFrame([['2019-08-25 13:30:00'], 
+                                        ['2023-10-06 05:12:11'],
+                                        ['2022-04-01 00:00:00'], 
+                                        ['2024-03-18 20:10:12']], ['DOB'])
+        >> Mdf = preprocess_timestamp(Mdf, 'DOB')
+        >> Mdf.show()
+            +-------------------+------------+---------+--------------+----+---------+-----------+----------+-----------+
+            |                DOB|current_date|get_month|get_month_name|hour|diff_days|diff_months|3day.later|3day.before|
+            +-------------------+------------+---------+--------------+----+---------+-----------+----------+-----------+
+            |2019-08-25 13:30:00|  2024-03-19|       08|        August|  13|     1668|54.78830645|2019-08-28| 2019-08-22|
+            |2023-10-06 05:12:11|  2024-03-19|       10|       October|  05|      165| 5.41236148|2023-10-09| 2023-10-03|
+            |2022-04-01 00:00:00|  2024-03-19|       04|         April|  00|      718|23.58064516|2022-04-04| 2022-03-29|
+            |2024-03-18 20:10:12|  2024-03-19|       03|         March|  20|        1| 0.00514785|2024-03-21| 2024-03-15|
+            +-------------------+------------+---------+--------------+----+---------+-----------+----------+-----------+
+    """
+    # adding new column with the constant-values '2024-03-19'
+    sparkdf = sparkdf.withColumn('current_date', lit('2024-03-19'))
+    
+    # datetime-processing
+    sparkdf = sparkdf.select(col(date_col), col('current_date'),
+                     date_format(to_date(col(date_col)), 'MM').alias('get_month'),
+                     date_format(to_date(col(date_col)), 'MMMM').alias('get_month_name'),
+                     date_format(to_timestamp(col(date_col)), 'HH').alias('hour'),
+                     datediff(col('current_date'), to_timestamp(col(date_col))).alias('diff_days'),
+                     months_between(col('current_date'), to_timestamp(col(date_col))).alias('diff_months'),                             
+                     date_add(to_date(col(date_col)), 3).alias('3day.later'),
+                     date_add(to_date(col(date_col)), -3).alias('3day.before'),  # you can also used day_sub(col, 3)               
+                    )
+    return sparkdf
+
+def spark_query_sql(sparkdf, table_name, query):
+    """
+        Thực hiện một SQL query từ một table với sparks
+        ==========================
+        Example
+        >> !wget https://jacobceles.github.io/knowledge_repo/colab_and_pyspark/cars.csv
+        >> df = spark.read.csv('cars.csv', header=True, sep=";")
+        >> ndf = spark_query_sql(df, "car", "select * from car limit 5")
+        >> ndf.show()               
+            +--------------------+----+---------+------------+----------+------+------------+-----+------+
+            |                 Car| MPG|Cylinders|Displacement|Horsepower|Weight|Acceleration|Model|Origin|
+            +--------------------+----+---------+------------+----------+------+------------+-----+------+
+            |Chevrolet Chevell...|18.0|        8|       307.0|     130.0| 3504.|        12.0|   70|    US|
+            |   Buick Skylark 320|15.0|        8|       350.0|     165.0| 3693.|        11.5|   70|    US|
+            |  Plymouth Satellite|18.0|        8|       318.0|     150.0| 3436.|        11.0|   70|    US|
+            |       AMC Rebel SST|16.0|        8|       304.0|     150.0| 3433.|        12.0|   70|    US|
+            |         Ford Torino|17.0|        8|       302.0|     140.0| 3449.|        10.5|   70|    US|
+            +--------------------+----+---------+------------+----------+------+------------+-----+------+        
+        .................. Với một số query khá dài ta có thể kẹp nó ở giữa 3 ký tự "
+        >> q = (3)" select count(*) as total_count, Origin
+                 from car 
+                 group by Origin
+                 order by total_count desc
+               "(3)
+        >> ndf = spark_query_sql(df, "car", q)
+        >> ndf.show()
+            +-----------+------+
+            |total_count|Origin|
+            +-----------+------+
+            |        254|    US|
+            |         79| Japan|
+            |         73|Europe|
+            +-----------+------+
+    """
+    # Register Temporary Table
+    sparkdf.createOrReplaceTempView(table_name)
+    
+    # return
+    return spark.sql(query)
+
 # ===========================================================================================
 
 # Read more

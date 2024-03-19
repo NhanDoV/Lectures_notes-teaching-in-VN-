@@ -64,3 +64,21 @@ def solar_systems(N, R, centers = [0, 0], n=1, style = '-', col = 'blue'):
         plt.plot(xss, yss)
         ellips_2d([R1, R2], centers, style = '--', col = 'red')
     plt.plot(centers, "ro")
+
+def vector_plot(x0, y0, x1, y1, clv, hL = 0.2, hW = 0.04):
+    """
+    This function is used to plot the vector/arrow though 2 points
+    Args: 
+        - (x0, y0) and (x1, y1) : coordinates of arrow base
+        - clv (str): color of vector
+        - HL, HW: head_length & head_width of vector/ arrow
+    """
+    ## length of arrow along x & y direction
+    dx = x1 - x0
+    dy = y1 - y0
+    # plot the starting_point of vector
+    plt.plot(x0, y0, clv, marker = 'o', label = 'from (%s, %s) to (%s, %s)'%(x0, y0, x1, y1))
+    # plot the vector / arrow
+    plt.arrow(x0, y0, dx, dy, color = clv, 
+              head_length = hL, head_width = hW, 
+              length_includes_head = False)
