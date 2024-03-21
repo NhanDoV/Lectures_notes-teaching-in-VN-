@@ -10,8 +10,10 @@ lab = LabelEncoder()
 iris['species'] = lab.fit_transform(iris['species'])
 X = iris.drop(columns='species')
 y = iris['species']
+# Phân tách dữ liệu để huấn luyện và kiểm chứng
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.30, 
                                                     stratify=y, random_state=42)
+# Transform từ numpy array thành torch-tensor
 X_train = torch.FloatTensor(X_train.to_numpy())
 X_test = torch.FloatTensor(X_test.to_numpy())
 y_train = torch.LongTensor(y_train.to_numpy())
@@ -31,7 +33,7 @@ class DNN(torch.nn.Module):
             - virginica     
     """
     def __init__(self, input_dim, output_dim):
-        super(CNN,self).__init__()
+        super(DNN,self).__init__()
         self.input_layer    = torch.nn.Linear(input_dim, 256)
         self.hidden_layer1  = torch.nn.Linear(256, 64)
         self.output_layer   = torch.nn.Linear(64, output_dim)
@@ -42,6 +44,47 @@ class DNN(torch.nn.Module):
         out =  self.relu(self.hidden_layer1(out))
         out =  self.output_layer(out)
         return out
+    
+#======================= modeling
+class DNN2(torch.nn.Module):
+    """
+        Các tham số giữa các layers trong đây có thể được tùy chỉnh
+        Hơn nữa ở model này ta sẽ dùng thêm nhân tố DropOut
+        Ở đây ta dùng activation-function là RELU
+        Hidden-Layer 1 có dimension = 4 x 512
+        Hidden-Layer 2 là 512 x 256
+        ...
+        Hidden-Layer 6 là 16 x 8
+        Output layer là 8 x 3
+        Ở đây ta đang giả định output_dim = 3 là số categories trong iris-data
+            - setosa
+            - versicolor    
+            - virginica     
+    """
+    def __init__(self, input_dim, output_dim):
+        super(DNN2, self).__init__()
+        self.dropout        = torch.nn.Dropout(0.3)
+        self.input_layer    = torch.nn.Linear(input_dim, 512)
+        self.hidden_layer1  = torch.nn.Linear(512, 256)
+        self.hidden_layer2  = torch.nn.Linear(256, 128)
+        self.hidden_layer3  = torch.nn.Linear(128, 64)
+        self.hidden_layer4  = torch.nn.Linear(64, 32)
+        self.hidden_layer5  = torch.nn.Linear(32, 16)
+        self.hidden_layer6  = torch.nn.Linear(16, 8)        
+        self.output_layer   = torch.nn.Linear(8, output_dim)
+        self.relu = torch.nn.ReLU()    
+    
+    def forward(self,x):
+        out =  self.relu(self.input_layer(x))
+        out =  self.relu(self.hidden_layer1(out))
+        out =  self.relu(self.hidden_layer2(out))
+        out =  self.relu(self.hidden_layer3(out))
+        out =  self.relu(self.hidden_layer4(out))
+        out =  self.relu(self.hidden_layer5(out))
+        out =  self.relu(self.hidden_layer6(out))        
+        out =  self.output_layer(out)
+        return out
+        
 #====================== TRAINING    
 def train(model,optimizer,criterion,
                   X_train,y_train,
@@ -84,6 +127,7 @@ def train(model,optimizer,criterion,
             print(f"Epoch {epoch+1}/{num_epochs}, Train Loss: {loss_train.item():.4f}, Test Loss: {loss_test.item():.4f}")
 
     torch.save(model.state_dict(), "clf_model.h5")
+
 #=======================================================================================
 if __name__ == "__main__":
     num_epochs = int(input("Input the number of epochs: "))   
