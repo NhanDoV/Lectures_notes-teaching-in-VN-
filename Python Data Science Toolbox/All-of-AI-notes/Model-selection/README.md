@@ -1,4 +1,4 @@
-Here we only focus on tabular-data, the images / sound / etc will be represented in the other section likes [Computer-Vision]() or [Generative-model]()
+Here we only focus on tabular-data, the images / sound / etc will be represented in the other section likes [Computer-Vision](https://github.com/NhanDoV/Lectures_notes-teaching-in-VN-/tree/master/Python%20Data%20Science%20Toolbox/All-of-AI-notes/Computer-Vision) or [Generative-model](https://github.com/NhanDoV/Lectures_notes-teaching-in-VN-/tree/master/Python%20Data%20Science%20Toolbox/All-of-AI-notes/Generative_model)
 
 ## 1. ANOVA in Linear-regression
 
@@ -8,4 +8,9 @@ Here we only focus on tabular-data, the images / sound / etc will be represented
 
 ## 4. All of clustering models
 
-## 4. All of time-series models
+## 5. All of time-series models
+### 5.1. Stationery testing
+
+### 5.2. Seasonality vs trend
+
+### 5.3. Denoising
