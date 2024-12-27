@@ -1,0 +1,52 @@
+{
+    "funny": [
+        {
+            "Le Chien Parlant": [
+              {
+                "language": "EN",
+                "example": "One day, a man walked into a bar with his dog. The bartender looked at the dog and said, 'I bet your dog can't talk.' The man replied, 'Well, let's see.' He turned to the dog and asked, 'What’s your name?' The dog replied, 'Rex.' The bartender was shocked, but said, 'Okay, what’s two plus two?' The dog replied, 'Four.' The bartender, stunned, asked, 'What’s the capital of France?' The dog replied, 'Paris.' The bartender was amazed and said, 'This is incredible! You should get a job for the circus!' The man smiled and said, 'The circus? This dog’s a liar. He’s never been to Paris!'"
+              },
+              {
+                "language": "VI",
+                "example": "Một ngày, một người đàn ông đi vào quán bar với chú chó của mình. Người bartender nhìn chú chó và nói: 'Tôi cá là chó của anh không biết nói đâu.' Người đàn ông trả lời: 'Chúng ta thử xem.' Anh ta quay sang chú chó và hỏi: 'Tên của mày là gì?' Chú chó trả lời: 'Rex.' Người bartender rất ngạc nhiên nhưng nói tiếp: 'Được rồi, hai cộng hai là bao nhiêu?' Chú chó trả lời: 'Bốn.' Người bartender tiếp tục hỏi: 'Thủ đô của Pháp là gì?' Chú chó trả lời: 'Paris.' Người bartender rất ngạc nhiên và nói: 'Thật tuyệt vời! Anh nên cho nó đi làm trong rạp xiếc!' Người đàn ông mỉm cười và nói: 'Xiếc ư? Con chó này là kẻ nói dối. Nó chưa bao giờ đến Paris!'"
+              },
+              {
+                "language": "FR",
+                "example": "Un jour, un homme entre dans un bar avec son chien. Le barman regarde le chien et dit : 'Je parie que ton chien ne sait pas parler.' L'homme répond : 'On va voir.' Il se tourne vers le chien et lui demande : 'Quel est ton nom ?' Le chien répond : 'Rex.' Le barman est stupéfait, mais continue : 'D’accord, quel est deux plus deux ?' Le chien répond : 'Quatre.' Le barman, choqué, demande : 'Quelle est la capitale de la France ?' Le chien répond : 'Paris.' Le barman est époustouflé et dit : 'C’est incroyable ! Tu devrais travailler pour le cirque !' L’homme sourit et dit : 'Le cirque ? Ce chien est un menteur. Il n’a jamais été à Paris !'"
+              }
+            ],
+            "Le Lapin Mange Ses Crottes": [
+              {
+                "language": "EN",
+                "example": "One day, a rabbit was hopping around in the forest when it found something strange. It bent down and started nibbling on something that looked a little unusual. A curious bird flew by and asked, 'What are you eating, Mr. Rabbit?' The rabbit looked up and said, 'Oh, it's just my favorite snack – rabbit droppings! I can't get enough of them!' The bird, horrified, flew away screaming, 'Yuck!'"
+              },
+              {
+                "language": "VI",
+                "example": "Một ngày, con thỏ đang nhảy quanh trong rừng thì phát hiện một thứ gì đó lạ lạ. Nó cúi xuống và bắt đầu ăn một thứ có vẻ hơi kỳ kỳ. Một con chim tò mò bay qua và hỏi: 'Mày đang ăn gì vậy, con thỏ?' Con thỏ ngẩng lên và nói: 'Ồ, đó là món ăn yêu thích của tao – cứt thỏ! Tao không thể ngừng ăn nó!' Con chim, hoảng hốt, bay đi và kêu lên: 'Ghê quá!'"
+              },
+              {
+                "language": "FR",
+                "example": "Un jour, un lapin sautait dans la forêt quand il trouva quelque chose de bizarre. Il se baissa et commença à grignoter quelque chose qui semblait un peu étrange. Un oiseau curieux vola près de lui et lui demanda : 'Que manges-tu, M. Lapin ?' Le lapin leva les yeux et dit : 'Oh, c'est ma collation préférée – des crottes de lapin ! Je ne peux pas m'en passer !' L'oiseau, horrifié, s'envola en criant, 'Beurk !'"
+              }
+            ]
+          }
+    ],
+    "scary": [
+        {
+            "La Maison Hantée": [
+              {
+                "language": "EN",
+                "example": "One night, a group of friends decided to explore the abandoned house at the end of the village. They entered the old, decaying house with broken walls and a musty smell. As they walked up the stairs, a door opened by itself, and a whispering voice came from the room: 'Leave now!' They were all scared and about to leave, but one of them, Nam, decided to continue exploring. As he entered the room, a ghostly figure appeared and said: 'This is where I died, and I can’t rest until someone takes my place.' At that moment, the lights went out, and everything was plunged into darkness..."
+              },
+              {
+                "language": "VI",
+                "example": "Vào một đêm tối, một nhóm bạn quyết định khám phá ngôi nhà bỏ hoang ở cuối làng. Họ bước vào căn nhà cũ kỹ, nơi có những bức tường vỡ nát và mùi ẩm mốc. Khi họ đi lên cầu thang, một cánh cửa mở tự động, và một giọng nói thì thầm từ trong phòng: 'Rời khỏi đây!' Tất cả họ đều sợ hãi và định bỏ đi, nhưng một người trong nhóm, anh Nam, quyết định tiếp tục khám phá. Khi anh bước vào phòng, một bóng ma hiện lên và nói: 'Đây là nơi tôi chết, và tôi không thể yên nghỉ cho đến khi có ai đó thay thế tôi.' Lúc đó, đèn tắt ngúm và mọi thứ chìm vào bóng tối…"
+              },
+              {
+                "language": "FR",
+                "example": "Une nuit, un groupe d’amis a décidé d’explorer la maison abandonnée à la fin du village. Ils sont entrés dans la vieille maison décrépie, avec des murs cassés et une odeur de moisi. En montant les escaliers, une porte s’est ouverte toute seule et une voix murmure dans la pièce : 'Partez maintenant !' Ils étaient tous effrayés et sur le point de partir, mais l’un d’eux, Nam, a décidé de continuer à explorer. Lorsqu’il est entré dans la pièce, une silhouette fantomatique est apparue et a dit : 'C’est ici que je suis mort, et je ne peux pas reposer tant que quelqu’un ne prend pas ma place.' À ce moment-là, les lumières se sont éteintes et tout est devenu noir..."
+              }
+            ]
+        }
+    ]
+  }
