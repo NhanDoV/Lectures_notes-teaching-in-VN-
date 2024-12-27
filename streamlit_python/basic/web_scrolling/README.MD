@@ -8,3 +8,7 @@ pip install streamlit
 ```bash
 streamlit run web_scrolling.py
 ```
+
+<video controls width="640" height="360">
+  <source src="demo.mp4" type="video/mp4">
+</video>

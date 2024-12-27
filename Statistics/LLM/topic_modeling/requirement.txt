@@ -1,0 +1,5 @@
+google_play_scraper
+app_store_scraper
+scikit-learn
+openai
+pandas
