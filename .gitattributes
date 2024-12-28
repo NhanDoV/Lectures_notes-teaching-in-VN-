@@ -1,0 +1,20 @@
+# Force GitHub to recognize Python files as Python
+*.py linguist-language=Python
+
+# Force GitHub to recognize C++ files as C++
+*.cpp linguist-language=C++
+
+# Force GitHub to recognize HTML files as HTML
+*.html linguist-language=HTML
+
+# Force GitHub to recognize JSON files as JSON
+*.json linguist-language=JSON
+
+# Force GitHub to recognize Go files as Go
+*.go linguist-language=Go
+
+# Force GitHub to recognize Java files as Java
+*.java linguist-language=Java
+
+# Force GitHub to recognize Jupyter Notebooks as Jupyter Notebook
+*.ipynb linguist-language=Jupyter Notebook
