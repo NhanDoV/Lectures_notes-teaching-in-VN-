@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIB Chatbot Admin-page</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        /* Basic CSS Reset */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: url('{{ url_for('static', filename='draft.jpg') }}') no-repeat center center fixed;
+            height: 100vh;
+            background-size: cover;
+            overflow-x: hidden; /* Prevent horizontal overflow */
+            box-sizing: border-box; /* Ensure padding and borders are included in the width */
+        }
+
+        /* Navigation Bar Styling */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 10px;
+            background: linear-gradient(to left, #1367c3, darkblue); /* Gradient from white to dark orange */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .navbar a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            padding: 10px 20px;
+        }
+
+        .navbar a:hover {
+            color: #FF4500; /* Change color on hover */
+        }
+
+        /* Centered Title */
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            color: #fff;
+        }
+
+        /* Table styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto; /* Center the table */
+            background-color: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-sizing: border-box; /* Include padding and borders in width */
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 20px;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        th {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        /* Center text in table headers */
+        th {
+            text-align: center;
+            font-size: 14pt;
+            font-weight: bold;
+            color: #9400D3; /* Color for header text */
+        }
+
+        /* Gradient background for Statistics Summary */
+        .stats-summary {
+            background: linear-gradient(to right, #FFDAB9, #D3D3D3); /* Light-orange to light-gray gradient */
+            font-weight: bold;
+            font-size: 36pt;
+            color: darkblue;
+            text-align: center; /* Center text horizontally */
+            vertical-align: middle; /* Center text vertically */
+        }
+
+        /* Gradient background for Filters */
+        .filters-background {
+            background: linear-gradient(to right, #D3D3D3, #ADD8E6); /* Light-gray to light-blue gradient */
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box; /* Include padding in width */
+        }
+
+        /* Container for the bar charts (single row layout) */
+        .bar-charts-container {
+            display: flex;
+            margin: 20px auto; /* Center the container */
+            gap: 20px; /* Space between charts */
+            max-width: calc(100% - 40px); /* Prevent overflow */
+            box-sizing: border-box; /* Include padding in width */
+        }
+
+        .chart {
+            flex: 1; /* Ensure all charts take equal width */
+            padding: 10px;
+            background: linear-gradient(to bottom right, #f0f8ff, #e6e6fa); /* Light-blue to lavender gradient */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box; /* Include padding in width */
+        }
+
+        .chart iframe {
+            width: 100%;
+            height: 400px;
+            border: none; /* Remove border if any */
+        }
+
+        /* Container for pie chart and additional bar chart (single row layout) */
+        .pie-bar-charts-container {
+            display: flex;
+            margin: 10px auto; /* Center the container */
+            gap: 10px; /* Space between charts */
+            max-width: calc(100% - 20px); /* Prevent overflow */
+            box-sizing: border-box; /* Include padding in width */
+        }
+
+        .pie-bar-charts-container .pie-chart-wrapper {
+            width: 35%; /* 35% of the width for the pie chart */
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            background: linear-gradient(to bottom right, #f0f8ff, #e6e6fa); /* Light-blue to lavender gradient */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box; /* Include padding in width */
+        }
+
+        .pie-bar-charts-container .additional-bar-chart-wrapper {
+            width: 65%; /* 65% of the width for the additional bar chart */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom right, #f0f8ff, #e6e6fa); /* Light-blue to lavender gradient */
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box; /* Include padding in width */
+        }
+
+        .pie-chart-wrapper, .additional-bar-chart-wrapper {
+            padding: 10px;
+            box-sizing: border-box; /* Include padding in width */
+        }
+
+        .pie-chart-wrapper iframe, .additional-bar-chart-wrapper iframe {
+            width: 100%;
+            height: 400px;
+            border: none; /* Remove border if any */
+        }
+
+        /* Styling for the form container */
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 20px auto; /* Center the form container horizontally */
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 1000px; /* Optional: limit the width */
+            box-sizing: border-box; /* Include padding in width */
+        }
+
+        .form-container form {
+            display: flex;
+            align-items: center;
+            width: 100%; /* Ensure form takes full width */
+        }
+
+        .form-row {
+            display: flex;
+            align-items: center; /* Vertically center items */
+            width: 100%; /* Take full width */
+            justify-content: center; /* Center items horizontally */
+        }
+
+        .form-group {
+            margin: 0 100px; /* Set distance for each form-group (approximately 200pt/px) */
+        }
+
+        .form-container select {
+            width: 120px; /* Set width for dropdowns */
+            padding: 8px;
+        }
+
+        .form-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Specific styles for form title */
+        .form-title-container {
+            width: 90%,
+            margin-bottom: 20px;
+        }
+
+        /* Title for the combined bar charts */
+        .combined-bar-charts-title {
+            font-size: 18pt;
+            font-weight: bold;
+            color: #FF7F50;
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px  1px 0 #000, 1px  1px 0 #000;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Include the navigation bar -->
+    {% include 'navbar.html' %}        
+    <h1 style="font-size: 35pt"> VIB Chatbot Admin-page </h1>
+    
+    <!-- Table -->
+    <table>
+        <thead>
+            <!-- Additional Row with Merged Cell -->
+            <tr>
+                <td colspan="3" class="stats-summary">
+                    Statistics Summary
+                </td>
+            </tr>
+            <!-- Table Header -->
+            <tr>
+                <th style="font-size: 14pt; font-weight: bold; color: #9400D3; text-align: center"> Today </th>
+                <th style="font-size: 14pt; font-weight: bold; color: #9400D3; text-align: center"> This-week </th>
+                <th style="font-size: 14pt; font-weight: bold; color: #9400D3; text-align: center"> This-month </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td> <span style="font-size: 9pt;">n_questions</span> <br>
+                     <span style="font-size: 28pt; font-weight: bold; color: blue;">{{ n_quest_today }}</span>
+                </td>
+                <td> <span style="font-size: 9pt;">n_questions</span> <br>
+                     <span style="font-size: 28pt; font-weight: bold; color: blue;">{{ n_quest_week }}</span>
+                </td>
+                <td> <span style="font-size: 9pt;">n_questions</span> <br>
+                     <span style="font-size: 28pt; font-weight: bold; color: blue;">{{ n_quest_month }}</span>
+                </td>
+            </tr>
+            <tr>
+                <td> <span style="font-size: 9pt;">n_failed_answer</span> <br>
+                     <span style="font-size: 28pt; font-weight: bold; color: green;">{{ n_fail_today }}</span>
+                </td>
+                <td> <span style="font-size: 9pt;">n_failed_answer</span> <br>
+                     <span style="font-size: 28pt; font-weight: bold; color: green;">{{ n_fail_inweek }}</span>
+                </td>
+                <td> <span style="font-size: 9pt;">n_failed_answer</span> <br>
+                     <span style="font-size: 28pt; font-weight: bold; color: green;">{{ n_fail_inmonth }}</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Combined Bar Charts Section -->
+    <div class="combined-bar-charts-title">
+        <br> Top 3 Question Content Level <br>
+    </div>
+    <div class="bar-charts-container">
+        <!-- Bar Chart 1 -->
+        <div class="chart">
+            {% if bar_chart_1_html %}
+                {{ bar_chart_1_html|safe }}
+            {% endif %}
+        </div>
+
+        <!-- Bar Chart 2 -->
+        <div class="chart">
+            {% if bar_chart_2_html %}
+                {{ bar_chart_2_html|safe }}
+            {% endif %}
+        </div>
+
+        <!-- Bar Chart 3 -->
+        <div class="chart">
+            {% if bar_chart_3_html %}
+                {{ bar_chart_3_html|safe }}
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Form Container (Centered and Above the Pie Chart and Additional Bar Chart) -->
+    <div class="form-container filters-background">
+        <div class="form-title-container">
+            <h2 style="font-size: 18pt; font-weight: bold; color: #FF7F50; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px  1px 0 #000, 1px  1px 0 #000;"> </h2>
+        </div>
+        <form action="/" method="get">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="pie_chart_type">Select Pie Chart:</label>
+                    <select id="pie_chart_type" name="pie_chart_type">
+                        <option value="quest_type_cate">Quest Type Cate</option>
+                        <option value="quest_content_level1">Quest Content Level 1</option>
+                        <option value="quest_content_level2">Quest Content Level 2</option>                        
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="df_selection">Select time-range_type:</label>
+                    <select id="df_selection" name="df_selection">
+                        <option value="today">Today</option>
+                        <option value="this-week">This Week</option>
+                        <option value="this-month">This Month</option>
+                    </select>
+                </div>
+                <button type="submit">Show Charts</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Container for pie chart and additional bar chart (Below the Filters) -->
+    <div class="pie-bar-charts-container">
+        <!-- Pie Chart -->
+        <div class="pie-chart-wrapper">
+            <div class="form-title-container">
+                <h2 style="font-size: 18pt; font-weight: bold; color: #FF7F50; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px  1px 0 #000, 1px  1px 0 #000;"> </h2>
+            </div>
+            {% if pie_chart_html %}
+                {{ pie_chart_html|safe }}
+            {% endif %}
+        </div>
+
+        <!-- Additional Bar Chart -->
+        <div class="additional-bar-chart-wrapper">
+            <div class="form-title-container">
+                <h2 style="font-size: 18pt; font-weight: bold; color: #FF7F50; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px  1px 0 #000, 1px  1px 0 #000;"> </h2>
+            </div>
+            {% if additional_bar_chart_html %}
+                {{ additional_bar_chart_html|safe }}
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

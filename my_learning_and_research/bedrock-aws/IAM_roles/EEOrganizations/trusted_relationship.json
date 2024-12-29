@@ -1,0 +1,28 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": "arn:aws:iam::782331748738:root"
+            },
+            "Action": "sts:AssumeRole"
+        },
+        {
+            "Sid": "EEControlPlaneAccountTrust",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": [
+                    "arn:aws:iam::122334600246:root",
+                    "arn:aws:iam::572239370997:root"
+                ]
+            },
+            "Action": "sts:AssumeRole",
+            "Condition": {
+                "StringEquals": {
+                    "sts:ExternalId": "bcac70be132a459d9cef7f334cb487ed"
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Data</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            background: linear-gradient(to right, #FFA07A, #DDA0DD); /* Light orange to light purple */
+            color: #333; /* Optional: Adjust text color for better readability */
+        }
+        .container {
+            background: url('{{ url_for('static', filename='logo_d.png') }}') no-repeat center center fixed;
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .btn-save {
+            background-color: #FFA07A; /* Light orange background */
+            color: white; /* White text color */
+            border: none; /* Remove border */
+            border-radius: 5px; /* Rounded corners */
+            padding: 10px 20px; /* Padding */
+            font-size: 16px; /* Font size */
+        }
+        .btn-save:hover {
+            background-color: #FF8C00; /* Darker orange on hover */
+            color: white; /* Ensure text color remains white */
+        }
+        .btn-save:active {
+            background-color: #FF7F50; /* Slightly darker orange when clicked */
+        }
+        .alert-success {
+            display: none; /* Hide by default */
+            margin-top: 20px;
+        }
+        .button-container {
+            display: flex;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- Include the navigation bar -->
+    {% include 'navbar.html' %}
+
+    <div class="container mt-4">
+        <h1 style="font-size: 28pt; font-weight: bold; color: white;"> Edit Data </h1>
+        
+        <!-- Insert/Update Data Form -->
+        <div class="mb-3">
+            <h2 style="color: white;">Insert/Update new data </h2>
+            <form id="insertForm">
+                <div class="form-row">
+                    <div class="form-group col-md-3">
+                        <label for="newDate" style="color: lime; font-weight: bold"> Date </label>
+                        <input type="text" id="newDate" class="form-control">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="newQuestion" style="color: lime; font-weight: bold"> Question </label>
+                        <input type="text" id="newQuestion" class="form-control">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="newAnswers" style="color: lime; font-weight: bold" > Answers </label>
+                        <input type="text" id="newAnswers" class="form-control">
+                    </div>
+                    <div class="form-group col-md-3", style="text-align: center; border: lime">
+                        <label for="newQualify" style="color: white; font-weight: bold"> Qualify </label>
+                        <input type="text" id="newQualify" class="form-control">
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        <form method="post" action="/update_data" id="updateForm">
+            <div class="mb-3">
+                <label for="rowCount" class="form-label" style="color: white;">Number of Rows to Display:</label>
+                <input type="number" id="rowCount" class="form-control" value="5" min="1" onchange="updateRowDisplay()">
+            </div>
+
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th style="color: white;">Date</th>
+                        <th style="color: white;">Question</th>
+                        <th style="color: white;">Answers</th>
+                        <th style="color: white;">Qualify</th>
+                        <th style="color: white;">Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    {% for index, row in df.iterrows() %}
+                    <tr>
+                        <td><input type="text" name="date_{{ index }}" value="{{ row['date'] }}" class="form-control"></td>
+                        <td><input type="text" name="question_{{ index }}" value="{{ row['question'] }}" class="form-control"></td>
+                        <td><input type="text" name="answers_{{ index }}" value="{{ row['answers'] }}" class="form-control"></td>
+                        <td><input type="text" name="qualify_{{ index }}" value="{{ row['qualify'] }}" class="form-control"></td>
+                        <td><button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="button-container">
+                <button type="button" class="btn btn-save" onclick="saveYourChanges()" style="background-color: lightblue"> 
+                    Save Your Changes </button>
+            </div>
+        </form>
+        
+        <!-- Success message box -->
+        <div id="successMessage" class="alert alert-success">
+            Your dataset has been updated successfully!
+        </div>
+    </div>
+    <script>
+        function updateRowDisplay() {
+            const rowCount = parseInt(document.getElementById('rowCount').value, 10);
+            const rows = document.querySelectorAll('#tableBody tr');
+            
+            rows.forEach((row, index) => {
+                if (index < rowCount || isNaN(rowCount)) {
+                    row.style.display = '';
+                } else {
+                    row.style.display = 'none';
+                }
+            });
+        }
+
+        function removeRow(button) {
+            const row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+            updateRowDisplay(); // Update row count after removal
+        }
+
+        function addRow() {
+            const tableBody = document.getElementById('tableBody');
+            const newIndex = tableBody.children.length;
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = 
+                `<td><input type="text" name="date_${newIndex}" class="form-control"></td>
+                 <td><input type="text" name="question_${newIndex}" class="form-control"></td>
+                 <td><input type="text" name="answers_${newIndex}" class="form-control"></td>
+                 <td><input type="text" name="qualify_${newIndex}" class="form-control"></td>
+                 <td><button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button></td>`;
+            tableBody.appendChild(newRow);
+            updateRowDisplay(); // Update row count after adding
+        }
+
+        function insertOrUpdateRow() {
+            const date = document.getElementById('newDate').value;
+            const question = document.getElementById('newQuestion').value;
+            const answers = document.getElementById('newAnswers').value;
+            const qualify = document.getElementById('newQualify').value;
+            
+            if (!date || !question || !answers || !qualify) {
+                alert('Please fill in all fields.');
+                return;
+            }
+            
+            const tableBody = document.getElementById('tableBody');
+            const rows = tableBody.getElementsByTagName('tr');
+            let rowUpdated = false;
+
+            for (let i = 0; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName('td');
+                if (cells[0].children[0].value === date) { // Assuming 'date' is the unique identifier
+                    cells[1].children[0].value = question;
+                    cells[2].children[0].value = answers;
+                    cells[3].children[0].value = qualify;
+                    rowUpdated = true;
+                    break;
+                }
+            }
+
+            if (!rowUpdated) {
+                const newIndex = rows.length;
+                const newRow = document.createElement('tr');
+                newRow.innerHTML = 
+                    `<td><input type="text" name="date_${newIndex}" value="${date}" class="form-control"></td>
+                     <td><input type="text" name="question_${newIndex}" value="${question}" class="form-control"></td>
+                     <td><input type="text" name="answers_${newIndex}" value="${answers}" class="form-control"></td>
+                     <td><input type="text" name="qualify_${newIndex}" value="${qualify}" class="form-control"></td>
+                     <td><button type="button" class="btn btn-danger" onclick="removeRow(this)">Remove</button></td>`;
+                tableBody.appendChild(newRow);
+            }
+
+            // Clear the input fields
+            document.getElementById('insertForm').reset();
+            updateRowDisplay(); // Update row count after adding
+        }
+
+        function saveYourChanges() {
+            insertOrUpdateRow(); // Handle inserting/updating data
+
+            // Display success message
+            document.getElementById('successMessage').style.display = 'block';
+
+            // Simulate form submission delay to see the success message
+            setTimeout(() => {
+                // Submit the form to save changes
+                document.getElementById('updateForm').submit();
+            }, 1000); // Adjust delay as needed
+        }
+
+        // Initialize row display based on the default value
+        document.addEventListener('DOMContentLoaded', updateRowDisplay);
+    </script>
+</body>
+</html>

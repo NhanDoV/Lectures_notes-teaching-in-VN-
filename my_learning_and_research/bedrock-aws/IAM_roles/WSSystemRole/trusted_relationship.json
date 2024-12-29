@@ -1,0 +1,16 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "WSSystemRoleTrust",
+            "Effect": "Allow",
+            "Principal": {
+                "AWS": [
+                    "arn:aws:iam::209094973618:user/WSControlPlaneUser",
+                    "arn:aws:iam::484654583263:root"
+                ]
+            },
+            "Action": "sts:AssumeRole"
+        }
+    ]
+}

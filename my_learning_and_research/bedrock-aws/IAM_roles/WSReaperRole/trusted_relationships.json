@@ -1,0 +1,19 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "WSReaperRoleTrust",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": [
+                    "prod.reaper.workshopstudio.aws.internal",
+                    "reaper.workshopstudio.aws.internal",
+                    "dev.reaper.workshopstudio.aws.internal",
+                    "gamma.reaper.workshopstudio.aws.internal"
+                ],
+                "AWS": "arn:aws:iam::484654583263:root"
+            },
+            "Action": "sts:AssumeRole"
+        }
+    ]
+}

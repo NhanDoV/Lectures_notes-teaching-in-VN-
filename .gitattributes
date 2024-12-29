@@ -10,6 +10,12 @@
 # Force GitHub to recognize JSON files as JSON
 *.json linguist-language=JSON
 
+# Force GitHub to recognize CSS files as CSS
+*.css linguist-language=CSS
+
+# Force GitHub to recognize SQL files as SQL
+*.sql linguist-language=SQL
+
 # Force GitHub to recognize Go files as Go
 *.go linguist-language=Go
 

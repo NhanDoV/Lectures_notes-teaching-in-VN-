@@ -1,0 +1,72 @@
+{
+	"Version": "2012-10-17",
+	"Statement": [
+		{
+			"Action": [
+				"ssm:ListCommandInvocations",
+				"ssm:GetCommandInvocation"
+			],
+			"Resource": "*",
+			"Effect": "Allow"
+		},
+		{
+			"Action": [
+				"cloudformation:DescribeStacks",
+				"cloudformation:DescribeStackEvents",
+				"cloudformation:DescribeStackResource",
+				"cloudformation:DescribeStackResources"
+			],
+			"Resource": [
+				"arn:aws:cloudformation:us-west-2:209094973618:stack/*"
+			],
+			"Effect": "Allow"
+		},
+		{
+			"Action": [
+				"ec2:AssociateIamInstanceProfile",
+				"ec2:ModifyInstanceAttribute",
+				"ec2:ReplaceIamInstanceProfileAssociation",
+				"ec2:RebootInstances"
+			],
+			"Resource": [
+				"arn:aws:ec2:us-west-2:209094973618:instance/*"
+			],
+			"Effect": "Allow"
+		},
+		{
+			"Action": [
+				"ec2:DescribeInstances",
+				"ec2:DescribeIamInstanceProfileAssociations"
+			],
+			"Resource": "*",
+			"Effect": "Allow"
+		},
+		{
+			"Action": [
+				"iam:ListInstanceProfiles"
+			],
+			"Resource": [
+				"arn:aws:iam::209094973618:instance-profile/*"
+			],
+			"Effect": "Allow"
+		},
+		{
+			"Action": [
+				"s3:ListBucket",
+				"s3:DeleteObject"
+			],
+			"Resource": [
+				"arn:aws:s3:::cloud9-cloud9logbucket-nmue7wq1e3dl",
+				"arn:aws:s3:::cloud9-cloud9logbucket-nmue7wq1e3dl/*"
+			],
+			"Effect": "Allow"
+		},
+		{
+			"Action": [
+				"iam:PassRole"
+			],
+			"Resource": "arn:aws:iam::209094973618:role/cloud9-Cloud9Role-xroSVfr2vjjk",
+			"Effect": "Allow"
+		}
+	]
+}

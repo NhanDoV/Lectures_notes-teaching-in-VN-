@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIB Chatbot Question Answer Management</title>
+    <style>
+        /* Basic CSS Reset */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            /* Gradient background */
+            background: linear-gradient(to right, #8A2BE2, #DDA0DD); /* Example gradient */
+            height: 100vh;
+            background-size: cover;
+        }
+
+        /* Centered Title */
+        h1 {
+            text-align: center;
+            margin-top: 20px; /* Optional spacing from the top */
+            margin-bottom: 20px; /* Optional spacing below the title */
+            color: #fff; /* White color for better contrast */
+        }
+
+        /* Table styling */
+        table {
+            width: 100%; /* Full width */
+            border-collapse: collapse; /* Merge borders */
+            margin: 0 20px; /* Margin adjusted for left and right */
+            background-color: #fff; /* White background for the table */
+            border-radius: 8px; /* Rounded corners */
+            overflow: hidden; /* Ensure border-radius works */
+        }
+
+        th, td {
+            border: 1px solid #ddd; /* Light border color */
+            padding: 20px; /* Increased padding inside cells */
+            text-align: center; /* Center align text */
+            vertical-align: middle; /* Vertically center text */
+        }
+
+        th {
+            background-color: #f4f4f4; /* Light gray background for header */
+            color: #333; /* Darker text color for header */
+        }
+
+        /* Dropdown Button and Content */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin: 20px;
+        }
+
+        .dropbtn {
+            background-color: #4CAF50; /* Green background */
+            color: white; /* White text */
+            padding: 10px 20px; /* Padding */
+            font-size: 16px; /* Font size */
+            border: none; /* Remove border */
+            cursor: pointer; /* Pointer cursor on hover */
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+        }
+
+        /* Container for the charts */
+        .chart-container {
+            display: flex;
+            align-items: center;
+            margin: 0 20px; /* Margin adjusted for left and right */
+        }
+
+        /* Style for each chart */
+        .chart {
+            margin: 10px;
+        }
+
+        /* Flexbox layout */
+        .chart-left {
+            flex: 1; /* Takes up one part of the container width */
+            margin-right: 10px; /* Optional spacing between columns */
+        }
+
+        .chart-right {
+            flex: 2; /* Takes up twice the width of the left column */
+        }
+
+        /* Ensure charts fit well */
+        .chart iframe {
+            width: 100%;
+            height: 400px; /* Adjust height as needed */
+        }
+
+        /* Styling for additional charts */
+        .additional-chart {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>VIB Chatbot Admin Page</h1>
+    
+    <!-- Table -->
+    <table>
+        <thead>
+            <!-- Additional Row with Merged Cell -->
+            <tr>
+                <td colspan="3" style="background-color: #e0e0e0; font-weight: bold; font-size: 36pt; color: darkblue;">
+                    Statistics Summary
+                </td>
+            </tr>
+            <!-- Table Header -->
+            <tr>
+                <th style="font-size: 14pt; font-weight: bold; color: #9400D3;">Today</th>
+                <th style="font-size: 14pt; font-weight: bold; color: #9400D3;">This-week</th>
+                <th style="font-size: 14pt; font-weight: bold; color: #9400D3;">This-month</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td> <span style="font-size: 9pt;">n_questions</span> <br>
+                     <span style="font-size: 28pt; font-weight: bold; color: blue;">{{ n_quest_today }}</span>
+                </td>
+                <td> <span style="font-size: 9pt;">n_questions</span> <br>
+                     <span style="font-size: 28pt; font-weight: bold; color: blue;">{{n_quest_week}}</span>
+                </td>
+                <td> <span style="font-size: 9pt;">n_questions</span> <br>
+                     <span style="font-size: 28pt; font-weight: bold; color: blue;">{{n_quest_month}}</span>
+                </td>
+            </tr>
+            <tr>
+                <td> <span style="font-size: 9pt;">n_failed_answer</span> <br>
+                     <span style="font-size: 28pt; font-weight: bold; color: green;">{{n_fail_today}}</span>
+                </td>
+                <td> <span style="font-size: 9pt;">n_failed_answer</span> <br>
+                     <span style="font-size: 28pt; font-weight: bold; color: green;">{{n_fail_inweek}}</span>
+                </td>
+                <td> <span style="font-size: 9pt;">n_failed_answer</span> <br>
+                     <span style="font-size: 28pt; font-weight: bold; color: green;">{{n_fail_inmonth}}</span>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <div class="chart-container">
+        <div class="chart chart-left">
+            {{ graph_html1|safe }}
+        </div>
+        <div class="chart chart-right">
+            {{ graph_html2|safe }}
+        </div>
+    </div>     
+
+    <!-- Dropdown Button for Charts -->
+    <div class="dropdown">
+        <button class="dropbtn">Select Chart</button>
+        <div class="dropdown-content">
+            <a href="#" onclick="showChart('chart3')">Chart 3</a>
+            <a href="#" onclick="showChart('chart4')">Chart 4</a>
+            <a href="#" onclick="showChart('chart5')">Chart 5</a>
+        </div>
+    </div>
+
+    <!-- Additional Charts -->
+    <div class="chart-container">
+        <div class="chart chart-left" id="chart3" style="display: none;">
+            {{ graph_html3|safe }}
+        </div>
+        <div class="chart chart-right" id="chart4" style="display: none;">
+            {{ graph_html4|safe }}
+        </div>
+        <div class="chart chart-right" id="chart5" style="display: none;">
+            {{ graph_html5|safe }}
+        </div>
+    </div>
+
+    <script>
+        function showChart(chartId) {
+            // Hide all additional charts
+            document.querySelectorAll('.chart-container .chart').forEach(chart => {
+                if (chart.id && chart.id !== chartId) {
+                    chart.style.display = 'none';
+                }
+            });
+
+            // Show the selected additional chart
+            document.getElementById(chartId).style.display = 'block';
+        }
+    </script>
+</body>
+</html>

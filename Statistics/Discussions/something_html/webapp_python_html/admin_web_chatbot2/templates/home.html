@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title style="font-size: 18pt; font-weight: bold; color: #32CD32;"> VIB Chatbot-report</title>
+    <style>
+        /* Apply gradient background to the entire page */
+        body {
+            background: linear-gradient(
+                to right, 
+                #FFA07A 0%,     /* Light Orange */
+                #ADD8E6 40%,    /* Light Blue */
+                #D3D3D3 100%    /* Light Gray */
+            ); 
+            font-family: Arial, sans-serif; /* Optional: Set a font family */
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+            position: relative; /* Ensure positioning for absolute elements */
+        }
+
+        /* Position logos */
+        .logo {
+            position: absolute;
+            top: 10px;
+            width: 100px; /* Adjust size as needed */
+            height: auto;
+        }
+
+        .logo-top-left {
+            left: 10px;
+        }
+
+        .logo-top-right {
+            right: 10px;
+        }
+
+        /* Center-align all titles */
+        h1, h2 {
+            text-align: center;
+        }
+
+        /* Container for the charts */
+        .charts-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Two columns of equal width */
+            gap: 20px; /* Space between the charts */
+        }
+
+        /* Make sure each chart takes full width in its grid cell */
+        .chart {
+            width: 100%;
+        }
+
+        /* Specific styling for the pie chart and additional bar chart */
+        .pie-chart-container, .additional-bar-chart-container {
+            width: 100%; /* Full width of its container */
+        }
+
+        /* Container for the form */
+        .form-container {
+            margin-top: 20px;
+        }
+
+        /* Flexbox for title and form alignment */
+        .form-title-container {
+            margin-bottom: 20px;
+        }
+
+        .form-container form {
+            display: block; /* Block display to stack form elements */
+            margin-top: 10px;
+        }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-container select, .form-container button {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* Flexbox for dropdown and button alignment */
+        .flex-row {
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Center items horizontally */
+            gap: 10px; /* Space between the dropdown and button */
+        }
+
+        .flex-row form {
+            margin: 0; /* Remove margin for better alignment */
+        }
+
+        .flex-row select {
+            flex: 1; /* Make the select element take available space */
+        }
+    </style>
+</head>
+<body>
+    <!-- Logos -->
+
+    <!-- Existing content -->
+    <h1 style="font-size: 28pt; font-weight: bold; color: #000080;"> Final-report chatbot qualification </h1>
+
+    <!-- Container for pie chart and additional bar chart -->
+    <div class="charts-container">
+        <!-- Pie Chart -->
+        <div class="pie-chart-container chart">
+            <div class="form-title-container">
+                <h2 style="font-size: 18pt; font-weight: bold; color: #FF7F50; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px  1px 0 #000, 1px  1px 0 #000;"> Pie Chart:</h2>
+                <!-- Pie Chart Selection Form -->
+                <form action="/chart" method="get">
+                    <label for="pie_chart_type">Select Pie Chart:</label>
+                    <select id="pie_chart_type" name="pie_chart_type">
+                        <option value="quest_type_cate">Quest Type Cate</option>
+                        <option value="quest_content_level1">Quest_Content_Level</option>
+                        <option value="haiku_manual_check">haiku_manual_check</option>
+                        <option value="gpt35_manual_check">gpt35_manual_check</option>
+                    </select>
+                    <button type="submit">Show Pie Chart</button>
+                </form>
+            </div>
+            {% if pie_chart_html %}
+                {{ pie_chart_html|safe }}
+            {% endif %}
+        </div>
+
+        <!-- Additional Bar Chart -->
+        <div class="additional-bar-chart-container chart">
+            <div class="form-title-container">
+                <h2 style="font-size: 18pt; font-weight: bold; color: #FF7F50; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px  1px 0 #000, 1px  1px 0 #000;"> Additional Bar Chart:</h2>
+                <!-- DataFrame Selection Form -->
+                <form action="/chart" method="get">
+                    <label for="df_selection"> Select the type of qualification:</label>
+                    <select id="df_selection" name="df_selection">
+                        <option value="z">Qualification by Type</option>
+                        <option value="zf">Manual Check by Type</option>
+                    </select>
+                    <button type="submit">Show Bar Chart</button>
+                </form>
+            </div>
+            {% if additional_bar_chart_html %}
+                {{ additional_bar_chart_html|safe }}
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Bar Chart Selection Form -->
+    <div class="form-container">
+        <h1 style="font-size: 18pt; font-weight: bold; color: white;"> Select Charts</h1>
+        <div class="flex-row">
+            <!-- Bar Chart Type Selection Form -->
+            <form action="/chart" method="get">
+                <label for="chart_type">Select Bar Chart Type:</label>
+                <select id="chart_type" name="chart_type">
+                    <option value="gpt35_qualify">GPT-3.5 Qualification</option>
+                    <option value="haiku_qualify">Haiku Qualification</option>
+                    <option value="gpt4o_qualify">GPT-4O Qualification</option>
+                    <option value="sonet_qualify">Sonet Qualification</option>
+                </select>
+            </form>
+            <!-- Generate Bar Charts Button -->
+            <form action="/chart" method="get">
+                <button type="submit">Generate Bar Charts</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bar Charts -->
+    <div class="form-container">
+        {% if chart_html1 %}
+            <h2 style="font-size: 18pt; font-weight: bold; color: #32CD32; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px  1px 0 #000, 1px  1px 0 #000;"> 
+                Chart 1: Chatbot-Qualification by Question-content-level</h2>
+            {{ chart_html1|safe }}
+        {% endif %}
+        
+        {% if chart_html2 %}
+            <h2 style="font-size: 18pt; font-weight: bold; color: #32CD32; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px  1px 0 #000, 1px  1px 0 #000;"> 
+                Chart 2: Chatbot-Qualification by Question-type-category</h2>
+            {{ chart_html2|safe }}
+        {% endif %}
+    </div>
+</body>
+</html>
