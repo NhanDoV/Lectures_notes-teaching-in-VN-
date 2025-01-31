@@ -47,13 +47,13 @@ import os
 os.environ["AZURE_OPENAI_API_KEY"] = "your_api_key"
 os.environ["AZURE_OPENAI_API_VERSION"] = "your_api_version"
 os.environ["AZURE_OPENAI_ENDPOINT"] = "your_azure_endpoint"
-
+    
+# azure initialize
 azure_client = AzureOpenAI(
   api_key = os.getenv("AZURE_OPENAI_API_KEY"),  
   api_version = os.getenv("AZURE_OPENAI_API_VERSION"),
   azure_endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
 )
-
 print("Azure client has been totally connected!!")
 def analytic(client, text):
     pre_defined_message = f"""
@@ -234,6 +234,42 @@ def get_list_answers(topic_name, if_neg):
     else:
         return ["none, đây là nhóm câu hỏi về tool.config, vui lòng dùng 1 hàm khác làm tiếp"]
 
+def plot_animation_shape(df, shape_type, title="Heart Shape Animation"):
+    df['frame'] = df.index    
+    fig = go.Figure()
+
+    fig.add_trace(go.Scatter(x=df['x'], y=df['y'], mode='lines', line=dict(color=color_sel, width=1), name=f"{shape_type.upper()} Line"))
+    fig.add_trace(go.Scatter(x=df['x'], y=df['y'], mode='markers', marker=dict(color=color_sel, size=5), name=f"{shape_type.upper()} Points"))
+
+    frames = []
+    for i in range(1, len(df)):
+        frames.append(go.Frame(
+            data=[
+                go.Scatter(x=df['x'][:i], y=df['y'][:i], mode='markers', marker=dict(color=color_sel, size=5)),
+                go.Scatter( x=df['x'][:i], y=df['y'][:i], mode='lines', line=dict(color=color_sel, width=1))
+            ],
+            name=f"Frame {i}"
+        ))
+
+    # Add frames to the figure
+    fig.frames = frames
+
+    # Update layout for better appearance
+    fig.update_layout(
+        updatemenus=[dict(
+            type="buttons",
+            showactive=False,
+            buttons=[dict(label="Play", method="animate", args=[None, dict(frame=dict(duration=25, redraw=True), fromcurrent=True)])]
+        )],
+        title=title,
+        xaxis=dict(range=[min(0, df['x'].min() * 1.2), df['x'].max() * 1.3], showgrid=False),
+        yaxis=dict(range=[min(0, df['y'].min() * 1.2), df['y'].max() * 1.3], showgrid=False),
+        showlegend=False, height=600,
+    )
+
+    # Display the plot
+    st.plotly_chart(fig)
+            
 # Set the page layout to wide (this must be the first Streamlit command)
 st.set_page_config(layout="wide")
 
@@ -251,7 +287,7 @@ st.markdown("""
     <h1 class="title"> Dropdown List and Input Box Application </h1>
 """, unsafe_allow_html=True) # st.title()
 
-page = st.sidebar.radio("Chọn trang", ("Trang 1", "Trang 2", "Trang 3", "Trang 4", "Trang 5"))
+page = st.sidebar.radio("Chọn trang", ("Trang 1", "Trang 2", "Trang 3", "Trang 4", "Trang 5", "Trang 6"))
 
 # Trang 1
 if page == "Trang 1":
@@ -523,7 +559,7 @@ elif page == "Trang 4":
         <br>
     """, unsafe_allow_html=True)
     col1, col2 = st.columns([1, 3])
-    with open('data/comic.json', 'r', encoding='utf-8') as f:
+    with open('notebooks/comic.json', 'r', encoding='utf-8') as f:
         data = json.load(f)    
     with col1:
         st.subheader("Model selection")
@@ -548,6 +584,96 @@ elif page == "Trang 4":
             st.subheader("result")
             your_reponse = st.json(story_teller(azure_client, your_request))            
             
+elif page == "Trang 5":
+    st.markdown("""
+        <style>
+            .title-trang1 {
+                background: linear-gradient(to right, #B2FFFF, #00CED1);  /* Another light cyan gradient */
+                -webkit-background-clip: text;
+                color: transparent;
+                font-size: 36px;  /* Adjust the font size as needed */
+                font-weight: bold;
+            }
+            .title-sub {
+                color: #90EE90;  /* Light green color */
+            }
+        </style>
+        <h1 class="title-trang1">Trang 5: Object-shape moving simulation </h1>
+        <br>
+    """, unsafe_allow_html=True)
+    col1, col2 = st.columns([1, 3])
+    with col1:
+        st.subheader("Select your parameters")
+        shape_type = st.selectbox("your shape-type", ["heart", "spiral", "stars"])
+        
+        if shape_type == "heart":
+            heart_type = st.selectbox("heart-equation-type", ["type1", "type2", "type3"])
+        elif shape_type == "stars":
+            n_wings = st.selectbox("number of wings", [3, 4, 5, 6, 7, 8, 9])
+            out_radius = st.slider(label = "radius", min_value=1, max_value=10, step=1)
+            inner_scale = st.slider(label = "inner_scale", min_value=0.1, max_value=1.0, step=0.01)
+            
+        elif shape_type == "spiral":
+            a_spiral = st.slider(label = "a", min_value=1, max_value=10, step=1)
+            b_spiral = st.slider(label = "b", min_value=1, max_value=10, step=1)
+            n_rounds = st.slider(label = "n_rounds", min_value=2, max_value=5, step=1)
+        
+        color_sel = st.selectbox("color", ["light-red", "red", "cyan", "yellow", "lightgreen"])
+        if color_sel == "light-red":
+            color_sel = "#ff4d4d"
+            
+    with col2:
+        if shape_type == "heart":
+            if heart_type == "type1":
+                df = pd.DataFrame({'t': np.linspace(0, 2*np.pi, 501)})        
+                df['x'] = df['t'].apply(lambda t: 16*(np.sin(t))**3)
+                df['y'] = df['t'].apply(lambda t: 13*np.cos(t) - 5*np.cos(2*t) - 2*np.cos(3*t) - np.cos(4*t))
+            elif heart_type == "type2":
+                df = pd.DataFrame({'t': np.linspace(-1, 1, 801)})
+                def log(t):
+                    if t == 0:
+                        return 0.2
+                    else:
+                        return np.log(np.abs(t))                
+                df['x'] = df['t'].apply(lambda t: np.sin(t)*np.cos(t)*log(t))
+                df['y'] = df['t'].apply(lambda t: (np.abs(t))**0.3 * np.sqrt(np.cos(t)))
+                # df.loc[df['x'] == 0, 'y'] = 0.2
+                        
+            else:
+                df = pd.DataFrame({'t': np.linspace(0, 2*np.pi, 501)})        
+                df['x'] = df['t'].apply(lambda t: -np.sqrt(2)*(np.sin(t))**3)
+                df['y'] = df['t'].apply(lambda t: 2*np.cos(t) - (np.cos(t))**2 - (np.cos(t))**3)                    
+                
+            # Create the figure using plotly.graph_objects
+            plot_animation_shape(df, shape_type, "Heart Shape Animation")
+        
+        elif shape_type == "spiral":
+            df = pd.DataFrame({'t': np.linspace(0, 2*n_rounds*np.pi, 501)})
+            df['x'] = df['t'].apply(lambda t: (a_spiral + b_spiral*t)*np.cos(t))            
+            df['y'] = df['t'].apply(lambda t: (a_spiral + b_spiral*t)*np.sin(t))
+            
+            # Create the figure using plotly.graph_objects
+            plot_animation_shape(df, shape_type, "Spiral Shape Animation")
+            
+        elif shape_type == "stars":
+            R = 1*out_radius
+            r = inner_scale*out_radius
+            
+            if n_wings % 2:
+                df = pd.DataFrame({'t': np.linspace(0, 2*np.pi, n_wings*2, endpoint=False)})
+            else:
+                df = pd.DataFrame({'t': np.linspace(-np.pi, np.pi, n_wings*2, endpoint=False)})
+                           
+            df['radius'] = df.index % 2 == 0  # True for even indices (outer), False for odd (inner)
+            df['radius'] = df['radius'].apply(lambda x: R if x else r)
+
+            # Calculate x and y coordinates based on the radius
+            df['x'] = df.apply(lambda row: row['radius'] * np.cos(row['t']), axis=1)
+            df['y'] = df.apply(lambda row: row['radius'] * np.sin(row['t']), axis=1)
+            df = pd.concat([df, df.iloc[0:1]], ignore_index=True)
+            
+            plot_animation_shape(df, shape_type, f"{n_wings}-Stars Shape Animation")
+
 else:
     st.markdown("""
         <style>
@@ -562,70 +688,78 @@ else:
                 color: #90EE90;  /* Light green color */
             }
         </style>
-        <h1 class="title-trang1">Trang 5: Heart moving simulation </h1>
+        <h1 class="title-trang1">Trang 6: Guessing-games </h1>
         <br>
     """, unsafe_allow_html=True)
-    col1, col2 = st.columns([1, 3])
+    col1, col2 = st.columns([1, 3])    
     with col1:
-        st.subheader("Select your parameters")
-        heart_type = st.selectbox("heart-equation-type", ["type1", "type2", "type3"])
-        color_sel = st.selectbox("color", ["light-red", "red", "cyan", "yellow", "lightgreen"])
-        if color_sel == "light-red":
-            color_sel = "#ff4d4d"
-        
+        game_tit = st.selectbox("Select game to play", ["Guess a number", "Guess an object"])
+        if game_tit == "Guess a number":
+            n_min = st.select_slider("min_value of the range", options=range(-100, int(1e2) ), value=0)
+            n_max = st.select_slider("max_value of the range", options=range(n_min, int(1e3) ), value=0)
+            if 'target_number' not in st.session_state:
+                st.session_state.target_number = np.random.randint(n_min, n_max)
+                
+        elif game_tit == "Guess an object":
+            topic_to_guess = st.selectbox("topic-to-guess", ["animals", "fruits", "vehicles", "planets", "football-clubs"])
+            if topic_to_guess in ["animals", "fruits", "vehicles", "planets"]:
+                # gợi ý từ đầu tiên, từ cuối cùng
+                n_clues = st.selectbox("maximum number of hints", [1, 2])
+            else:
+                # gợi ý chủ đề có bao nhiêu từ, từ đầu và từ cuối
+                n_clues = st.selectbox("maximum number of hints", [1, 2, 3])
     with col2:
-        if heart_type == "type1":
-            df = pd.DataFrame({'t': np.linspace(0, 2*np.pi, 501)})        
-            df['x'] = df['t'].apply(lambda t: 16*(np.sin(t))**3)
-            df['y'] = df['t'].apply(lambda t: 13*np.cos(t) - 5*np.cos(2*t) - 2*np.cos(3*t) - np.cos(4*t))
-        elif heart_type == "type2":
-            df = pd.DataFrame({'t': np.linspace(-1, 1, 801)})
-            def log(t):
-                if t == 0:
-                    return 0.2
-                else:
-                    return np.log(np.abs(t))                
-            df['x'] = df['t'].apply(lambda t: np.sin(t)*np.cos(t)*log(t))
-            df['y'] = df['t'].apply(lambda t: (np.abs(t))**0.3 * np.sqrt(np.cos(t)))
-            # df.loc[df['x'] == 0, 'y'] = 0.2
-                    
-        else:
-            df = pd.DataFrame({'t': np.linspace(0, 2*np.pi, 501)})        
-            df['x'] = df['t'].apply(lambda t: -np.sqrt(2)*(np.sin(t))**3)
-            df['y'] = df['t'].apply(lambda t: 2*np.cos(t) - (np.cos(t))**2 - (np.cos(t))**3)
+        st.subheader("Play")
+        # Display instructions based on the selected game
+        if game_tit == "Guess a number":
+            st.write("#### Instructions")
+            st.write("Guess a number between the selected range. You'll get feedback on whether your guess is too high or too low.")
+            st.write(f"your-selected-range: ({n_min}, {n_max})")
+                        
+            guess = st.number_input("Enter your guess:", min_value=n_min, max_value=n_max, value=n_min)
             
-    # Create the figure using plotly.graph_objects
-        df['frame'] = df.index    
-        fig = go.Figure()
+            # Start button to begin the game
+            if st.button("Submit"):
+                target_number = st.session_state.target_number
+                
+                # Add your game logic here, for example:                
+                if guess == target_number:
+                    st.success(f"Congratulations! You guessed the number {target_number}.")
+                elif guess < target_number:
+                    st.warning("Your guess is too low. Try again!")
+                else:
+                    st.warning("Your guess is too high. Try again!")
+        
+        elif game_tit == "Guess an object":
+            st.write("### Instructions")
+            st.write(f"Guess an object from the selected topic. You'll receive clues to help you make the guess.")
+            
+            # Display hints and game logic for guessing objects
+            if topic_to_guess == "animals":
+                object_to_guess = np.random.choice(["elephant", "dragon"])
+            elif topic_to_guess == "fruits":
+                object_to_guess = np.random.choice(["banana", "apple"])
+            elif topic_to_guess == "vehicles":
+                object_to_guess = np.random.choice(["car", "bicycle"])
+            elif topic_to_guess == "planets":
+                object_to_guess = np.random.choice(["earth", "mars"])
+            else:  # football-clubs
+                object_to_guess = np.random.choice(["manchester-united", "chelsea"])
+                
+            # Add more topics and objects accordingly            
+            if n_clues == 1:
+                st.write(f"Clue 1: The first letter is {object_to_guess[0]}")
+            elif n_clues == 2:
+                st.write(f"Clue 2: The last letter is {object_to_guess[-1]}")
+            elif n_clues == 3:
+                st.write(f"Clue 3: There was {len(object_to_guess.split(' '))} words in this object")
 
-        fig.add_trace(go.Scatter(x=df['x'], y=df['y'], mode='lines', line=dict(color=color_sel, width=1), name="Heart Line"))
-        fig.add_trace(go.Scatter(x=df['x'], y=df['y'], mode='markers', marker=dict(color=color_sel, size=5), name="Heart Points"))
- 
-        frames = []
-        for i in range(1, len(df)):
-            frames.append(go.Frame(
-                data=[
-                    go.Scatter(x=df['x'][:i], y=df['y'][:i], mode='markers', marker=dict(color=color_sel, size=5)),
-                    go.Scatter( x=df['x'][:i], y=df['y'][:i], mode='lines', line=dict(color=color_sel, width=1))
-                ],
-                name=f"Frame {i}"
-            ))
-
-        # Add frames to the figure
-        fig.frames = frames
-
-        # Update layout for better appearance
-        fig.update_layout(
-            updatemenus=[dict(
-                type="buttons",
-                showactive=False,
-                buttons=[dict(label="Play", method="animate", args=[None, dict(frame=dict(duration=25, redraw=True), fromcurrent=True)])]
-            )],
-            title="Heart Shape Animation",
-            xaxis=dict(range=[min(0, df['x'].min() * 1.2), df['x'].max() * 1.3], showgrid=False),
-            yaxis=dict(range=[min(0, df['y'].min() * 1.2), df['y'].max() * 1.3], showgrid=False),
-            showlegend=False, height=600,
-        )
-
-        # Display the plot
-        st.plotly_chart(fig)
+            guess_object = st.text_input("Enter your guess:")
+            
+            # Start button to begin the game
+            if st.button("Submit"):
+                # Check the user’s guess
+                if guess_object.lower() == object_to_guess.lower():
+                    st.success(f"Congratulations! You guessed the object: {object_to_guess}.")
+                else:
+                    st.warning("Incorrect guess. Try again!")

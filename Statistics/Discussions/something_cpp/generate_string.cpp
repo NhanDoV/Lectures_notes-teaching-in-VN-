@@ -1,12 +1,13 @@
-#include <iostream>
-#include <vector>
-#include <cstdlib>
-#include <ctime>
-#include <unordered_map>
-#include <string>
-#include <algorithm>
+#include <iostream>  // Allows input/output functionality
+#include <vector>    // Enables the use of the vector container (dynamic array)
+#include <cstdlib>   // Contains functions for random number generation and conversion
+#include <ctime>     // Allows working with time (used for seeding random function)
+#include <unordered_map>  // Provides the unordered_map container (hash table)
+#include <string>    // Enables the use of the string data type
+#include <algorithm> // Contains common algorithms like sort(), find(), etc.
 
-using namespace std;
+// This line allows us to use components in the std namespace without needing to write 'std::'
+using namespace std;  
 
 class TopicGuessingGame {
 private:
@@ -20,13 +21,18 @@ public:
 	 * The topics include:
 	 * - Animal
 	 * - Fruit
+	 * - Colors
 	 * - Vehicle
 	 * - Plant
 	 * - Operator Names
+	 * - Periodic Table of Metals
 	 * - Solar System Names
+	 * - Programming Languages
 	 * - month_name
 	 * - countries
 	 * - real estate
+	 * - food names
+	 * - football-club-names
 	 */
 	TopicGuessingGame() {
 		// Initialize the topics with sample data for each category (animal, fruit, etc.)
@@ -42,6 +48,23 @@ public:
 			"sparrow", "cardinal", "woodpecker", "canary", "robin", "swallow", "stork", "bat", "firefly", "moth",
 			"butterfly", "beetle", "dragonfly", "ant", "termite", "cockroach", "ladybug", "tick", "bee", "wasp"
 		};
+
+		topics["Periodic_Table_of_Metals"] = {"Lithium", "Beryllium", "Sodium", "Magnesium", "Aluminum", "Potassium", "Calcium",
+											"Scandium", "Titanium", "Vanadium", "Chromium", "Manganese", "Iron", "Cobalt", "Nickel", 
+											"Copper", "Zinc", "Gallium", "Rubidium", "Strontium", "Yttrium", "Zirconium", "Niobium", 
+											"Molybdenum", "Technetium", "Ruthenium", "Rhodium", "Palladium", "Silver", "Cadmium", 
+											"Indium", "Tin", "Cesium", "Barium", "Lanthanum", "Cerium", "Praseodymium", "Neodymium", 
+											"Promethium", "Samarium", "Europium", "Gadolinium", "Terbium", "Dysprosium", "Holmium", 
+											"Erbium", "Thulium"
+											};
+
+		topics["colors"] = {"Red", "Blue", "Green", "Yellow", "Purple", "Orange", "Pink", "Brown", "Black", "White", "Gray",
+		                    "Cyan", "Magenta", "Lime", "Indigo", "Violet", "Turquoise", "Teal", "Beige", "Coral", "Lavender",
+		                    "Olive", "Maroon", "Navy", "Gold", "Silver", "Peach", "Mint", "Chocolate", "Ivory", "Mustard",
+		                    "Amber", "Fuchsia", "Rose", "Aqua", "Crimson", "Salmon", "Khaki", "Plum", "Lilac", "Periwinkle",
+		                    "Slate", "Copper", "Bronze", "Charcoal", "Taupe", "Emerald", "Sapphire", "Ruby", "Garnet", "Blush",
+		                    "Cobalt", "Sand", "Mauve", "Azure", "Eggplant", "Ochre", "Denim", "Pearl", "Mint Green", "Forest Green"
+		                   };
 
 		topics["fruit"] = {
 			"apple", "banana", "orange", "grape", "mango", "pineapple", "watermelon", "blueberry", "strawberry",
@@ -70,9 +93,30 @@ public:
 			"buggy", "golf cart", "hoverboard", "electric skateboard", "chopper", "dirt bike", "cross bike", "moped"
 		};
 
+		topics["programming_language"] = {"Python", "JavaScript", "Java", "C", "C++", "C#", "Go", "Rust", "PHP", "Swift",
+		                                  "Kotlin", "Ruby", "TypeScript", "SQL", "R", "Dart", "Scala", "Shell", "Perl", "Objective-C",
+		                                  "Lua", "Haskell", "Elixir", "MATLAB", "Visual Basic", "F#", "Groovy", "Erlang", "Clojure",
+		                                  "COBOL", "Fortran", "VBScript", "Pascal", "Assembly", "VHDL", "Verilog", "Ada", "Prolog",
+		                                  "Scratch", "PowerShell", "Julia", "Crystal", "Nim", "Scheme", "SAS", "ABAP", "APL", "Smalltalk",
+		                                  "RPG", "Q#"
+		                                 };
+
 		topics["month_name"] = {"January", "Jan", "February", "Feb", "March", "Mar", "April", "Apr", "May", "June", "Jun",
 		                        "July", "Jul", "August", "Aug", "September", "Sep", "October", "Oct", "November", "Nov", "December", "Dec"
 		                       };
+
+		topics["food_names"] = {"Pho", "Banh mi", "Banh xeo", "Goi cuon", "Com tam", "Cha gio", "Hu tieu", "Banh bao", "Xoi", "Banh chung", 
+								"Banh duc", "Banh canh", "Mi Quang", "Ca ri", "Banh nam", "Chaolom", "Banh khot", "Banh bo", "Com chay", 
+								"Banh tet", "Sui cao", "Banh trang nuong", "Mi hoanh thanh", "Dim sum", "Peking duck", "Mapo tofu", "Dumplings",
+								 "Hot pot", "Kung Pao chicken", "Xiao long bao", "Chow mein", "Sweet and sour pork", "Jiaozi", "Mooncake", 
+								 "Ma la", "Sichuan hotpot", "Chashu", "Sushi", "Ramen", "Tempura", "Tonkatsu", "Takoyaki", "Okonomiyaki", 
+								 "Unagi", "Kaiseki", "Sashimi", "Mochi", "Shabu-shabu", "Udon", "Gyoza", "Omurice", "Chirashi", "Kare Raisu", 
+								 "Ebi fry", "Yakisoba", "Negima", "Onigiri", "Miso soup", "Katsudon", "Tamagoyaki", "Zaru soba", "Soba", 
+								 "Chanko nabe", "Sukiyaki", "Tempura soba", "Izakaya", "Tonkotsu ramen", "Burger", "French fries", "Pizza", 
+								 "Hot dog", "Fried chicken", "Chicken nuggets", "Tacos", "Burrito", "Spaghetti", "Lasagna", "Chicken wings", 
+								 "Onion rings", "Grilled cheese sandwich", "Poutine", "Fried rice", "Fish and chips", "Doner kebab", 
+								 "Cheeseburger", "Falafel", "Bagel", "Gyro", "Shawarma", "Steak", "Barbecue ribs"
+								 };
 
 		topics["countries"] = {"Afghanistan", "AFG", "Albania", "ALB", "Algeria", "ALG", "Andorra", "AND", "Angola", "ANG", "Argentina", "ARG",
 		                       "Armenia", "ARM", "Australia", "AUS", "Austria", "AUT", "Azerbaijan", "AZE", "Bahamas", "BAH", "Bahrain", "BHR",
@@ -108,6 +152,12 @@ public:
 		                       "Zambia", "ZAM", "Zimbabwe", "ZIM"
 		                      };
 
+		topics["bible_heros"] = {"Adam", "Eve", "Noah", "Abraham", "Sarah", "Isaac", "Jacob", "Joseph", "Moses", "Aaron", "Joshua", "Deborah",
+		                         "Gideon", "Samson", "Ruth", "Samuel", "David", "Solomon", "Elijah", "Elisha", "Esther", "Job", "Nehemiah",
+		                         "Daniel", "Mary", "Joseph", "John the Baptist", "Peter", "Paul", "John", "James", "Stephen", "Philip",
+		                         "Barnabas", "Timothy", "Luke", "Mary Magdalene", "Martha", "Lazarus", "Priscilla", "Aquila"
+		                        };
+
 		topics["real_estate"] = {"single-family home", "multi-family home", "apartment", "condominium", "townhouse",
 		                         "duplex", "triplex", "quadplex", "penthouse", "villa", "mansion", "cottage", "bungalow", "farmhouse", "mobile home", "manufactured home",
 		                         "tiny house", "vacation home", "office building", "retail space", "warehouse", "industrial facility", "hotel", "restaurant",
@@ -119,6 +169,20 @@ public:
 		                         "orchard", "retirement home", "assisted living facility", "nursing home", "subsidized housing", "social housing",
 		                         "low-income housing", "green building", "solar-powered home", "sustainable development"
 		                        };
+
+		topics["football_clubs"] = {"Bayern Munich", "Liverpool", "Manchester United", "Real Madrid", "Barcelona", "Paris Saint-Germain",
+		                            "Juventus", "Chelsea", "Arsenal", "Manchester City", "Tottenham Hotspur", "AC Milan", "Inter Milan", "Napoli", "Atletico Madrid",
+		                            "Borussia Dortmund", "RB Leipzig", "Sevilla", "AS Roma", "Ajax Amsterdam", "Benfica", "Porto", "Sporting Lisbon", "Lazio",
+		                            "Shakhtar Donetsk", "Zenit St. Petersburg", "Celtic", "Rangers", "Galatasaray", "FenerbahC'e", "Besiktas", "Olympique Lyon",
+		                            "Olympique Marseille", "Monaco", "Valencia", "Villarreal", "PSV Eindhoven", "Red Star Belgrade", "Dynamo Kyiv",
+		                            "Club Brugge", "Flamengo", "Palmeiras", "River Plate", "Boca Juniors", "Santos FC"
+		                           };
+
+		topics["body_parts"] = {"Head", "Neck", "Shoulder", "Arm", "Elbow", "Forearm", "Wrist", "Hand", "Palm", "Fingers", "Thumb",
+		                        "Chest", "Back", "Abdomen", "Waist", "Hip", "Buttocks", "Thigh", "Knee", "Leg", "Shin", "Calf", "Ankle", "Foot", "Toes",
+		                        "Heel", "Skull", "Brain", "Heart", "Lungs", "Liver", "Stomach", "Kidneys", "Bladder", "Pancreas", "Intestines", "Spleen",
+		                        "Esophagus", "Trachea", "Ears", "Eyes", "Nose", "Mouth", "Lips", "Teeth", "Tongue", "Jaw", "Skin", "Hair"
+		                       };
 
 		topics["plant"] = {
 			"rose", "tulip", "sunflower", "lily", "orchid", "daisy", "cactus", "palm", "bamboo", "ferns", "poinsettia",
@@ -151,8 +215,9 @@ public:
 		srand(time(0));  // Seed the random number generator
 
 		// Randomly select a topic from the available list
-		vector<string> topicsList = {"animal", "fruit", "vehicle", "plant", "month_name",
-		                             "vehicle", "real_estate", "countries"
+		vector<string> topicsList = {"animal", "fruit", "vehicle", "plant", "month_name", "bible_heros", "programming_language",
+		                             "vehicle", "real_estate", "countries", "football_clubs", "body_parts", "Periodic_Table_of_Metals",
+									 "food_names"
 		                            };
 		string topic = topicsList[getRandomNumber(0, topicsList.size() - 1)];
 

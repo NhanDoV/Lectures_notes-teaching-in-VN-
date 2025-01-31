@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login to Home Page</title>
+  <style>
+    /* Basic Styling */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Arial', sans-serif;
+    }
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background-color: #f3f3f3;
+    }
+    .container {
+      background-color: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      text-align: center;
+      width: 300px;
+    }
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 0.8rem;
+      margin: 1rem 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      background-color: #007bff;
+      color: white;
+      padding: 0.8rem 1.2rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      width: 100%;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .hidden {
+      display: none;
+    }
+    a {
+      display: block;
+      margin-top: 1rem;
+      color: #007bff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="login-page">
+    <h1>Login</h1>
+    <form id="login-form">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required placeholder="Enter your username">
+      
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" required placeholder="Enter your password">
+      
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <div class="container hidden" id="home-page">
+    <h1>Welcome to the Home Page!</h1>
+    <p>You are successfully logged in.</p>
+    <a href="#" id="logout-btn">Logout</a>
+  </div>
+
+  <script>
+    const loginForm = document.getElementById('login-form');
+    const loginPage = document.getElementById('login-page');
+    const homePage = document.getElementById('home-page');
+    const logoutButton = document.getElementById('logout-btn');
+
+    // Handle login form submission
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault(); // Prevent page reload
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      if (username && password) { // Simple validation
+        alert(`Welcome, ${username}!`);
+        loginPage.classList.add('hidden');
+        homePage.classList.remove('hidden');
+      } else {
+        alert('Please enter both username and password.');
+      }
+    });
+
+    // Handle logout
+    logoutButton.addEventListener('click', () => {
+      loginPage.classList.remove('hidden');
+      homePage.classList.add('hidden');
+    });
+  </script>
+</body>
+</html>

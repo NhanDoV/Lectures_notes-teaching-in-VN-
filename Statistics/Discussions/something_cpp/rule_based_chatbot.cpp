@@ -46,7 +46,51 @@ bool isMealQuery(const std::string& input) {
            lowerInput.find("burger") != std::string::npos ||
            lowerInput.find("pasta") != std::string::npos ||
            lowerInput.find("pizza") != std::string::npos ||
-           lowerInput.find("snack") != std::string::npos;
+           lowerInput.find("mushroom_soup") != std::string::npos ||           
+           lowerInput.find("chicken_fries") != std::string::npos ||
+           lowerInput.find("hamburger") != std::string::npos ||           
+           lowerInput.find("french_fries") != std::string::npos ||
+           lowerInput.find("snack") != std::string::npos ||
+           lowerInput.find("lasagna") != std::string::npos ||
+           lowerInput.find("fried_rice") != std::string::npos ||
+           lowerInput.find("tacos") != std::string::npos ||
+           lowerInput.find("hot_dog") != std::string::npos ||
+           lowerInput.find("kebab") != std::string::npos ||
+           lowerInput.find("ramen") != std::string::npos ||
+           lowerInput.find("dim_sum") != std::string::npos ||
+           lowerInput.find("burrito") != std::string::npos ||
+           lowerInput.find("samosa") != std::string::npos ||
+           lowerInput.find("steak") != std::string::npos ||
+           lowerInput.find("cheeseburger") != std::string::npos ||
+           lowerInput.find("chow_mein") != std::string::npos ||
+           lowerInput.find("grilled_cheese") != std::string::npos ||
+           lowerInput.find("eggrolls") != std::string::npos ||
+           lowerInput.find("risotto") != std::string::npos ||
+           lowerInput.find("nachos") != std::string::npos ||
+           lowerInput.find("paella") != std::string::npos ||
+           lowerInput.find("falafel") != std::string::npos ||
+           lowerInput.find("ceviche") != std::string::npos ||
+           lowerInput.find("quiche") != std::string::npos ||
+           lowerInput.find("goulash") != std::string::npos ||
+           lowerInput.find("clams") != std::string::npos ||
+           lowerInput.find("pizza_pasta") != std::string::npos ||
+           lowerInput.find("moussaka") != std::string::npos ||
+           lowerInput.find("beef_tacos") != std::string::npos ||
+           lowerInput.find("bangers_and_mash") != std::string::npos ||
+           lowerInput.find("chicken_wings") != std::string::npos ||
+           lowerInput.find("eggplant_parmesan") != std::string::npos ||
+           lowerInput.find("coq_au_vin") != std::string::npos ||
+           lowerInput.find("tuna_sashimi") != std::string::npos ||
+           lowerInput.find("stuffed_peppers") != std::string::npos ||
+           lowerInput.find("maki_rolls") != std::string::npos ||
+           lowerInput.find("poutine") != std::string::npos ||
+           lowerInput.find("baked_ziti") != std::string::npos ||
+           lowerInput.find("eggplant_rollatini") != std::string::npos ||
+           lowerInput.find("shakshuka") != std::string::npos ||
+           lowerInput.find("tom_yum_soup") != std::string::npos ||
+           lowerInput.find("hummus") != std::string::npos ||
+           lowerInput.find("curry") != std::string::npos ||
+           lowerInput.find("tandoori_chicken") != std::string::npos;
 }
 
 // Function to check if the input is a farewell
@@ -65,10 +109,57 @@ bool isFarewell(const std::string& input) {
            lowerInput.find("ni hao") != std::string::npos;
 }
 
+// Function to check if the input is a drink query
+bool isDrinkQuery(const std::string& input) {
+    std::string lowerInput = toLowerCase(input);
+    return lowerInput.find("red wine") != std::string::npos ||
+           lowerInput.find("champagne") != std::string::npos ||
+           lowerInput.find("cocktail") != std::string::npos ||
+           lowerInput.find("johny walker") != std::string::npos ||
+           lowerInput.find("whiskey") != std::string::npos ||
+           lowerInput.find("vodka") != std::string::npos ||
+           lowerInput.find("beer") != std::string::npos ||
+           lowerInput.find("rum") != std::string::npos;
+}
+
+// Function to handle drink orders
+void handleDrinkOrder(const std::string& input) {
+    std::string lowerInput = toLowerCase(input);
+    std::cout << "Bot: You want to order a drink. ";
+    
+    if (lowerInput.find("red wine") != std::string::npos) {
+        std::cout << "How about a nice glass of red wine?" << std::endl;
+    }
+    else if (lowerInput.find("champagne") != std::string::npos) {
+        std::cout << "Champagne, perfect for a celebration!" << std::endl;
+    }
+    else if (lowerInput.find("cocktail") != std::string::npos) {
+        std::cout << "A cocktail coming right up! What type of cocktail would you like?" << std::endl;
+    }
+    else if (lowerInput.find("johny walker") != std::string::npos) {
+        std::cout << "A glass of Johnny Walker, excellent choice!" << std::endl;
+    }
+    else if (lowerInput.find("whiskey") != std::string::npos) {
+        std::cout << "Would you like a shot of whiskey?" << std::endl;
+    }
+    else if (lowerInput.find("vodka") != std::string::npos) {
+        std::cout << "A vodka-based drink sounds great!" << std::endl;
+    }
+    else if (lowerInput.find("beer") != std::string::npos) {
+        std::cout << "A cold beer coming your way!" << std::endl;
+    }
+    else if (lowerInput.find("rum") != std::string::npos) {
+        std::cout << "Rum! Would you like it straight or in a cocktail?" << std::endl;
+    }
+    else {
+        std::cout << "I didn't quite catch that. What kind of drink would you like to order?" << std::endl;
+    }
+}
 
 // Function to extract meal details from a sentence using regex
 bool extractMealDetails(const std::string& input, std::vector<std::string>& meals, int& numPeople, std::string& mealTime, std::string& mealType) {
-    std::regex mealPattern("(sushi|pho|pad_thai|beefsteak|burger|pizza|pasta|snack|doner_kabab|peking_duck|carbonara)", std::regex::icase);
+    std::regex mealPattern("(sushi|pho|pad_thai|beefsteak|burger|pizza|french_fries|pasta|snack|doner_kabab|peking_duck|carbonara|hamburger|chicken_fries|mushroom_soup)", 
+                            std::regex::icase);
     std::regex quantityPattern("(\\d+)\\s?([a-zA-Z]+)");
     std::regex peoplePattern("(\\d+)\\s?people");
     std::regex timePattern("(\\d+\\s?am|pm|noon|midnight)");
@@ -90,42 +181,25 @@ bool extractMealDetails(const std::string& input, std::vector<std::string>& meal
         mealList.push_back(iter->str());
         ++iter;
     }
+
+    if (!mealList.empty()) {
+        meals = mealList;
+    }
     
-    // Extract meal timing (e.g., "12 am", "noon")
+    // Extract meal time
     if (std::regex_search(input, match, timePattern)) {
         mealTime = match.str(1);
     }
-    
-    // Extract meal type (e.g., "lunch", "dinner")
+
+    // Extract meal type
     if (std::regex_search(input, match, typePattern)) {
         mealType = match.str(1);
     }
 
-    if (!mealList.empty() && numPeople > 0 && !mealTime.empty() && !mealType.empty()) {
-        meals = mealList;
-        return true;
-    }
-
-    return false;
+    return !meals.empty() || numPeople > 0 || !mealTime.empty() || !mealType.empty();
 }
 
-// Function to handle detailed meal queries and additional information
-void askForMealDetails() {
-    std::string mealType, quantity, timeOfMeal;
-
-    std::cout << "Bot: What type of meal would you like? (e.g., breakfast, lunch, dinner, snack)" << std::endl;
-    std::getline(std::cin, mealType);
-
-    std::cout << "Bot: How many people are you ordering for?" << std::endl;
-    std::getline(std::cin, quantity);
-
-    std::cout << "Bot: When would you like to have the meal? (e.g., 12 AM, noon, or specific time)" << std::endl;
-    std::getline(std::cin, timeOfMeal);
-
-    std::cout << "Bot: Great! You want " << mealType << " for " << quantity << " people at " << timeOfMeal << ". Anything else I can help with?" << std::endl;
-}
-
-// Function to introduce the bot's capabilities and provide options
+// Function to introduce the bot
 void introduceBot() {
     std::cout << "Bot: Hello! I'm your personal assistant." << std::endl;
     std::cout << "I can help you with the following:" << std::endl;
@@ -134,59 +208,63 @@ void introduceBot() {
     std::cout << "3. Meal timing: I can help you schedule the meal time." << std::endl;
     std::cout << "4. Farewell: If you're done, just say goodbye!" << std::endl;
     std::cout << "You can type 'exit' to end the conversation." << std::endl;
+    std::cout << "What would you like to do?" << std::endl;
 }
 
-// Function to generate a response based on the user's input
+// Function to generate a response based on user input
 void generateResponse(const std::string& input) {
-    static std::vector<std::string> meals;
-    static int numPeople = 0;
-    static std::string mealTime;
-    static std::string mealType;
-
     if (isGreeting(input)) {
-        std::cout << "Bot: Hello! How can I assist you today?" << std::endl;
-        introduceBot();  // Provide bot introduction and options after greeting
-    } 
-    else if (isMealQuery(input)) {
-        // If meal details are mentioned in a single input, extract and process them
-        if (extractMealDetails(input, meals, numPeople, mealTime, mealType)) {
-            std::cout << "Bot: Great! You want ";
-            for (const auto& meal : meals) {
-                std::cout << meal << " ";
-            }
-            std::cout << "for " << numPeople << " people at " << mealTime << " for " << mealType << ". Anything else I can help with?" << std::endl;
-        } else {
-            std::cout << "Bot: What would you like to have for a meal? I can suggest some options!" << std::endl;
-            std::cout << "Bot: What type of meal would you like? (e.g., breakfast, lunch, dinner, snack)" << std::endl;
-        }
+        introduceBot();
     } 
     else if (isFarewell(input)) {
-        std::cout << "Bot: Goodbye! Have a great day!" << std::endl;
-        std::cout << "Bot: Thank you for chatting! Goodbye!" << std::endl;
-        exit(0);  // Exit the conversation
+        std::cout << "Bot: Goodbye! Have a good meal!" << std::endl;
+    }
+    else if (isMealQuery(input)) {
+        std::vector<std::string> meals;
+        int numPeople = 0;
+        std::string mealTime, mealType;
+        if (extractMealDetails(input, meals, numPeople, mealTime, mealType)) {
+            std::cout << "Bot: I can suggest the following meals: ";
+            for (const auto& meal : meals) {
+                std::cout << meal << ", ";
+            }
+            std::cout << std::endl;
+            if (numPeople > 0) {
+                std::cout << "Bot: For " << numPeople << " people." << std::endl;
+            }
+            if (!mealTime.empty()) {
+                std::cout << "Bot: How about having the meal at " << mealTime << "?" << std::endl;
+            }
+            if (!mealType.empty()) {
+                std::cout << "Bot: I suggest having it for " << mealType << "." << std::endl;
+            }
+        } 
+        else {
+            std::cout << "Bot: I'm not sure what you're asking for, can you clarify?" << std::endl;
+        }
+    }
+    else if (isDrinkQuery(input)) {
+        handleDrinkOrder(input);
     }
     else {
-        std::cout << "Bot: Sorry, I didn't quite get that. Could you please ask something else?" << std::endl;
+        std::cout << "Bot: I'm not sure how to respond to that. Can you clarify?" << std::endl;
     }
 }
 
 int main() {
     std::string userInput;
-
-    std::cout << "Welcome to the rule-based chatbot!" << std::endl;
-
+    
+    // Start conversation
+    std::cout << "Bot: Hello! How can I help you today?" << std::endl;
     while (true) {
         std::cout << "You: ";
-        std::getline(std::cin, userInput);  // Get user input
-
-        if (toLowerCase(userInput) == "exit") {
-            std::cout << "Bot: Thank you for chatting, have a good meal! Goodbye and see you soon!" << std::endl;
+        std::getline(std::cin, userInput);
+        if (userInput == "exit") {
+            std::cout << "Bot: Goodbye! Have a good meal!" << std::endl;
             break;
         }
-
-        // Generate response based on user input
         generateResponse(userInput);
     }
-
+    
     return 0;
 }

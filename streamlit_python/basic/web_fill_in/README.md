@@ -9,7 +9,7 @@ pip install streamlit plotly openpyxl openai scikit-learn
 python pre_trained.py
 ```
 
-![image](data/images/image_pre_trained.png)
+![image](streamlit_python/basic/web_fill_in/data/images/image_pre_trained.png)
 
 #### Step 3. run the python.file
 
@@ -17,9 +17,9 @@ python pre_trained.py
 streamlit run web_scrolling.py
 ```
 
-![image](data/images/image_run_web.png)
+![image]streamlit_python/basic/web_fill_in/data/images/image_run_web.png)
 
-![image](data/images/image_get_web.png)
+![image](streamlit_python/basic/web_fill_in/data/images/image_run_web.png)
 
 #### Results
 - **Page 1**
