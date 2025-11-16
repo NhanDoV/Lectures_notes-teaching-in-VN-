@@ -6,6 +6,15 @@ class list_all_subsets:
             for ls in comb(nums, n_elm):
                 myls.append(list(ls))
         return myls
+    
+    def using_iterate(self, nums: list[int]) -> list[list[int]]:
+        all_subsets = []        
+        # For each elements
+        for num in nums:
+            for subset in all_subsets:
+                all_subsets += [ subset + [num] ]
+
+        return all_subsets
 
     def backtracking_subsets(self, nums: list[int]) -> list[list[int]]: # backtracking
         myls = []

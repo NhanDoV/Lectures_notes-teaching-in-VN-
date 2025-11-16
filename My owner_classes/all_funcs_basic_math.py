@@ -409,6 +409,7 @@ def fibo_gcd(indexes):
     for i in range(2, len(fibo_list)):
         init_gcd = gcd(init_gcd, fibo_list[i])
     return init_gcd
+
 #=============================================================================
 def fibo_lcm(indexes):
     """

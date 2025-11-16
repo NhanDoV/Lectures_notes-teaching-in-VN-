@@ -1,8 +1,943 @@
+import random
 import numpy as np
-import seaborn as sns
+from datetime import datetime
 import matplotlib.pyplot as plt
 from scipy.stats import t, norm
 from scipy.stats import norm, t, chisquare
+
+# =========================================== SUDOKU SQUARE =====================================================
+class Sudoku:
+    """
+        A Sudoku generator and validator using backtracking.
+
+            This class can:
+            - Generate a valid `9 x 9` Sudoku grid using a randomized backtracking algorithm.
+            - Validate rows, columns, and `3 x 3` sub-blocks.
+            - Generate random invalid grids for testing (brute-force method).
+            - Check if a number can be placed at a given position.
+
+            Attributes:
+                grid (list[list[int]]): A 9 x 9 Sudoku grid initialized with zeros.
+    
+        EXAMPLES:
+            >>> GSudoku = Sudoku()
+            >>> sud_mat = GSudoku.back_tracking_generate()
+            >>> for row in sud_mat:
+                    print(row)
+            
+            Output:
+
+                        [4, 2, 5, 3, 8, 9, 1, 6, 7]
+                        [3, 8, 9, 1, 6, 7, 5, 2, 4]
+                        [6, 7, 1, 4, 2, 5, 9, 3, 8]
+                        [8, 3, 6, 7, 1, 2, 4, 9, 5]
+                        [9, 1, 4, 8, 5, 6, 2, 7, 3]
+                        [7, 5, 2, 9, 4, 3, 6, 8, 1]
+                        [2, 9, 7, 5, 3, 1, 8, 4, 6]
+                        [5, 6, 8, 2, 7, 4, 3, 1, 9]
+                        [1, 4, 3, 6, 9, 8, 7, 5, 2]            
+                    
+            >>> GSudoku.check_block(sud_mat), GSudoku.check_row(sud_mat), GSudoku.check_col(sud_mat)
+
+            Output:
+                        (True, True, True)
+
+    """
+    def __init__(self):
+        # create a grid 9x9 of 0-values
+        self.grid = [[0 for _ in range(9)] for _ in range(9)]
+            
+    def random_num_gen(self) -> list[list[int]]:        
+        sudoku_mat = []
+        for r in range(9):
+            valid_nums = list(range(1, 10))
+            new_row = []
+            for c in range(9):
+                rand_num = random.choice(valid_nums)
+                new_row.append(rand_num) 
+                valid_nums.remove(rand_num)
+            sudoku_mat.append(new_row)
+        return sudoku_mat
+
+    def get_dict_count(self, arr: list[int]) -> dict:
+        # Initialize a count-dictionary
+        hashmap = {num: 0 for num in range(1, 10)}
+        for num in arr:
+            if num in hashmap:
+                hashmap[num] = hashmap.get(num, 0) + 1
+        return hashmap
+    
+    def check_col(self, mat: list[list[int]]) -> bool:
+        for col in range(9):
+            check_arr = [mat[row][col] for row in range(9)]
+            hashmap = self.get_dict_count(check_arr)
+            
+            # if count_max > 1 that meant exists duplicated ; otherwise return True
+            if max(hashmap.values()) > 1:
+                # print(f"Look at column {col + 1}; value {max(hashmap, key=hashmap.get)} has appeared {max(hashmap.values())} times")
+                return False
+        return True
+
+    def check_row(self, mat: list[list[int]]) -> bool:
+        for row in range(9):
+            check_arr = mat[row]
+            hashmap = self.get_dict_count(check_arr)
+            if max(hashmap.values()) > 1:
+                # print(f"Look at row {row + 1}; value {max(hashmap, key=hashmap.get)} has appeared {max(hashmap.values())} times")
+                return False
+        return True
+    
+    def check_block(self, mat: list[list[int]]) -> bool:
+        # note_rows = {0: "Top", 3: "Middle", 6: "Bottom"}
+        # note_cols = {0: "Left", 3: "Middle", 6: "Right"}
+        for r in range(0, 9, 3):
+            for c in range(0, 9, 3):
+                check_arr = [mat[r + i][c + j] for i in range(3) for j in range(3)]
+            hashmap = self.get_dict_count(check_arr)
+            if max(hashmap.values()) > 1:
+                # print(f"Look at block [{r}:{r+2} x {c}:{c+2}] \t [ {note_rows[r]}-{note_cols[c]} ]")
+                # for idx in range(0,9,3):
+                #     print([ check_arr[idx + _] for _ in range(3)])
+                # print(f"value {max(hashmap, key=hashmap.get)} has appeared {max(hashmap.values())} times")
+                return False
+        return True
+    
+    def brute_force_generate(self, max_iter: int) -> list[list[int]]:
+        while max_iter > 1:
+            mat = self.random_num_gen()
+            res = self.check_col(mat) and self.check_block(mat)
+            if res:
+                return mat
+            max_iter -= 1
+        print(f"Can not find a valid-Sudoku by this way, please try BACKTRACKING method `back_tracking_generate` or type `help(Sudoku)` ")
+
+    def if_valid(self, row, col, num) -> bool:
+        if num in self.grid[row]:
+            return False
+        
+        if num in [self.grid[r][col] for r in range(9)]:
+            return False
+        
+        box_row, box_col = (row // 3)*3, (col // 3)*3
+        for r in range(box_row, box_row + 3):
+            for c in range(box_col, box_col + 3):
+                if self.grid[r][c] == num:
+                    return False
+                
+        return True
+
+    def fill_val_to_grid(self) -> bool: 
+        for row in range(9):
+            for col in range(9):
+                if self.grid[row][col] == 0:
+                    nums = list(range(1, 10))
+                    random.shuffle(nums)
+                    for num in nums:
+                        if self.if_valid(row, col, num):
+                            self.grid[row][col] = num
+                            if self.fill_val_to_grid():
+                                return True
+                            self.grid[row][col] = 0
+                    return False
+        return True
+    
+    def back_tracking_generate(self) -> list[list[int]]:
+        self.fill_val_to_grid()
+        return self.grid
+
+# =========================================== MAGIC SQUARE =====================================================
+class MagicSquare:
+    """
+        DEFINITION:
+            - MAGIC SQUARE of order n is an `n x n` grid filled with the numbers 1 through n**2 so that 
+            every row, every column, and both main diagonals each add up to the same total, 
+            called the magic constant (or magic sum) M. 
+            - Because it uses each integer from 1 to n² exactly once, the value of M depends only on n, 
+            and has the value `n * (n**2 + 1) / 2`
+
+        EXAMPLE:
+            >>> magic_sq = MagicSquare()
+            >>> mat = magic_sq.magic_sq_generate(3)
+            [Output]: [[2, 7, 6], [9, 5, 1], [4, 3, 8]]
+
+            >>> mat = magic_sq.magic_sq_generate(4)
+            [Output]: [[16, 2, 3, 13], [5, 11, 10, 8], [9, 7, 6, 12], [4, 14, 15, 1]]
+
+
+            >>> magic_sq.check_valid(mat)
+            [Output]: True
+
+            >>> magic_sq.check_valid([[3, 5, 7], [2, 4, 9], [6, 1, 8]])
+            [Output]: False
+
+    """
+    def random_generate_matrix(self, n_dim: int) -> list[list[int]]:
+        valid_nums = list(range(1, 1 + n_dim**2))
+        pseduo_sq = []
+        for _ in range(n_dim):
+            new_row = []
+            for _ in range(n_dim):
+                rand_num = random.choice(valid_nums)
+                new_row.append(rand_num)
+                valid_nums.remove(rand_num)
+            pseduo_sq.append(new_row)
+
+        return pseduo_sq
+
+    def get_valid_sum(self, n_dim: int) -> int:
+        return (n_dim**2 + 1)*n_dim // 2
+
+    def check_rows(self, mat: list[list[int]], n_dim: int) -> bool:
+        for r in range(n_dim):
+            if sum(mat[r]) != self.get_valid_sum(n_dim):
+                return False
+        return True
+
+    def check_cols(self, mat: list[list[int]], n_dim: int) -> bool:
+        for col in range(n_dim):
+            col_to_check = []
+            for row in range(n_dim):
+                col_to_check.append( mat[col][row] )
+            if sum(col_to_check) != self.get_valid_sum(n_dim):
+                return False
+        return True
+
+    def check_diag(self, mat: list[list[int]], n_dim: int) -> bool:
+        left_diag, right_diag = 0, 0
+        valid_sum = self.get_valid_sum(n_dim)
+        for r in range(n_dim):
+            left_diag += mat[r][r]
+            right_diag += mat[r][n_dim - r - 1]
+        if (left_diag == valid_sum) and (right_diag == valid_sum):
+            return True
+        else:
+            return False
+
+    def check_valid(self, mat: list[list[int]]) -> bool:
+        n_row, n_col = len(mat), len(mat[0])
+        if n_row != n_col:
+            return False
+        else:
+            valid_sum = self.get_valid_sum(n_row)
+            if self.check_rows(mat, n_row) and self.check_cols(mat, n_row) and self.check_diag(mat, n_row):
+                return True
+            else:
+                return False
+
+    def brute_force_trials(self, n_dim: int, max_iter: int) -> list[list[int]]:
+        if (n_dim <= 4) and (max_iter < 1e9 ) and (max_iter > 1):
+            for iter in range(max_iter):
+                mat = self.random_generate_matrix(n_dim)
+                if self.check_rows(mat, n_dim) and self.check_cols(mat, n_dim) and self.check_diag(mat, n_dim):
+                    print(f"Success at iter = {iter + 1}")
+                    return mat
+        else:
+            print("this method is only for small dimension (3 or 4) and max_iter is lower than 1e9")
+            return None
+
+    def siamase_rule(self, n_dim: int) -> list[list[int]]:
+        # initialize magic square
+        mat = [[0 for _ in range(n_dim)] for _ in range(n_dim)]
+
+        # Initialize position for 1
+        i = n_dim // 2
+        j = n_dim - 1
+
+        # One by one put all values in magic square
+        for num in range(1, n_dim**2 + 1):
+
+            # put the current element at (i, j)
+            mat[i][j] = num
+
+            # if we get multiple of n, move left
+            if num % n_dim == 0:
+                j -= 1
+
+            # else move to top-right
+            else:
+                i -= 1
+                j += 1
+
+            # add n and take modulo to avoid out of bounds
+            i = (i + n_dim) % n_dim
+            j = (j + n_dim) % n_dim
+
+        return mat
+
+    def doublyEven(self, n_dim: int) -> list[list[int]]:
+        # 2-D matrix with all entries as 0
+        mat = [[(n_dim * y) + x + 1 for x in range(n_dim)] 
+                for y in range(n_dim)
+              ]
+
+        # Change value of array elements at fix location as per the rule (n*n+1)-arr[i][[j]        
+        # Corners of order (n/4)*(n/4)
+        # Top left corner
+        for i in range(0, n_dim//4):
+            for j in range(0, n_dim//4):
+                mat[i][j] = (n_dim**2 + 1) - mat[i][j]
+        
+        # Top right corner
+        for i in range(0, n_dim//4):
+            for j in range(3 * (n_dim//4), n_dim):
+                mat[i][j] = (n_dim**2 + 1) - mat[i][j]
+
+        # Bottom Left corner
+        for i in range(3 * (n_dim // 4), n_dim):
+            for j in range(0, n_dim//4):
+                mat[i][j] = (n_dim**2 + 1) - mat[i][j]
+        
+        # Bottom Right corner
+        for i in range(3 * (n_dim//4), n_dim):
+            for j in range(3 * (n_dim//4), n_dim):
+                mat[i][j] = (n_dim**2 + 1) - mat[i][j]
+                
+        # Centre of matrix,order (n/2)*(n/2)
+        for i in range(n_dim//4, 3 * (n_dim//4)):
+            for j in range(n_dim//4, 3 * (n_dim//4)):
+                mat[i][j] = (n_dim**2 + 1) - mat[i][j]
+
+        return mat
+
+    def magic_sq_generate(self, n_dim):
+        if n_dim % 2 == 1:
+            return self.siamase_rule(n_dim)
+        else:
+            return self.doublyEven(n_dim)
+
+# =========================================== CONVERT OPERATOR =================================================
+class Convert:
+    """
+        A collection of converter functions between decimal, binary, ASCII, and Excel-style indices.
+    """
+    # From decimal to other forms
+    def from_decimal(self, form: str, num: int) -> str:
+        """
+            Convert a decimal number to a target number system.
+
+            Supported forms:
+                - "bin" : binary (base 2)
+                - "oct" : octal (base 8)
+                - "hex" : hexadecimal (base 16)
+
+            Examples:
+                dec=8,  form="bin" --> "1000"
+                dec=15, form="hex" --> "F"
+                dec=31, form="hex" --> "1F"
+
+            Args:
+                form (str): Target format ("bin", "oct", "hex").
+                num (int): Decimal integer to convert.
+
+            Returns:
+                str: Converted representation in the target system.
+
+            Raises:
+                ValueError: If `form` is not supported.
+        """
+        base_dict = {'bin':2, 'oct': 8, 'hex': 16}
+        if form not in base_dict:
+            raise ValueError("Form must be one of: 'bin', 'oct', 'hex'.")
+
+        base = base_dict[form]
+
+        # digits for hex
+        digits = "0123456789ABCDEF"
+
+        if num == 0:
+            return "0"
+
+        result = []
+        # here output is string (to easier handle the hexan)
+        while num > 0:                          # in case your output is an integer, change it to
+            reminder = num % base               # update your target
+            result.append(digits[reminder])     #                   target += reminder * (base ** deg)
+            num //= base                        #                   num //= base        deg += 1
+
+        return ''.join(reversed(result))
+
+    # From binary to other forms
+    def from_binary(self, form: str, num: str) -> str:
+        """
+            Convert a binary number into another number system.
+
+            Supported forms:
+                - "dec" : decimal
+                - "oct" : octal
+                - "hex" : hexadecimal
+
+            Examples:
+                binary 110 -> dec 6
+                binary 1111 -> hex "F"
+                binary 100000 -> oct "20"
+
+            Args:
+                form (str): Target format ("dec", "oct", "hex").
+                num (int): Binary number represented as an integer (e.g., 1011).
+
+            Returns:
+                str: Converted value in the requested format.
+
+            Raises:
+                ValueError: If form is invalid or num contains non-binary digits.
+        """
+        base_dict = {"dec": 10, "oct": 8, "hex": 16}
+        if form not in base_dict:
+            raise ValueError("Form must be one of: 'dec', 'oct', 'hex'.")
+
+        # --- validate binary input ---
+        if any(d not in "01" for d in str(num)):
+            raise ValueError("Input must be a binary number (only 0 and 1).")
+
+        # --- Step 1: binary → decimal ---
+        dec_val = 0
+        deg = 0
+        tmp = num
+
+        while tmp > 0:
+            dec_val += (tmp % 10) * (2 ** deg)
+            tmp //= 10
+            deg += 1
+
+        # if output is decimal → return int
+        if form == "dec":
+            return str(dec_val)
+
+        # --- Step 2: decimal → oct or hex ---
+        digits = "0123456789ABCDEF"
+        base = base_dict[form]
+
+        result = []
+        temp = dec_val
+
+        while temp > 0:
+            result.append(digits[temp % base])
+            temp //= base
+
+        return ''.join(reversed(result))
+
+    def from_hex(self, form: str, num: str) -> str:
+        """
+            Convert a hexadecimal number into another number system.
+
+            Supported forms:
+                - "dec" : decimal
+                - "bin" : binary
+                - "oct" : octal
+
+            Examples:
+                hex "1F"   -> dec "31"
+                hex "A3"   -> bin "10100011"
+                hex "FF"   -> oct "377"
+
+            Args:
+                form (str): Target number system ("dec", "bin", "oct").
+                num (str): Hexadecimal string using digits 0–9 and A–F.
+
+            Returns:
+                str: Converted number as a string.
+
+            Raises:
+                ValueError: If form is invalid or input contains invalid hex characters.
+        """
+        base_dict = {"dec": 10, "bin": 2, "oct": 8}
+
+        if form not in base_dict:
+            raise ValueError("Form must be one of: 'dec', 'bin', 'oct'.")
+
+        # Validate hex input
+        num = num.upper()
+        if any(ch not in "0123456789ABCDEF" for ch in num):
+            raise ValueError("Input must be a valid hexadecimal string.")
+
+        # Step 1: hex → decimal
+        dec_val = 0
+        for ch in num:
+            dec_val = dec_val * 16 + int(ch, 16)
+
+        if form == "dec":
+            return str(dec_val)
+
+        # Step 2: decimal → target (bin or oct)
+        digits = "0123456789ABCDEF"
+        base = base_dict[form]
+
+        result = []
+        temp = dec_val
+
+        if temp == 0:
+            return "0"
+
+        while temp > 0:
+            result.append(digits[temp % base])
+            temp //= base
+
+        return ''.join(reversed(result))
+
+    def from_oct(self, form: str, num: int) -> str:
+        """
+            Convert an octal number into another number system.
+
+            Supported forms:
+                - "dec" : decimal
+                - "bin" : binary
+                - "hex" : hexadecimal
+
+            Examples:
+                oct 17    -> dec "15"
+                oct 20    -> bin "10000"
+                oct 377   -> hex "FF"
+
+            Args:
+                form (str): Target number system ("dec", "bin", "hex").
+                num (int): Octal number represented as an integer (digits 0–7).
+
+            Returns:
+                str: Converted number as a string.
+
+            Raises:
+                ValueError: If form is invalid or num is not valid octal.
+        """
+        base_dict = {"dec": 10, "bin": 2, "hex": 16}
+
+        if form not in base_dict:
+            raise ValueError("Form must be one of: 'dec', 'bin', 'hex'.")
+
+        # Validate oct input
+        if any(ch not in "01234567" for ch in str(num)):
+            raise ValueError("Input must be a valid octal number (digits 0–7).")
+
+        # Step 1: oct → decimal
+        dec_val = 0
+        for ch in str(num):
+            dec_val = dec_val * 8 + int(ch)
+
+        if form == "dec":
+            return str(dec_val)
+
+        # Step 2: decimal → target (bin or hex)
+        digits = "0123456789ABCDEF"
+        base = base_dict[form]
+
+        result = []
+        temp = dec_val
+
+        if temp == 0:
+            return "0"
+
+        while temp > 0:
+            result.append(digits[temp % base])
+            temp //= base
+
+        return ''.join(reversed(result))
+
+    def to_excelNums(self, columnIndex: str) -> int:
+        """
+            Convert an Excel-style column label into its corresponding numeric index.
+
+            Examples:
+                "A"  -> 1
+                "Z"  -> 26
+                "AA" -> 27
+                "AB" -> 28
+
+            Args:
+                columnIndex (str): Excel column label. Must be uppercase A–Z characters.
+
+            Returns:
+                int: The corresponding Excel column index.
+
+            Raises:
+                ValueError: If the input is not uppercase alphabetic.
+        """
+        if columnIndex.isalpha() and columnIndex.isupper():
+            res = 0
+            for letter in columnIndex:
+                res = res * 26 + (ord(letter) - 64)
+            return res
+        else:
+            raise ValueError("Input must be uppercase and contain only alphabet letters.")
+
+
+    def to_exlcelIndex(self, columnNumber: int) -> str:
+        """
+            Convert a numeric index into its corresponding Excel-style column label.
+
+            Examples:
+                1  -> "A"
+                5  -> "E"
+                26 -> "Z"
+                27 -> "AA"
+                52 -> "AZ"
+
+            Args:
+                columnNumber (int): Positive column number (>= 1).
+
+            Returns:
+                str: Excel column label.
+
+            Raises:
+                ValueError: If columnNumber is not a positive integer.
+        """
+        result = []
+        while columnNumber > 0:
+            columnNumber -= 1
+            result.append( chr(columnNumber % 26 + 65) )
+            columnNumber //= 26
+        return ''.join(reversed(result))
+
+# ========================================= Timestamps puzzle ==================================================
+class Special_TimeStamps:
+    """
+        Summary:
+            ------------------------------
+                Func 1: Find all timestamps-format YYYYMMDD such that there exists an integer num such that num**pow = YYYYMMDD
+                
+                >>> sol = Special_TimeStamps()
+                >>> sol.datetime_is_power_num(2, 1990, 2025)                 
+                Output:
+                        1990-May-21 since 4461^2 = 19900521
+                        2015-Nov-21 since 4489^2 = 20151121
+                        2024-Oct-01 since 4499^2 = 20241001
+                
+                >>> sol.datetime_is_power_num(3, 1990, 2025)
+                Output:
+                        From 1990 to 2025, there doesnt exist any integer such that num^3 
+                
+                >>> sol.datetime_is_power_num(4, 1990, 2025)
+                Output:
+                        2015-Nov-21 since 67^4 = 20151121
+                                        
+            ------------------------------
+                Func 2: Find all 13-Fri in a given years
+            ------------------------------
+                Func 3: A date is palindromic if the digits read the same forwards and backwards
+            ------------------------------
+                Func 4: primes date
+            ------------------------------
+                Func 5: Labour date is a weekend
+    """
+    def if_valid_timestamps(self, timestamp: str) -> bool:
+        try:
+            datetime.strptime(timestamp, "%Y%m%d")
+            return True
+        except:
+            return False
+
+    def is_prime(self, num: int) -> bool:
+        if num == 2:
+            return True
+        for factor in range(2, int(num**0.5) + 1):
+            if num % factor == 0:
+                return False
+        return True
+
+    def datetime_is_power_num(self, pow: int, count_from: int, lookback_year: int):
+        cnt = 0
+        for year in range(count_from, lookback_year + 1):
+            for month in range(1, 13):
+                for day in range(1, 32):
+                    ts_str = f"{year}{month:02d}{day:02d}"
+                    if sol.if_valid_timestamps(ts_str):
+                        res = int(ts_str)**(1 / pow)
+                        if res == int(res):
+                            print(f"{datetime.strptime(ts_str, '%Y%m%d').strftime('%Y-%b-%d')} since {int(res)}^{pow} = {ts_str}")
+                            cnt += 1
+        if cnt == 0:
+            print(f"From {count_from} to {lookback_year}, there doesnt exist any integer such that num^{pow} ")
+
+    def check_Fri_13(self, year: int):
+        cnt = 0
+        for month in range(1, 13):
+            ts_str = f"{year}{month:02d}13"
+            if self.if_valid_timestamps(ts_str):
+                dt = datetime.strptime(ts_str, "%Y%m%d")
+                res = dt.strftime("%a-%d-%b-%Y")
+                if res.split("-")[0] == 'Fri':
+                    print(f"{ts_str} is {res}")
+                    cnt += 1
+        if cnt == 0:
+            print(f"In {year} there is no Fri-13")
+
+    def palindromic_date(self, count_from: int, lookback_year: int):
+        cnt = 0
+        for year in range(count_from, lookback_year + 1):
+            for month in range(1, 13):
+                for day in range(1, 32):
+                    ts_str = f"{year}{month:02d}{day:02d}"
+                    # check if date is valid & it is equals to its reverse value
+                    if self.if_valid_timestamps(ts_str) and ts_str == ts_str[::-1]:
+                        dt = datetime.strptime(ts_str, "%Y%m%d")
+                        print(f"{dt.strftime("%d-%m-%Y")} or {ts_str} is palindromic")
+                        cnt += 1
+        if cnt == 0:
+            print(f"From {count_from} to {lookback_year} there is no any datetime is palindromic")
+
+    def prime_date(self, year: int):
+        res_dates = []
+        for month in range(1, 13):
+            for day in range(1, 32):
+                ts_str = f"{year}{month:02d}{day:02d}"
+                # check if the input date is valid timestamps and also is a prime
+                if self.if_valid_timestamps(ts_str) and self.is_prime(int(ts_str)):
+                    dt = datetime.strptime(ts_str, "%Y%m%d")
+                    res_dates.append(f"{dt.strftime("%d-%m-%Y")} ({ts_str})")
+        if len(res_dates) == 0:
+            print(f"In {year} there is no any datetime is a prime")
+        return res_dates    
+
+    def labour_dt_is_wk(self, count_from: int, lookback_year: int):
+        cnt = 0
+        for year in range(count_from, lookback_year + 1):
+            ts_str = f"{year}0501"
+            if self.if_valid_timestamps(ts_str):
+                dt = datetime.strptime(ts_str, "%Y%m%d")
+                res = dt.strftime("%a-%d-%b-%Y")
+                if res.split("-")[0] in ["Sat", "Sun"]:
+                    print(f"{ts_str} is {res}")
+                    cnt += 1
+        if cnt == 0:
+            print(f"In {year} there is no Labour day is weekend from {count_from} to {lookback_year} ")
+
+# ====================================== SOME PROBA-STATS SIMULATIONS ==========================================
+class ProbaStatSims:
+    """
+        Some simulations come from the well-known puzzles 
+    """
+    # Problem 1.
+    def balance_event_from_biased_coin(self, q: float, prob_H: float, n_sims: int) -> int:
+        """
+            Generate an event with probability q using only an unfair coin.
+
+            This function shows how to convert a biased coin (Head with probability prob_H) into an unbiased coin using the Von Neumann trick, 
+            and then how to use fair bits to construct a uniform random variable U ~ Uniform(0,1). The event returned is:
+                        1   if   U < q
+                        0   otherwise
+
+            Args:
+                q (float): Target probability for the event (0 <= q <= 1).
+                prob_H (float): Probability that the unfair coin returns Head.
+                n_sims (int): Number of fair bits used to approximate U.
+
+            Returns:
+                int: 1 with probability approximately q, otherwise 0.
+            
+            Application:
+                Given a unfair coin with p_head, how can we simulate an event with equal-proba (or even the desired proba)
+            
+            Example:
+                >>> sol = ProbaStatSims()
+                >>> cnt = 0
+                >>> q = 0.25
+                >>> n_sims = 320
+                >>> N = 1000
+                >>> for _ in range(N):
+                        cnt += sol.balance_event_from_biased_coin(q, 0.8, n_sims)
+                >>> print(cnt / N)   # ≈ 0.25
+
+        """
+        # ========================== Define support functions ======================
+        def unfair_coin(prob_H: float) -> int:
+            # 1 for Head and 0 for Tail
+            return 1 if random.random() < prob_H else 0
+
+        def make_fair_coint(prob_H: float) -> int:        
+            while True:
+                a = unfair_coin(prob_H)
+                b = unfair_coin(prob_H)
+                if a == 1 and b == 0:
+                    return 1
+                elif a == 0 and b == 1:
+                    return 0
+        # ===============================================================================
+        # Step 1: Build a uniform [0,1) random number using fair bits
+        u = 0.0
+        for i in range(n_sims):
+            bit = make_fair_coint(prob_H)
+            u += bit * (0.5 ** (i + 1))
+        # Step 2: Compare to q
+        return 1 if u < q else 0
+
+    # Problem 2.
+    def prob_to_meet_a_triangle_from_stick(self, n_sims: int, max_iter: int) -> float:
+        """
+            Estimate the probability that a randomly broken stick forms a triangle.
+
+            A unit stick is broken into three pieces by choosing two independent, uniformly distributed cut points in (0,1).  
+            Let the resulting segment lengths be a, b, c. The three segments form a triangle iff:
+
+                    a + b > c
+                    a + c > b
+                    b + c > a
+
+            This simulation repeats the experiment max_iter times for each of n_sims outer simulations, and averages the estimated probabilities.
+
+            Args:
+                n_sims (int): Number of independent simulations to average over.
+                max_iter (int): Number of stick-break experiments per simulation.
+
+            Returns:
+                float: Estimated probability that three random segments form a triangle.
+                    The true theoretical value is 1/4.
+
+            Example:
+                >>> sol = ProbaStatSims()
+                >>> sol.prob_to_meet_a_triangle_from_stick(200, 10000)
+                0.2492    # close to 0.25
+        """
+        def valid_triangle(a: float, b: float, c: float) -> bool:
+            return (a + b > c) & (a + c > b) & (b + c > a)
+
+        probs = []
+        for _ in range(n_sims):
+            cnt = 0
+            for _ in range(max_iter):
+                # First, define 2 random points on the interval (0, 1)
+                ab = np.sort(np.random.uniform(0, 1, 2))
+                # The two random cut points divide the stick into 3 parts:
+                # segment a (from 0 to first cut), segment b (between cuts), and segment c (from second cut to end)
+                a = ab[0]
+                b = ab[1] - ab[0]
+                # the last one
+                c = 1 - (a + b)
+                # check if them formed a triangle
+                if valid_triangle(a, b, c):
+                    cnt += 1
+            probs.append(cnt / max_iter)
+        return sum(probs) / n_sims
+    
+    # Problem 3.
+    def expected_cost(self, a: float, b: float, X: float, Y: float,  
+                      n_sims: int = 1000, seed: int|None = None) -> float:
+        """
+            Compute the analytic optimal forecast under asymmetric linear loss for
+            B ~ Uniform(a, b), then estimate expected cost by Monte Carlo.
+
+            Loss definition:
+                loss(g, b) = X * max(g - b, 0) + Y * max(b - g, 0)
+
+            For asymmetric absolute loss the minimiser is the quantile F(g*) = Y/(X+Y).
+            For Uniform(a, b) this gives:
+                g* = a + (Y / (X + Y)) * (b - a)
+
+            Args:
+                a (float): left endpoint of the uniform distribution.
+                b (float): right endpoint of the uniform distribution (b > a).
+                X (float): per-unit cost for over-estimation (g > b).
+                Y (float): per-unit cost for under-estimation (b > g).
+                n_sims (int): number of Monte Carlo draws to estimate expected cost.
+                seed (int | None): random seed for reproducibility.
+
+            Returns:
+                dict: {
+                    "g_opt": float,          # analytic optimal forecast
+                    "exp_cost_opt": float,   # simulated expected cost at g_opt
+                    "exp_cost_mid": float,   # simulated expected cost at midpoint (a+b)/2
+                    "exp_cost_random": float,# simulated expected cost for 1 random g (for reference)
+                    "n_sims": int
+                }
+
+            Raises:
+                ValueError: if b <= a or X < 0 or Y < 0.
+        """
+        if b <= a:
+            raise ValueError("b must be greater than a.")
+        if X < 0 or Y < 0:
+            raise ValueError("X and Y must be non-negative.")
+
+        rng = np.random.default_rng(seed)
+
+        # analytic optimal forecast (quantile)
+        q = Y / (X + Y) if (X + Y) > 0 else 0.5  # if both zero, any g is fine; choose median
+        g_opt = a + q * (b - a)
+
+        # helper to estimate expected cost of forecast g
+        def simulate_expected_cost(g: float) -> float:
+            draws = rng.uniform(a, b, size=n_sims)
+            # vectorized loss
+            over = np.maximum(g - draws, 0.0)   # g > b
+            under = np.maximum(draws - g, 0.0) # b > g
+            losses = X * over + Y * under
+            return float(np.mean(losses))
+
+        exp_cost_opt = simulate_expected_cost(g_opt)
+        exp_cost_mid = simulate_expected_cost((a + b) / 2)
+
+        # random g for reference
+        g_random = rng.uniform(a, b)
+        exp_cost_random = simulate_expected_cost(g_random)
+
+        res = {
+            "g_opt": g_opt,
+            "exp_cost_opt": exp_cost_opt,
+            "exp_cost_mid": exp_cost_mid,
+            "g_random": g_random,
+            "exp_cost_random": exp_cost_random,
+            "n_sims": n_sims,
+        }
+
+        return res
+
+    # Problem 4.
+    def dice_order(self, n_dice: int, n_sims: int) -> float:
+        """
+            What is the proba when tossing n_dice and obtain n_points in strictly increasing order
+            Args:
+                n_dice : number of dice
+                n_sims : number of simulations
+            Example:
+                n_dice = 3      -->     prob = P[difference number in all 3 tosses] * P[increasing order | different nums]
+
+                                             =          1 * (5 / 6) * (4 / 6)       *       (1 / 6)        
+                                             
+                                             =                  5 / 54
+        """
+        cnt = 0
+        for _ in range(n_sims):
+            rolls = [random.randint(1, 6) for _ in range(n_dice)]
+            if all(rolls[i] < rolls[i+1] for i in range(n_dice - 1)):
+                cnt += 1
+        return cnt / n_sims
+
+    # Problem 5.
+    def coin_winning_prob(self, winning_state : str, n_sims: int) -> float:
+        """
+            Estimate the expected number of fair-coin tosses needed for a given pattern (winning_state) to appear for the first time.
+
+            The state is a string of 'H' and 'T', e.g.:
+                                            "H"        "HT"        "HHT"        "TTH"
+
+            Example:
+                >>> sol = ProbaStatSims()
+                >>> sol.coin_winning_prob("HT", 5000)
+                Output:
+                        4.01   (true theoretical value = 4)
+
+            Method:
+                For each simulation:
+                    - Flip a fair coin until the sequence of flips ends with winning_state
+                    - Count number of flips
+                Return the average over n_sims simulations
+        """
+        expected_time_to_win = 0
+        for _ in range(n_sims): # numbers of simulations
+            init_state = ''
+            cnt = 0
+            while winning_state not in init_state:
+                p_temp = random.random()
+                if p_temp > 0.5:
+                    init_state += 'H'
+                else:
+                    init_state += 'T'
+                cnt += 1
+            expected_time_to_win += cnt
+
+        return expected_time_to_win / n_sims
+
+# ========================================== MARKOV CHAIN & MCMC ===============================================
+class MarkovChain:
+    def get_transition_matrix(self, mat: list[list]) -> float:
+        pass
 
 # ===================================== STATISTICAL TESTING HYPOTHESIS =========================================
 # Hypothesis class 

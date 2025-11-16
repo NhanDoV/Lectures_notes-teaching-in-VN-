@@ -27,6 +27,12 @@ class isPalindrome:
     
     # Approach 3: 2 pointers
     # Time complexity: O(n)     -   Space complexity: O(1)
+    def alphaNum(self, c):
+        """ This will support you to check (in the `use_2pointers`) if any the characters is UPPERCASE or LOWERCASE or NUMERIC """
+        return (ord('A') <= ord(c) <= ord('Z') or
+                ord('a') <= ord(c) <= ord('z') or
+                ord('0') <= ord(c) <= ord('9'))
+        
     def use_2pointers(self, s: str) -> bool:
         l, r = 0, len(s) - 1
 
@@ -39,8 +45,3 @@ class isPalindrome:
                 return False
             l, r = l + 1, r - 1
         return True
-
-    def alphaNum(self, c):
-        return (ord('A') <= ord(c) <= ord('Z') or
-                ord('a') <= ord(c) <= ord('z') or
-                ord('0') <= ord(c) <= ord('9'))
