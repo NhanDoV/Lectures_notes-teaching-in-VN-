@@ -1,7 +1,8 @@
 import numpy as np
 from math import sqrt, gcd, lcm, acos, asin, comb
 
-#=============================================================================
+#======================================= Fibonacci =========================================
+# using mathematic formula
 def fibo_by_golden_rt(a, b , n):
     """
         Tổng quát cho Fibonacci với 2 số hạng đầu lần lượt là a và b
@@ -33,49 +34,203 @@ def fibo_by_golden_rt(a, b , n):
         return a
     else:
         return (a*fa + b*fb)
-    
-#=============================================================================    
-def check_Smith_number(n):
-    """
-        Smith number: 4, 22, 27, 58, 22, 121, 378, 2050918644
-        Điều kiện
-            Tổng các ước số nguyên tố (dạng thừa số nguyên tố)
-            bằng với
-            tổng các chữ số trong chính nó
-        Ví dụ
-            4 = 2^2            và     0+4  = 2+2
-            22 = 2 * 11        và     2+2  = 2 + (1 + 1)
-            27 = 3^3           và     2+7  = 3+3+3
-            58 = 2*29          và     5+8  = 2+(2+9)
-            378 = 2*(3^3)*7    và    3+7+8 = 2+(3*3)+7
-    """
-    prime_factors = []
-    N = n 
-    for i in range(2, 1+n//2):        
-        while N%i == 0:
-            prime_factors.append(i)
-            N = N // i
-        if i < N:
-            i = i + 1
-        else:
-            break
-    def sum_digit(n):
-        str_num = str(n)
-        digit_of_num = [str_num[idx] for idx in range(len(str_num))]
-        return sum([int(u) for u in digit_of_num])
-    
-    sum_of_input = sum_digit(n)
-    sum_digit_of_num = sum([sum_digit(primef) for primef in prime_factors])
 
-    if sum_of_input == sum_digit_of_num:
-        print(f"{n} is a Smith number")
-    else:
-        print(f"{n} is not a Smith number")
-        
-#=============================================================================    
-def is_prime(x):
+def fibo_with_DP(a: float = 1.0, b: float = 1.0, n: int = 3) -> float:
+    """
+        Using Dynamic Programming to solve this
+            Time complexity: O(n)
+            Space Complexity: O(1)
+        Args:
+            a, b (float) : 2 first Fibonacci coefficients
+            n      (int) : n-indexed
+        Returns:
+            curr (float) : the current value at n-indexed
+        Examples:
+            >>> fibo_with_DP()
+                2.0
+            >>> fibo_with_DP(1, 2, 4)
+                5
+    """
+    if n <= 0:
+        raise ValueError("n must be greater than 0")
+    if n == 1:
+        return a
+    if n == 2:
+        return b
+    prev, curr = a, b
+    for _ in range(3, n + 1):
+        prev, curr = curr, prev + curr
+    return curr
+
+#====================================== Smith number =======================================    
+class check_Smith_number:
+    """
+        Class to check whether a number is a Smith Number.
+
+        A Smith number is a composite number whose sum of digits equals
+        the sum of digits of its prime factors (counted with multiplicity).
+
+        Example:
+            4  = 2^2           -->     4 --> 4      =   2 + 2
+            22 = 2 * 11        -->    22 --> 2 + 2  =   2 + (1 + 1)
+            27 = 3^3           -->    27 --> 2 + 7  =   3 + 3 + 3
+            58 = 2 * 29        -->    58 --> 5 + 8  =   2 + (2 + 9)
+
+        How it works:
+            >>> sol =  check_Smith_number()
+            >>> sol.implement(4)
+                True
+
+            >>> sol.implement(22)
+                True
+
+            >>> sol.implement(26)
+                False
+
+            >>> sol.find_all_Smith_num(2, 500)
+                [4, 22, 27, 58, 85, 94, 121, 166, 202, 265, 274, 319, 346, 355, 378, 382, 391, 438, 454, 483]
+    """
+
+    def sum_digit(self, n):
+        """
+            Return the sum of digits of an integer.
+            Example: 378 → 3 + 7 + 8 = 18
+        """
+        return sum(int(c) for c in str(n))
+
+    def prime_factorization(self, n):
+        """
+            Prime-factorize integer n (including when n is prime).
+            
+            Returns:
+                List of prime factors including multiplicity.
+            
+            Logic:
+                - Extract factor 2 first.
+                - Then test only odd numbers up to sqrt(temp).
+                - If remaining (>1), that remainder is a prime.
+        """
+        factors = []
+        temp = n
+
+        # factor 2
+        while temp % 2 == 0:
+            factors.append(2)
+            temp //= 2
+
+        # odd factors
+        for i in range(3, int(sqrt(temp)) + 1, 2):
+            while temp % i == 0:
+                factors.append(i)
+                temp //= i
+
+        # leftover prime
+        if temp > 1:
+            factors.append(temp)
+
+        return factors
+
+    def prime_factorization_exc(self, n: int) -> list[int]:
+        """
+            Prime-factorize n BUT assume the input is composite.
+            (This version does NOT return n itself when n is prime.)
+
+            Useful if you want to treat prime inputs specially.
+
+            Example:
+                n = 27 → [3, 3, 3]
+                n = 13 → []   (because 13 is prime)
+        """
+        prime_factors = []
+        original_n = n
+
+        for i in range(2, 1 + int(n**0.5)):
+            while n % i == 0:
+                prime_factors.append(i)
+                n //= i
+
+            if i >= n:
+                break
+
+        # If prime-input, return empty list
+        return prime_factors
+
+
+    def implement(self, n: int, method: str = 'exc') -> bool:
+        """
+            Check if n is a Smith number using chosen factorization method.
+
+            Args:
+                method: 
+                    "inc" → use prime_factorization() 
+                            (including prime-input, so prime returns [n])
+                    "exc" → use prime_factorization_exc()
+                            (prime input returns empty list)
+                n: integer to check.
+
+            Returns:
+                True  if n is a Smith number,
+                False otherwise.
+
+            Logic:
+                - Must be composite (Smith numbers exclude primes).
+                So if method="inc", len(factors)==1 → prime → return False
+                If method="exc", empty list → prime → return False
+                - Compare:
+                    sum_digits(n) == sum_digits(all prime factors)
+        """
+        if n < 4:
+            return False
+
+        s1 = self.sum_digit(n)
+
+        # choose factorization method
+        if method == "inc":
+            factors = self.prime_factorization(n)
+            # If only 1 factor → n is prime → not Smith
+            if len(factors) == 1:
+                return False
+
+        elif method == "exc":
+            factors = self.prime_factorization_exc(n)
+            # empty → n is prime → not Smith
+            if len(factors) == 0:
+                return False
+
+        else:
+            raise ValueError("method must be either 'inc' or 'exc'")
+
+        # sum of digits of factors
+        s2 = sum(self.sum_digit(f) for f in factors)
+
+        return s1 == s2
+
+    def find_all_Smith_num(self, num_start: int, num_end: int) -> list[int]:
+        """
+            Find all Smith numbers in a given range
+
+            Args:
+                num_start (int) : started number
+                num_end   (int) : ending number
+
+            Constraints: num_end must be less than 10^6
+
+            Returns: list of all Smith numbers
+        """
+        Smith_nums = []
+        for num in range(num_start, num_end + 1):
+            if self.implement(num):
+                Smith_nums.append(num, "inc")
+        return Smith_nums
+
+#======================================== is Prime =========================================    
+def is_prime_brute_force(x):
     """
         Kiểm tra số nguyên tố
+            Time complexity :   O(n)
+            Space complexity :  O(n)
+        Args:
+            x (int) : input number
     """
     prime_factors = []
     for k in range(2, x):
@@ -86,7 +241,33 @@ def is_prime(x):
         return 1
     else:
         return 0
-    
+
+def is_prime_optimal(x : int) -> bool:
+    """
+        Check a number is prime by looking for any divisors until its square-root
+            Time complexity  :  O(sqrt n)
+            Space complexity :  O(1)
+        Args:
+            x (int) : input number
+        Returns:
+            boolean : if the input is prime or not
+        Examples:
+            >>> is_prime_optimal(2)
+                True
+            >>> is_prime_optimal(3)
+                True
+            >>> is_prime_optimal(8)
+                8 is not a prime, 8 / 2 = 4
+                False
+    """
+    if x == 2:
+        return True
+    for fac in range(2, int(x**0.5) + 1):
+        if x % fac == 0:
+            print(f"{x} is not a prime, {x} / {fac} = {x // fac}")
+            return False
+    return True
+
 #=============================================================================    
 def triangle_type_3edges(a, b, c):
     """

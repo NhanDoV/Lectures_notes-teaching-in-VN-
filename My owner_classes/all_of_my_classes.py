@@ -935,9 +935,187 @@ class ProbaStatSims:
         return expected_time_to_win / n_sims
 
 # ========================================== MARKOV CHAIN & MCMC ===============================================
-class MarkovChain:
-    def get_transition_matrix(self, mat: list[list]) -> float:
-        pass
+import scipy.linalg
+
+class Markov:
+    """
+        Markov chain class supporting:
+            - Validation of transition matrix
+            - Simulation of trajectories
+            - n-step transition probabilities
+            - Stationary distribution
+            - Absorption probabilities
+            - Check if Irreducibility or Ergodicity
+        Examples:
+            >>> mk = Markov([[0.6, 0.4],
+                             [0.7, 0.3]],
+                            ["H", "T"])
+                mk.simulate(T=10, start_state="T")
+
+                [Output]:
+                            T -> H -> T -> T -> T -> H -> H -> H -> T -> H -> stop
+            >>> mk.stationary_dist()
+
+                [Output]:
+                            Stationary distribution: [0.63636364 0.36363636]
+            >>> print("Irreducible:", mk.is_irreducible())
+            >>> print("Aperiodic:", mk.is_aperiodic())
+            >>> print("Ergodic:", mk.is_ergodic())
+                
+                [Output]:
+                            Irreducible: True
+                            Aperiodic: True
+                            Ergodic: True
+            >>> P = [[1,   0,   0],
+                     [0.5, 0.5, 0],
+                     [0.2, 0.3, 0.5]]
+            >> mk = Markov(P, ["A","B","C"])
+            >> mk.absorption_probabilities()
+                [Output]:
+                            {'absorbing_states': ['A'],
+                             'transient_states': ['B', 'C'],
+                             'absorption_probabilities': array([[1.], 
+                                                               [1.]])}
+    """
+
+    def __init__(self, P, states=None, pi0=None):
+        self.P = np.array(P, dtype=float)
+        self.states = states if states else list(range(len(P)))
+        self.n = self.P.shape[0]
+        self.pi0 = pi0
+
+        self.validate_P()
+
+    def validate_P(self):
+        """Check if P is a valid transition matrix."""
+        assert self.P.shape[0] == self.P.shape[1], "Matrix must be square."
+        assert np.all(self.P >= 0), "Negative probabilities exist."
+        assert np.allclose(self.P.sum(axis=1), 1), "Rows must sum to 1."
+
+    def step(self, current):
+        """Sample the next state given the current one."""
+        idx = self.states.index(current)
+        next_state = np.random.choice(self.states, p=self.P[idx])
+        return next_state
+
+    def simulate(self, T, start_state=None):
+        """
+            Simulate a Markov chain trajectory of length T.
+        """
+        if start_state is None:
+            current_state = self.states[0]
+        else:
+            current_state = start_state
+
+        idx = self.states.index(current_state)
+        print(current_state, end=" -> ")
+
+        for _ in range(T - 1):
+            idx = np.random.choice(range(self.n), p=self.P[idx])
+            current_state = self.states[idx]
+            print(current_state, end=" -> ")
+
+        print("stop")
+
+    def n_step_matrix(self, k):
+        """Return P^k."""
+        return np.linalg.matrix_power(self.P, k)
+
+    def stationary_dist(self):
+        """
+            Compute stationary distribution π satisfying πP = π.
+            Uses left eigenvector of eigenvalue 1.
+        """
+        eigvals, eigvecs = scipy.linalg.eig(self.P, left=True, right=False)
+
+        # find eigenvalue closest to 1
+        idx = np.argmin(np.abs(eigvals - 1))
+        stationary = eigvecs[:, idx].real
+        stationary /= stationary.sum()
+
+        print("Stationary distribution:", stationary)
+        return stationary
+
+    def is_irreducible(self):
+        """
+            Check irreducibility:
+                - The chain is irreducible if every state can reach every other state.
+                - We test whether sum(P + P^2 + ... + P^n) has all positive entries.
+        """
+        reach = np.zeros_like(self.P)
+
+        P_power = np.eye(self.n)
+        for _ in range(self.n):
+            P_power = P_power @ self.P
+            reach += P_power
+
+        return np.all(reach > 0)
+
+    def is_aperiodic(self):
+        """
+            Check if the chain is aperiodic.
+                for each state i, 
+                    compute gcd of return times n where (P^n)[i,i] > 0.
+                    if all periods = 1 → aperiodic.
+        """
+        max_k = 30  # enough for period detection
+        P_power = np.eye(self.n)
+        periods = [[] for _ in range(self.n)]
+
+        for k in range(1, max_k + 1):
+            P_power = P_power @ self.P
+            diag = np.diag(P_power)
+
+            for i in range(self.n):
+                if diag[i] > 1e-12:  # treat as positive
+                    periods[i].append(k)
+
+        # compute gcd for each state
+        gcds = []
+        for times in periods:
+            if len(times) == 0:
+                return False  # never returns → can't determine period
+            g = times[0]
+            for t in times[1:]:
+                g = math.gcd(g, t)
+            gcds.append(g)
+
+        return all(g == 1 for g in gcds)
+
+    def is_ergodic(self):
+        """
+            Ergodic = irreducible + aperiodic.
+        """
+        return self.is_irreducible() and self.is_aperiodic()
+
+    def absorption_probabilities(self):
+        """
+        If the chain has absorbing states, compute:
+            - absorption probabilities matrix B
+            - transient states
+            - absorbing states
+
+        Returns None if the chain has no absorbing states.
+        """
+        absorbing = [i for i in range(self.n) if np.isclose(self.P[i, i], 1)]
+        transient = [i for i in range(self.n) if i not in absorbing]
+
+        if len(absorbing) == 0:
+            print("No absorbing states in this Markov chain.")
+            return None
+
+        Q = self.P[np.ix_(transient, transient)]
+        R = self.P[np.ix_(transient, absorbing)]
+
+        I = np.eye(len(Q))
+        N = np.linalg.inv(I - Q)
+        B = N @ R
+
+        return {
+            "absorbing_states": [self.states[i] for i in absorbing],
+            "transient_states": [self.states[i] for i in transient],
+            "absorption_probabilities": B
+        }
 
 # ===================================== STATISTICAL TESTING HYPOTHESIS =========================================
 # Hypothesis class 

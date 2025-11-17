@@ -234,3 +234,124 @@ class KnightMoveSimulation:
         ani = animation.FuncAnimation(self.fig, self.update, frames=frames, 
                                       init_func=self.init, interval=interval, repeat=True)
         plt.show()
+
+class KnightTour:
+    """
+        Solve Knight's Tour using backtracking.
+        The knight must visit every cell exactly once.
+
+        Examples:
+            >>> tour = KnightTour(8)
+            >>> solution = tour.solve()
+            >>> print(solution)
+
+            Output:
+
+                    [[0, 59, 38, 33, 30, 17, 8, 63], 
+                     [37, 34, 31, 60, 9, 62, 29, 16], 
+                     [58, 1, 36, 39, 32, 27, 18, 7], 
+                     [35, 48, 41, 26, 61, 10, 15, 28], 
+                     [42, 57, 2, 49, 40, 23, 6, 19], 
+                     [47, 50, 45, 54, 25, 20, 11, 14], 
+                     [56, 43, 52, 3, 22, 13, 24, 5], 
+                     [51, 46, 55, 44, 53, 4, 21, 12]]
+    """
+
+    def __init__(self, n=8):
+        self.n = n
+        self.board = [[-1] * n for _ in range(n)]
+
+        # Knight moves
+        self.moves = [
+            (2, 1), (1, 2), (-1, 2), (-2, 1),
+            (-2, -1), (-1, -2), (1, -2), (2, -1)
+        ]
+
+    def is_valid(self, x, y):
+        """Check if (x,y) is inside board and not visited."""
+        return 0 <= x < self.n and 0 <= y < self.n and self.board[x][y] == -1
+
+    def solve(self, x=0, y=0):
+        """Try to solve from starting position (x,y)."""
+        self.board[x][y] = 0  # starting step
+
+        if self._dfs(x, y, step=1):
+            return self.board
+        else:
+            return None
+
+    def _dfs(self, x, y, step):
+        """Recursive backtracking."""
+        if step == self.n * self.n:
+            return True
+
+        for dx, dy in self.moves:
+            nx, ny = x + dx, y + dy
+            if self.is_valid(nx, ny):
+                self.board[nx][ny] = step
+                if self._dfs(nx, ny, step + 1):
+                    return True
+                self.board[nx][ny] = -1  # backtrack
+        return False
+
+class EightQueens:
+    """
+        Solve the N-Queens problem using backtracking.
+        Returns one valid configuration.
+
+        Examples:
+            >>> q = EightQueens(8)
+            >>> solution = q.solve()
+            >>> print(solution)
+            
+            Output:
+                    [[1, 0, 0, 0, 0, 0, 0, 0], 
+                     [0, 0, 0, 0, 1, 0, 0, 0], 
+                     [0, 0, 0, 0, 0, 0, 0, 1], 
+                     [0, 0, 0, 0, 0, 1, 0, 0], 
+                     [0, 0, 1, 0, 0, 0, 0, 0], 
+                     [0, 0, 0, 0, 0, 0, 1, 0], 
+                     [0, 1, 0, 0, 0, 0, 0, 0], 
+                     [0, 0, 0, 1, 0, 0, 0, 0]]
+    """
+
+    def __init__(self, n=8):
+        self.n = n
+        self.board = [[0] * n for _ in range(n)]
+
+        # To track attacks
+        self.cols = set()
+        self.diag1 = set()    # r - c
+        self.diag2 = set()    # r + c
+
+    def solve(self):
+        """Start solving from row 0."""
+        if self._dfs(0):
+            return self.board
+        return None
+
+    def _dfs(self, row):
+        """Try to place a queen on row."""
+        if row == self.n:
+            return True
+
+        for col in range(self.n):
+            if col in self.cols or (row - col) in self.diag1 or (row + col) in self.diag2:
+                continue
+
+            # Place queen
+            self.board[row][col] = 1
+            self.cols.add(col)
+            self.diag1.add(row - col)
+            self.diag2.add(row + col)
+
+            if self._dfs(row + 1):
+                return True
+
+            # Backtrack
+            self.board[row][col] = 0
+            self.cols.remove(col)
+            self.diag1.remove(row - col)
+            self.diag2.remove(row + col)
+
+        return False
