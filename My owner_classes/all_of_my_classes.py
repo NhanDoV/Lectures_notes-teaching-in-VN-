@@ -704,6 +704,63 @@ class ProbaStatSims:
     """
         Some simulations come from the well-known puzzles 
     """
+    # ======================================== Some supplements functions
+    def random_point_circle(self, radius: float) -> list[float]:
+        """ 
+            Generate a random point inside a circle, this will appear in many problems (e.g Prob 6, 7, 8)
+            Args: 
+                radius (float) : radius of the circle
+            Idea:
+                Using polar coordinate
+                        x = r * cos theta       and         y = r * sin theta
+                where,
+                        theta   ~    Unif(0, 2 pi)
+                        r       ~    Unif(0, radius)**0.5
+        """
+        r     = np.random.uniform(0, radius)**0.5
+        theta = np.random.uniform(0, 2 * np.pi)
+        return r*np.cos(theta), r*np.sin(theta)
+    
+    def random_walk_in_square(self, cur_pos: list[float], step_size : list[float], 
+                              probs: list[float], valid_direction : list[str]) -> list:
+        """
+            Descriptions:
+                We have 4 basic directions : 
+                    L (left)                                   U (Up)
+                    R (Right)                                  D (Down)
+
+                so the valid_directions must be a list contains one of them
+
+                For example, an ant can only move up or to the right by 1 unit on the rectangle size m*n with equal probas, that meant
+
+                                    P[X = "U"] = P[X = "R"] = 1/2
+
+            Args:
+                cur_pos             (list[float]) : current positions (x, y) 
+                step_size           (list[float]) : length per step based on the direction
+                probs               (list[float]) : probabilities for each (suppose constant per step)
+                valid_direction     (list[str])   : valid directions that mention in the problem
+
+            Returns: the position at the next step
+        """
+        x_curr, y_curr = cur_pos
+        step_x, step_y = step_size
+
+        next_state = np.random.choice(valid_direction, size = 1, p = probs)
+
+        # logic of direction
+        if next_state == 'L':
+            x_next, y_next = x_curr - step_x, y_curr
+        elif next_state == 'R':
+            x_next, y_next = x_curr + step_x, y_curr
+        elif next_state == 'U':
+            x_next, y_next = x_curr, y_curr + step_y
+        elif next_state == 'D':
+            x_next, y_next = x_curr, y_curr - step_y            
+
+        return [x_next, y_next]
+
+    # ============================================= PROBLEMS =====================================================
     # Problem 1.
     def balance_event_from_biased_coin(self, q: float, prob_H: float, n_sims: int) -> int:
         """
@@ -933,6 +990,423 @@ class ProbaStatSims:
             expected_time_to_win += cnt
 
         return expected_time_to_win / n_sims
+
+    # Problem 6.
+    def median_of_random_pts_inside_circle(self, n_sims: int) -> dict:
+        """
+            Problem statements: 
+                Let a random point on a unit circle, and X be the distance between this point to the center. 
+                Find the median and mean of this distance
+            
+            Args:
+                n_sims     (int) : number of simulations
+            
+            Return:
+                res       (dict) : {median_distance, mean_distance}
+            
+            Example:
+                >>> sol = ProbaStatSims()
+                >>> sol.median_of_random_pts_inside_circle(5000)
+                    Output :
+                            Theoritical median : sqrt(2) / 2 = 0.7071067811865476 	 mean : 2 / 3
+                            {'Empirical median': np.float64(0.7057158709716552),
+                            'Empirical mean': np.float64(0.6669921241308818)}
+        """
+        distance = []
+        
+        for _ in range(n_sims):
+            x, y = self.random_point_circle(1)
+            dist = (x**2 + y**2)**0.5
+            distance.append( dist )
+
+        print(f"Theoritical median : sqrt(2) / 2 = { 2**0.5 / 2 } \t mean : 2 / 3")
+        
+        return {'Empirical median': np.median(distance), 'Empirical mean': np.mean(distance)}
+    
+    # Problem 7.
+    def find_prob_distance_to_circle(self, n_sims: int, outer_radius: float, coef_cond: float) -> float:
+        """
+            Problem statements:
+                Make a random point inside a circle with a radius of 2 meters. Let 
+                    D1 be the distance from the point to the center of the circle
+                    D2 ..................................... circumference 
+                Let D = min(D1, D2). Find the radius R (in centimeters) such that
+                                            3 * P( D > R)   <  P( D < R )
+
+            Inference:
+                Find average R such that P[D < R] > 0.75 if coef_cond = 3
+                Generally, P[D < R] > coef_cond / (coef_cond + 1)
+
+            Args:
+                n_sims         (int) : number of simulations
+                outer_radius (float) : radius of the outer circle
+                coef_cond    (float) : coefficient in the problem, default = 3.0
+
+            Examples:
+                >>> sol = ProbaStatSims()
+                >>> sol.find_prob_distance_to_circle(1000, 2, 3)
+                    Output
+                            75.04529150679788
+        """
+        R_vals = []
+        for _ in range(n_sims):
+            D_vals = []
+            for _ in range(5000):                                   # 5000 is sample-size
+                x, y = self.random_point_circle(outer_radius)
+                d1 = (x**2 + y**2)**0.5                             # distance to center
+                d2 = outer_radius - d1                              # distance to circumference
+                D_vals.append(min(d1, d2))
+
+            D_vals = np.array(D_vals)
+            
+            left, right = 0.0, outer_radius / 2                     # D ranges from 0 to R/2
+            target = coef_cond / (1.0 + coef_cond)                  # general inequality: coef*P(D>R) < P(D<R)
+
+            for _ in range(50):
+                mid = (left + right) / 2
+                p = np.mean(D_vals  < mid)
+
+                if p > target:
+                    right = mid    # reduce R
+                else:
+                    left = mid     # increase R
+
+            R_meters = right
+            R_cm = R_meters * 100.0
+            R_vals.append(R_cm)
+
+        return sum(R_vals) / n_sims
+    
+    # Problem 8.
+    def expected_dist_2rnd_point_circle(self, n_sims: int = 1000, radius: float = 1.0) -> float:
+        """
+            Problem statements:
+                A & B are two points chosen uniformly at random inside a unit circle; find its distance
+            Args:
+                n_sims  (int)  : number of simulations
+                radius (float) : radius of the circle
+            Example:
+                >>> sol = ProbaStatSims()
+                >>> sol.expected_dist_2rnd_point_circle(100, 2)
+                Output :
+                        Theoritical result: (128*radius)/(45*pi) = 1.8108295747344536 
+                        np.float64(1.8097736590314317)
+        """
+        expected_dist = []
+        
+        for _ in range(n_sims):
+            distances = []
+            for _ in range(100):                            # make sample-size : 100
+                xA, yA = self.random_point_circle(radius)
+                xB, yB = self.random_point_circle(radius)
+                distances.append( ((xA - xB)**2 + (yA - yB)**2 )**0.5 )
+            expected_dist.append( sum(distances) / 100 )
+        
+        print(f"Theoritical result: (128*radius)/(45*pi) = { 128 * radius / (np.pi*45) } ")
+        
+        return sum(expected_dist) / n_sims
+    
+    # Problem 9.
+    def prob_that_distance_less_than_half_radius(self, n_sims: int = 1000, radius: float = 1.0) -> float:
+        """
+            Problem statements:
+                    Probability two random points lie within distance < R/2
+            Args:
+                n_sims  (int)  : number of simulations
+                radius (float) : radius of the circle
+            Example:
+                >>> sol = ProbaStatSims()
+                >>> sol.prob_that_distance_less_than_half_radius()
+        """
+        prob = 0
+        
+        for _ in range(n_sims):
+            distances = []
+            for _ in range(100):                            # make sample-size : 100
+                xA, yA = self.random_point_circle(radius)
+                xB, yB = self.random_point_circle(radius)
+                distances.append( ((xA - xB)**2 + (yA - yB)**2 )**0.5 )
+            distances = np.array(distances)
+            prob += len( distances[distances < radius / 2] ) / 100
+       
+        return prob / n_sims
+
+    # Problem 10.
+    def unique_paths_of_the_ant(self, m: int = 10, n : int = 10) -> int:
+        """
+            Problem statement:
+                An ant crawls from the starting point (0, 0) to the end point (m, n) in a Cartesian coordinate system. 
+                With each step, this ant can only move up or to the right by 1 unit, that is:
+                                (x, y)  -> (x, y + 1)   or   (x + 1, y)
+                The ant's head initially faces the positive x-axis.
+                Find the number of possible distinct routes where the ant's crawling path turns right exactly twice.
+
+            Args:
+                m (int): The x-coordinate of the destination point.
+                n (int): The y-coordinate of the destination point.
+
+            Returns:
+                int: The number of distinct routes with exactly two right turns.
+
+            Examples:
+                >>> sol = ProbaStatSims()
+                >>> sol.unique_paths_of_the_ant(10, 10)
+        """
+        from itertools import combinations
+
+        N = n + m
+        cnt = 0
+        for Rpos in combinations(range(N), m):
+            s = ['U'] * N
+            for i in Rpos:
+                s[i] = 'R'
+            path = ''.join(s)
+            if path.count('UR') == 2:
+                cnt += 1
+        return cnt
+
+    # Problem 11.
+    def expected_steps_to_wall(self, n_sims: int = 5000, m: int = 10, n: int = 10):
+        """
+            Problem statements:
+                A bug starts at position (0, 0) inside an m×n square.
+                At each step, it moves Up (U) or Right (R) with equal probability 1/2.
+                How many steps on average until it reaches either x = m or y = n (touches a wall)?
+
+            Args:
+                n_sims (int): Number of simulation trials to perform.
+                m (int): Boundary value in the x-axis.
+                n (int): Boundary value in the y-axis.
+
+            Returns:
+                float: The expected number of steps before reaching a boundary.
+
+            Example:
+                >>> sol = ProbaStatSims()
+                >>> sol.expected_steps_to_wall(10, 10)
+        """
+
+        steps_list = []
+        for _ in range(n_sims):
+            x, y = 0, 0
+            steps = 0
+            while x < m and y < n:
+                x, y = self.random_walk_in_square([x, y], [1, 1], [0.5, 0.5], ["U", "R"])
+                steps += 1
+
+            steps_list.append(steps)
+
+        return np.mean(steps_list)
+
+    # Problem 12.
+    def probability_reach_corner(self, n_sims=5000, m=10, n=10):
+        """
+            Probability the ant reaches the corner point (m, n) given random walks confined within bounds.
+
+            Args:
+                n_sims (int): Number of simulation trials to run.
+                m (int): The x-coordinate of the corner.
+                n (int): The y-coordinate of the corner.
+
+            Returns:
+                float: Estimated probability the ant reaches the corner (m, n).
+        """
+        success = 0
+        for _ in range(n_sims):
+            x, y = 0, 0
+            while True:
+                x, y = self.random_walk_in_square([x, y], [1, 1], [0.5, 0.5], ["U", "R"])
+
+                if x == m and y == n:
+                    success += 1
+                    break
+                if x > m or y > n:
+                    break
+
+        return success / n_sims
+    
+    # Problem 13.
+    def expected_turns(self, m: int = 10, n: int = 10, n_sims: int = 3000) -> float:
+        """
+            Problem statements:
+                Let a `turn` be a change of direction (from U to R or from R to U).
+                Estimate the expected number of turns taken by a random walker to reach or exceed position (m, n).
+
+            Args:
+                m (int): Width in the x-axis.
+                n (int): Height in the y-axis.
+                n_sims (int): Number of simulation trials to perform.
+
+            Returns:
+                float: Expected number of turns over all trials.
+        """
+        turns_list = []
+        for _ in range(n_sims):
+            x, y = 0, 0
+            steps = []
+            
+            while x < m or y < n:
+                x, y = self.random_walk_in_square([x, y], [1, 1],
+                                                [0.5, 0.5], ["U", "R"])
+                steps.append((x, y))
+            
+            # extract directions
+            dirs = []
+            for i in range(1, len(steps)):
+                px, py = steps[i-1]
+                cx, cy = steps[i]
+                if cx > px: 
+                    dirs.append("R")
+                else: 
+                    dirs.append("U")
+
+            turns = sum(1 for i in range(len(dirs) - 1) if dirs[i] != dirs[i+1])
+            turns_list.append(turns)
+
+        return np.mean(turns_list)
+    
+    # Problem 14.
+    def expected_wealth_toss_coin(self, n_sims: int = 50000, n_tosses: int = 3500, prob_H: float = 0.99) -> dict:
+        """
+            Problem statements:
+                A biased coin with probability prob_H of Heads is flipped n_tosses times.
+                You win $1 for each Heads and lose $100 for each Tails.
+                Calculate the expected wealth after n_tosses flips.
+
+            Args:
+                n_sims (int): Number of simulation trials.
+                n_tosses (int): Number of coin tosses per trial.
+                prob_H (float): Probability of Heads (between 0 and 1 exclusive).
+
+            Returns:
+                dict: A dictionary containing
+                    - 'AVG-Empirical-cost': Average simulated wealth.
+                    - 'Empirical std': Standard deviation of simulated wealth.
+                    - 'ellapsed_time': Elapsed time for simulations.
+        """
+        import time
+
+        t0 = time.time()
+        if not (0 < prob_H < 1):
+            raise ValueError("prob_H must be in (0, 1)")
+
+        costs = np.zeros(n_sims)
+
+        for i in range(n_sims):
+            pr = np.random.uniform(0, 1, n_tosses)
+            results = np.where(pr < prob_H, 1, -100)
+            costs[i] = np.sum(results)
+
+        theoretical_ev = n_tosses * (prob_H * 1 + (1 - prob_H) * -100)
+        empr_var = n_tosses * 100.99
+        
+        print(f"Theoretical expected wealth = {theoretical_ev:.5f} with theoritical-std = {empr_var**0.5:.5f}" )
+
+        return {'AVG-Empirical-cost': np.mean(costs), 
+                'Empirical std': np.std(costs),
+                'ellapsed_time': f"{(time.time() - t0):.3f} seconds"
+                }
+
+    # Problem 15.
+    def expected_abs_diff_dist(self, L: int = 60, n_sims: int = 100000) -> float:
+        """
+            Problem statement:
+                Two points are chosen, uniformly and independently distributed, on a line of length 60. 
+                What is average (expected) distance between them?
+
+            Args:
+                L      (int) : length of the line
+                n_sims (int) : number of simulations
+            
+            Example:
+                >>> sol = ProbaStatSims()
+                >>> sol.expected_abs_diff_dist()
+        """
+        abs_diff_dist = 0
+
+        for _ in range(n_sims):
+            X = np.random.uniform(0, L)
+            Y = np.random.uniform(0, L)
+
+            abs_diff_dist += abs(X - Y) / n_sims
+
+        return abs_diff_dist
+    
+    # Problem 16.
+    def determinant_of_unif_matrix(self, n_sims: int = 10000, low : float = -60, high: float = 60):
+        """
+            Problem statement:
+                The three distinct entries of a 2 x 2 symmetric matrix are drawn from the uniform distribution [-60, 60]. 
+                What is the expected determinant of the matrix?
+            
+            Args:
+                low, high (float) : lower and higher values of the uniform distribution
+        """
+        det_A = 0
+        for _ in range(n_sims):
+            x1 = np.random.uniform(-60, 60)
+            x2 = np.random.uniform(-60, 60)
+            x3 = np.random.uniform(-60, 60)
+
+            det_A += (x1*x3 - x2**2) / n_sims
+
+        return det_A
+    
+    # Problem 17.
+    def count_feasible_round_table(self, n: int):
+        """
+            Problem statements:
+                Four women and four men are randomly assigned seats around a round table.
+                What is the probability that no two persons of the same sex sit next to each other?
+
+            Args:
+                n (int): Number of men and number of women (total people = 2*n).
+
+            Returns:
+                None. Prints all valid seating arrangements, total count of feasible configurations,
+                sample space size for a round table ((2*n - 1)!), and the probability that no two persons 
+                of the same sex sit adjacently.
+        """
+        import math, itertools
+
+        M_ls = [f"M{k+1}" for k in range(n)]
+        W_ls = [f"W{k+1}" for k in range(n)]
+
+        count = 0
+        total = math.factorial(2 * n - 1)
+
+        # Vị trí xen kẽ: chỉ cần xét một pattern: M W M W ... (do xoay, pattern W M W M là giống)
+        # => tạo danh sách vị trí cho nam và nữ xen kẽ
+        gender_pattern = ['M' if i % 2 == 0 else 'W' for i in range(2 * n)]
+
+        # Sinh tất cả hoán vị người nam và nữ
+        for men_perm in itertools.permutations(M_ls):
+            for women_perm in itertools.permutations(W_ls):
+                # Gán người theo pattern M-W-M-W...
+                assigned = []
+                mi = wi = 0
+                for g in gender_pattern:
+                    if g == 'M':
+                        assigned.append(men_perm[mi])
+                        mi += 1
+                    else:
+                        assigned.append(women_perm[wi])
+                        wi += 1
+
+                # Kiểm tra vòng tròn: không ai cùng giới ngồi cạnh
+                valid = True
+                for i in range(2 * n):
+                    a, b = assigned[i], assigned[(i + 1) % (2 * n)]
+                    if a[0] == b[0]:
+                        valid = False
+                        break
+                if valid:
+                    count += 1
+                    print(" - ".join(assigned))
+
+        print(f"\nTổng số cấu hình thỏa: {count}")
+        print(f"Không gian mẫu (vòng tròn): {(2 * n - 1)}! = {total}")
+        print(f"Xác suất: {count} / {total} = {count / total:.6f}")
 
 # ========================================== MARKOV CHAIN & MCMC ===============================================
 import scipy.linalg
