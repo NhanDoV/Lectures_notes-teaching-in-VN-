@@ -1,5 +1,5 @@
 import numpy as np
-from math import sqrt, gcd, lcm, acos, asin, comb
+from math import sqrt, gcd, lcm, acos, asin, comb, factorial
 
 #======================================= Fibonacci =========================================
 # using mathematic formula
@@ -991,3 +991,93 @@ def find_all_triangle_2given_edges(a, b, min_level, max_level, n_examples=1):
     print(triag_list[:n_examples])
     
     return len(triag_list)
+
+#============================================================================================
+def special_sum_factorial(low: int, high: int):
+    """
+        Find all numbers in the interval [low, high] whose value equals the sum 
+        of the factorials of their digits.
+
+        These numbers are known as *factorions*. Only four such numbers exist:
+            1 = 1!
+            2 = 2!
+            145 = 1! + 4! + 5!
+            40585 = 4! + 0! + 5! + 8! + 5!
+
+        Examples:
+            >>> special_sum_factorial(20, 100000)
+            [145, 40585]
+
+        Args:
+            low (int): Starting value of the interval.
+            high (int): Ending value of the interval.
+
+        Returns:
+            list[int]: All factorions within the interval [low, high].
+
+        Note:
+            No theoretical upper bound check needed.
+            There are only 4 factorions in existence, proven mathematically.        
+    """
+
+    result = []
+
+    for num in range(low, high + 1):
+        digits = [int(d) for d in str(num)]
+        sum_fact = sum(factorial(d) for d in digits)
+
+        if sum_fact == num:
+            result.append(num)
+
+    return result
+
+#============================================================================================
+def special_sum_powed_num(low: int, high: int, pow: int):
+    """
+        Find all Armstrong (narcissistic) numbers within the interval [low, high].
+
+        A number is an Armstrong number for exponent `pow` if:
+            num = sum( digit_i ** pow for all digits of num )
+
+        Examples:
+            >>> special_sum_powed_num(100, 999, 3)
+            [153, 370, 371, 407]
+            # Because:
+            #   153 = 1^3 + 5^3 + 3^3
+            #   370 = 3^3 + 7^3 + 0^3
+            #   371 = 3^3 + 7^3 + 1^3
+            #   407 = 4^3 + 0^3 + 7^3
+
+            >>> special_sum_powed_num(1, 200, 2)
+            [1, 4, 9, 16, 25, 36, 49, 64]
+            # Because num = a^2 + b^2 for two-digit numbers (special case)
+
+        Args:
+            low  (int): Starting value of the search interval.
+            high (int): Ending value of the search interval.
+            pow  (int): Exponent used for digit powering.
+
+        Returns:
+            list[int]: All numbers in [low, high] satisfying the Armstrong property.
+
+        Notes:
+            - The function raises a ValueError if `high` is too large for exponent `pow`,
+            since no Armstrong numbers exist beyond a certain theoretical bound.
+    """
+    # Simple theoretical bound check
+    if high > 10 ** pow:
+        raise ValueError(
+            f"For high={high}, no Armstrong numbers exist for pow={pow}. "
+            f"Please keep high <= {10 ** pow}."
+        )
+
+    result = []
+
+    for num in range(low, high + 1):
+        digits = [int(d) for d in str(num)]
+        sum_pow = sum(d ** pow for d in digits)
+
+        if sum_pow == num:
+            result.append(num)
+
+    return result

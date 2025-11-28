@@ -1353,6 +1353,101 @@ class ProbaStatSims:
         return det_A
     
     # Problem 17.
+    def n_bridges_to_pass(self, n_islands: int = 10, n_sims: int = 10000) -> dict:
+        """
+            Problem statement:
+                There are ten islands in a line. Between each pair of consecutive islands, there are two bridges, 
+                one strong and one weak. (There are no bridges between non-consecutive islands.) 
+                There is no way to tell if a bridge is strong or weak except to walk over it. 
+                    * A strong bridge allows you to cross safely. 
+                    * A weak bridge immediately breaks and disappears when walked on, and you fall into the water and 
+                    are carried back to the first island.
+                You are situated on the first island and want to get to the tenth island. What is the expected number 
+                of `strong bridges` you will cross en route to the tenth island?
+
+            Explain & transform idea:
+                Let state = [X1, ..., Xn] and steps = [S1, ..., Sn] where:
+                    - n (n_island) is the number of islands, here n = 10
+                    - for each i in [1, n], 
+                        * X[i] ~ Bernoulli(p) with p = 0.5 is the state when you go from island i th to (i + 1) th,
+                        * S[i] is the number of bridges that you come to i th island from the first island, then
+                            if X[i-1] is "S"
+                                S[i]  =    1       +   S[i-1]
+                            otherwise, since the states "W" will be disappeared if you try
+                                S[i]  =  (i - 1)   +   S[i-1]       
+
+                Objective:
+                    Find sum(steps)           
+        """
+        def simulate_one_run(n_islands: int):
+            n_gaps = n_islands - 1
+            # remaining[i] = how many bridges remain for gap i: 2 (unknown) or 1 (only strong remains)
+            remaining = [2] * n_gaps
+
+            pos = 1                  # start at island 1
+            strong_count = 0
+
+            while pos < n_islands:
+                gap_idx = pos - 1    # gap between island pos and pos+1, zero-based
+
+                if remaining[gap_idx] == 1:
+                    # only strong bridge remains — deterministic crossing
+                    strong_count += 1
+                    pos += 1
+                    continue
+
+                # remaining[gap_idx] == 2: pick a bridge uniformly
+                if np.random.rand() < 0.5:
+                    # picked strong
+                    strong_count += 1
+                    pos += 1
+                    # both bridges still exist (we may leave them unchanged)
+                else:
+                    # picked weak -> it breaks and disappears
+                    remaining[gap_idx] = 1
+                    pos = 1   # carried back to island 1
+
+            return strong_count
+        
+        res = [simulate_one_run(n_islands) for _ in range(n_sims)]
+
+        return {'AVG': sum(res) / n_sims, 'std': np.std(res)}
+
+    # Problem 18.
+    def nb_apples_left_in_basket(self, n_sims: int, n_red: int = 60, n_green: int = 4) -> int:
+        """
+            Problem statements:
+                * There are 4 green and 60 red apples in a basket. They are removed one-by-one, without replacement, 
+                until all 4 green ones are extracted. 
+                * What is the expected number of apples that will be left in the basket? 
+
+            Idea:
+                Monte-Carlo estimate of apples left after removing apples until all green ones are removed.
+            
+            Args:
+                n_sims  (int) : number of simulations
+                n_red   (int) : number of red-apples
+                n_green (int) : number of green-apples
+        """
+        n_apples = []
+
+        for _ in range(n_sims):
+
+            # For each simulation, assign the value again because n_green = 0 after the first simulation 
+            r = n_red
+            g = n_green
+
+            while g > 0:
+                curr_prob = g / (r + g)             # update new_proba after each draw
+                if np.random.rand() < curr_prob:
+                    g -= 1                          # green drawn
+                else:
+                    r -= 1                          # red drawn
+            n_apples.append(r)
+
+        return sum(n_apples) / n_sims
+
+    # Problem 19.
     def count_feasible_round_table(self, n: int):
         """
             Problem statements:
@@ -1375,14 +1470,15 @@ class ProbaStatSims:
         count = 0
         total = math.factorial(2 * n - 1)
 
-        # Vị trí xen kẽ: chỉ cần xét một pattern: M W M W ... (do xoay, pattern W M W M là giống)
-        # => tạo danh sách vị trí cho nam và nữ xen kẽ
+        # Alternating positions: only need to consider one pattern: M W M W ... 
+        # (because by rotation, the pattern W M W M is the same)
+        # => create a list of positions for men and women in alternating order
         gender_pattern = ['M' if i % 2 == 0 else 'W' for i in range(2 * n)]
 
-        # Sinh tất cả hoán vị người nam và nữ
+        # Generate all permutations of men and women
         for men_perm in itertools.permutations(M_ls):
             for women_perm in itertools.permutations(W_ls):
-                # Gán người theo pattern M-W-M-W...
+                # Assign people according to the M-W-M-W... pattern
                 assigned = []
                 mi = wi = 0
                 for g in gender_pattern:
@@ -1393,7 +1489,7 @@ class ProbaStatSims:
                         assigned.append(women_perm[wi])
                         wi += 1
 
-                # Kiểm tra vòng tròn: không ai cùng giới ngồi cạnh
+                # Check around the circle: no two adjacent people have the same gender
                 valid = True
                 for i in range(2 * n):
                     a, b = assigned[i], assigned[(i + 1) % (2 * n)]
@@ -1404,9 +1500,9 @@ class ProbaStatSims:
                     count += 1
                     print(" - ".join(assigned))
 
-        print(f"\nTổng số cấu hình thỏa: {count}")
-        print(f"Không gian mẫu (vòng tròn): {(2 * n - 1)}! = {total}")
-        print(f"Xác suất: {count} / {total} = {count / total:.6f}")
+        print(f"\nTotal valid configurations: {count}")
+        print(f"Sample space (circle): {(2 * n - 1)}! = {total}")
+        print(f"Probability: {count} / {total} = {count / total:.6f}")
 
 # ========================================== MARKOV CHAIN & MCMC ===============================================
 import scipy.linalg

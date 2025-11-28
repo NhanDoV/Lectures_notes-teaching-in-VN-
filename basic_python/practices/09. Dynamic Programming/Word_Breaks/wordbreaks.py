@@ -12,22 +12,80 @@ class WordBreak:
         return len(s) == 0
 
     def recursive_without_hash(self, s: str, wordDict: list[str]) -> bool:
-        def recursive(s):
-            pass
+        def DFS(i):
+            if i == len(s):
+                return True
 
+            for w in wordDict:
+                if ((i + len(w)) <= len(s) and
+                     s[i : i + len(w)] == w
+                ):
+                    if DFS(i + len(w)):
+                        return True
+            return False
+        return DFS(0)
 
     def using_hash(self, s: str, wordDict: list[str]) -> bool:
         wordSet = set(wordDict)
-        def recursion(idx):
+        def DFS(idx):
             if idx == len(s):
                 return True
             for j in range(idx, len(s)):
-                print(j, s[idx : j + 1])
-                if (s[idx : j + 1] in wordSet) and recursion(j + 1):
+                if (s[idx : j + 1] in wordSet) and DFS(j + 1):
                         return True
             return False
         
-        return recursion(0)
+        return DFS(0)
 
-    def using_DP(self, s: str, wordDict: list[str]) -> bool:
-        pass
+    def using_DP_hash(self, s: str, wordDict: list[str]) -> bool:
+        wordSet = set(wordDict)
+        t = 0
+        for w in wordDict:
+            t = max(t, len(w))
+
+        memo = {}
+        def DFS(i):
+            if i in memo:
+                return memo[i]
+            if i == len(s):
+                return True
+            for j in range(i, min(len(s), i + t)):
+                if s[i : j + 1] in wordSet:
+                    if DFS(j + 1):
+                        memo[i] = True
+                        return True
+            memo[i] = False
+            return False
+
+        return DFS(0)
+    
+    def DP_TopDown(self, s: str, wordDict: list[str]) -> bool:
+        memo = {len(s) : True}
+        def DFS(i):
+            if i in memo:
+                return memo[i]
+
+            for w in wordDict:
+                if ((i + len(w)) <= len(s) and
+                     s[i : i + len(w)] == w
+                ):
+                    if DFS(i + len(w)):
+                        memo[i] = True
+                        return True
+            memo[i] = False
+            return False
+
+        return DFS(0)
+    
+    def DP_BottomUp(self, s: str, wordDict: list[str]) -> bool:
+        dp = [False] * (len(s) + 1)
+        dp[len(s)] = True
+
+        for i in range(len(s) - 1, -1, -1):
+            for w in wordDict:
+                if (i + len(w)) <= len(s) and s[i : i + len(w)] == w:
+                    dp[i] = dp[i + len(w)]
+                if dp[i]:
+                    break
+
+        return dp[0]    

@@ -118,4 +118,91 @@ def check_idempotent(matrix):
     else:
         print("đéo vuông nên đéo care")
         return 0
+
 #=============================================================================
+# Check if a matrix is Orthogonal
+def check_orthogonal(matrix, tol=1e-9):
+    """
+        Check whether a matrix is orthogonal.
+
+        A matrix Q is orthogonal if Q^T Q = I.
+
+        Example:
+            >> check_orthogonal([[0, 1], [1, 0]])
+                Orthogonal
+            >> check_orthogonal([[1, 2], [3, 4]])
+                Not orthogonal
+    """
+    M = np.array(matrix, dtype=float)
+    if M.shape[0] != M.shape[1]:
+        print("Not square → cannot be orthogonal")
+        return 0
+
+    I = np.eye(M.shape[0])
+    diff = M.T @ M - I
+
+    if np.all(np.abs(diff) < tol):
+        print("Orthogonal")
+        return 1
+    else:
+        print("Not orthogonal")
+        return 0
+
+#=============================================================================
+# Check if a matrix is Positive Definite
+def check_positive_definite(matrix):
+    """
+        Check if a matrix is symmetric positive definite (SPD).
+
+        Methods:
+            A matrix is SPD if:
+                - It is symmetric
+                - All eigenvalues > 0
+
+        Example:
+            >> check_positive_definite([[2, -1], [-1, 2]])
+                Positive definite
+            >> check_positive_definite([[0, 1], [1, 0]])
+                Not positive definite
+    """
+    M = np.array(matrix, dtype=float)
+
+    if not np.allclose(M, M.T):
+        print("Not symmetric → cannot be positive definite")
+        return 0
+
+    eigvals = np.linalg.eigvals(M)
+    if np.all(eigvals > 1e-12):
+        print("Positive definite")
+        return 1
+    else:
+        print("Not positive definite")
+        return 0
+
+#=============================================================================
+# Compute the Rank of a Matrix
+def matrix_rank(matrix):
+    """
+        Compute the rank of a matrix using SVD.
+
+        Example:
+            >> matrix_rank([[1, 2], [2, 4]])
+                1
+    """
+    M = np.array(matrix, dtype=float)
+    r = np.linalg.matrix_rank(M)
+    print(f"Rank = {r}")
+    return r
+
+#=============================================================================
+# Projection Matrix onto Column Space
+def projection_matrix(A):
+    """
+        Compute the projection matrix onto the column space of A.
+
+        Example:
+            >> projection_matrix([[1,0],[1,1]])
+    """
+    A = np.array(A, dtype=float)
+    P = A @ np.linalg.inv(A.T @ A) @ A.T
+    return P
