@@ -1504,6 +1504,59 @@ class ProbaStatSims:
         print(f"Sample space (circle): {(2 * n - 1)}! = {total}")
         print(f"Probability: {count} / {total} = {count / total:.6f}")
 
+    # Problem 20.
+    def Three_riflemen(self, source_dollar: int = 2002, N: int = 1_000_00):
+        """
+            Three riflemen A, B, and C take turns shooting at a target. 
+            A shoots first, then B, then C, repeating until someone hits.
+            Each hits the target with probability 0.5.
+
+            We simulate the game many times to estimate:
+                - P(A wins)
+                - Expected winning of A = source_dollar * P(A wins)
+
+            Analytical result:
+                P(A win) = 4/7  => E[A] = (4/7) * source_dollar = 1144
+        """
+        import random
+
+        def simulate_one_round():
+            """Simulate a single run of the shooting sequence."""
+            turn = 0  # 0 = A, 1 = B, 2 = C
+            while True:
+                shooter = turn % 3
+
+                # shooter hits with probability 0.5
+                if random.random() < 0.5:   # HIT
+                    return shooter  # 0=A, 1=B, 2=C
+
+                turn += 1  # next shooter
+
+        # Monte-Carlo simulation
+        wins = {0: 0, 1: 0, 2: 0}
+        for _ in range(N):
+            result = simulate_one_round()
+            wins[result] += 1
+
+        # Estimated probabilities
+        pA = wins[0] / N
+        pB = wins[1] / N
+        pC = wins[2] / N
+
+        # Expected winning for A
+        expected_A = source_dollar * pA
+
+        print(f"\n=== Simulation of Three Riflemen ({N:,} runs) ===")
+        print(f"P(A win) ≈ {pA:.6f}   (theoretical = 4/7 ≈ {4/7:.6f})")
+        print(f"P(B win) ≈ {pB:.6f}   (theoretical = 2/7 ≈ {2/7:.6f})")
+        print(f"P(C win) ≈ {pC:.6f}   (theoretical = 1/7 ≈ {1/7:.6f})")
+
+        print(f"\nExpected winnings for A:")
+        print(f"    ≈ {pA:.6f} × {source_dollar} = {expected_A:.2f}")
+        print(f"    (theoretical = 1144)")
+
+        return expected_A
+
 # ========================================== MARKOV CHAIN & MCMC ===============================================
 import scipy.linalg
 
