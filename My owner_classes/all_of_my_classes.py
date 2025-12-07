@@ -1557,6 +1557,65 @@ class ProbaStatSims:
 
         return expected_A
 
+    # Problem 21.
+    def Waffles_StreetCat(self, n_houses: int, days: int):
+        """
+            Problem statement:
+                * A street consists of 21 houses in a line numbered in order from 1 to 21.
+                Waffles the Cat spent day 0 in house number 1.
+                * Every morning, Waffles chooses a house neighboring its current location and spends a day there. 
+                * The choice is random with equal probabilities for all (one or two) neighboring houses.
+                => Find a probability that Waffles will spend day 1000 in house number 1.
+            Args:
+                n_house (int) : number of houses
+                n_days (int) 
+        """
+        # dp[t][i] = probability at day t in house i
+        # chỉ cần 2 hàng (rolling array)
+        prev = [0.0] * (n_houses + 1)
+        curr = [0.0] * (n_houses + 1)
+        
+        prev[1] = 1.0  # day 0: at house 1
+
+        for _ in range(days):
+            for i in range(1, n_houses + 1):
+                curr[i] = 0.0
+
+            for i in range(1, n_houses + 1):
+                if prev[i] == 0: 
+                    continue
+
+                if i == 1:              # only neighbor = 2
+                    curr[2] += prev[1]
+                elif i == n_houses:     # only neighbor = 20
+                    curr[n_houses-1] += prev[n_houses]
+                else:
+                    curr[i-1] += prev[i] * 0.5
+                    curr[i+1] += prev[i] * 0.5
+
+            prev, curr = curr, prev
+
+        return prev[1]
+
+    # Problem 22.
+    def fifty_Ants(self, n_ants: int = 50, N_sims: int = 1000):
+        """
+        
+        """
+        times = []
+        for _ in range(N_sims):
+            max_t = 0
+            for _ in range(n_ants):
+                x = random.random()               # position in [0,1]
+                if random.random() < 0.5:         # direction left
+                    t = x
+                else:                             # direction right
+                    t = 1 - x
+                max_t = max(max_t, t)
+            times.append(max_t)
+
+        return times.mean() / (n_ants + 1)
+
 # ========================================== MARKOV CHAIN & MCMC ===============================================
 import scipy.linalg
 
