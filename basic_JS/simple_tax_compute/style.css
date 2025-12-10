@@ -1,0 +1,85 @@
+/* Import font Inter */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+/* Background gradient animation */
+body {
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(120deg, #667eea, #764ba2);
+    background-size: 200% 200%;
+    animation: gradientMove 6s ease infinite;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Main card */
+.container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 28px;
+    border-radius: 14px;
+    width: 360px;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.2);
+    backdrop-filter: blur(6px);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+label {
+    font-weight: 500;
+    margin-top: 10px;
+    display: block;
+    font-size: 12px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 4px #667eea99;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 18px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+button:hover {
+    background: #5568d9;
+}
+
+#result {
+    margin-top: 20px;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.5;
+}

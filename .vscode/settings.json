@@ -55,5 +55,6 @@
         "regex": "cpp",
         "shared_mutex": "cpp",
         "cinttypes": "cpp"
-    }
+    },
+    "liveServer.settings.port": 5501
 }
