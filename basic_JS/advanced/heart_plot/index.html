@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Heart Curve Visualizer</title>
+
+  <!-- FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <!-- TITLE -->
+    <h1>Heart Curve Visualizer</h1>
+
+    <!-- TOP CONTROLS -->
+    <div class="controls">
+
+      <!-- LEFT: CHOOSE HEART TYPE -->
+      <div class="controls-left">
+        <label for="chartType">Choose Heart Type</label>
+        <select id="chartType">
+          <option value="1">Heart Type 1 (Parametric Log)</option>
+          <option value="2">Heart Type 2 (Implicit Algebraic)</option>
+          <option value="3">Heart Type 3 (Cusped)</option>
+          <option value="4">Heart Type 4 (Quadratic Sinusoidal)</option>
+          <option value="5">Heart Type 5 (Exponential Trig)</option>
+          <option value="6">Heart Type 6 (Degree-Scaled Implicit)</option>
+        </select>
+      </div>
+
+      <!-- RIGHT: SLIDERS -->
+      <div class="controls-right">
+        <div class="params-title">Params</div>
+        <div id="sliders"></div>
+      </div>
+
+    </div>
+
+    <!-- BOTTOM: CANVAS -->
+    <div class="canvas-wrap">
+      <canvas id="heartCanvas" width="600" height="600"></canvas>
+      <div class="watermark">NhanDov</div>
+    </div>
+  </div>
+
+  <!-- JS -->
+  <script src="app.js"></script>
+</body>
+</html>

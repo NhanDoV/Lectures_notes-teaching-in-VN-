@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game 2048</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>2048</h1>
+            <div class="score-container">
+                <div class="score">Score: <span id="score">0</span></div>
+                <div class="best">Best: <span id="best">0</span></div>
+            </div>
+        </div>
+        <div class="game-info">
+            <p>Have fun</p>
+            <button id="new-game">New game</button>
+        </div>
+        <div class="game-board">
+            <div id="game-grid"></div>
+        </div>
+        <div id="game-message">
+            <p></p>
+            <div class="buttons">
+                <button id="keep-playing" style="display:none;">Continue</button>
+                <button id="retry" style="display:none;">Play again</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

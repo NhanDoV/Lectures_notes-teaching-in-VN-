@@ -1,0 +1,110 @@
+/* ===== Page background ===== */
+body {
+    font-family: Tahoma, Arial, sans-serif;
+    background: radial-gradient(circle at top, #f0f0f0, #cfcfcf);
+}
+
+/* ===== Main login container ===== */
+.login-box {
+    width: 230px;
+    margin: 60px auto;
+    min-height: 500px;
+    padding: 50px;
+
+    /* Classic blue radial gradient */
+    background: radial-gradient(circle at top, #e8f0ff, #003399);
+
+    border: 1px solid #003399;
+    box-shadow:
+        0 0 12px rgba(0, 51, 153, 0.6),
+        inset 0 0 15px rgba(255, 255, 255, 0.6);
+}
+
+/* Ensure all children align evenly */
+.login-box > * {
+    box-sizing: border-box;
+}
+
+/* ===== Title ===== */
+.login-box h2 {
+    text-align: center;
+    margin-bottom: 15px;
+
+    /* Gradient text */
+    background: linear-gradient(to bottom, #ffffff, #0525b7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+
+.login-box h5 {
+    text-align: center;
+    margin-bottom: 15px;
+
+    /* Gradient text (red tone) */
+    background: linear-gradient(to bottom, #b3c7ff, #5151c8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+}
+
+/* ===== Input fields ===== */
+input {
+    width: 100%;
+    padding: 6px;
+    margin-top: 10px;
+
+    background: radial-gradient(circle, #ffffff, #e0e0e0);
+    border: 1px solid #666;
+    color: #000;
+}
+
+/* ===== Main action buttons ===== */
+button {
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+
+    background: radial-gradient(circle at top, #4d79ff, #003399);
+    color: #ffffff;
+
+    border: 1px solid #002266;
+    cursor: pointer;
+    box-shadow: inset 0 0 5px rgba(255, 255, 255, 0.4);
+}
+
+button:hover {
+    background: radial-gradient(circle at top, #668cff, #002266);
+}
+
+/* ===== Link styled as a full-width box ===== */
+.link {
+    display: block;
+    width: 100%;
+    padding: 8px;
+    margin-top: 10px;
+
+    text-align: center;
+    font-size: 13px;
+
+    color: #e0e8ff;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+/* ===== Dashboard view ===== */
+.user-info {
+    text-align: center;
+}
+
+/* ===== Sign out button ===== */
+.signout {
+    margin-top: 15px;
+
+    background: radial-gradient(circle at top, #d2b7b7, #e08b8b);
+    border: 1px solid #444;
+}
+
+.signout:hover {
+    background: radial-gradient(circle at top, #d6c2c2, #d18b8b);
+}

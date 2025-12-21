@@ -1,0 +1,216 @@
+:root {
+  --bg-main: #020617;
+  --bg-panel: radial-gradient(circle at top, #0b1430, #020617 80%);
+  --text-main: #e5e7eb;
+  --text-soft: #9aa4bf;
+  --accent: #38bdf8;
+  --accent-2: #818cf8;
+}
+
+/* ================= BODY ================= */
+
+body {
+  margin: 0;
+  background: radial-gradient(circle at top, #020617, #000);
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+}
+
+/* ================= CONTAINER ================= */
+
+.container {
+  max-width: 450px;
+  width: 92%;
+  margin: 20px auto;
+  padding: 16px;
+  border-radius: 14px;
+  background: radial-gradient(circle at top, #1e1b4b, #020617 75%);
+  box-shadow: 0 30px 40px rgba(0,0,0,0.8);
+}
+
+/* ================= TITLE ================= */
+
+h1 {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 22px;
+  text-align: center;
+  margin-bottom: 16px;
+  background: linear-gradient(90deg, #a5b4fc, #38bdf8, #818cf8);
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+/* ================= CONTROLS ================= */
+
+.controls {
+  padding: 14px;
+  border-radius: 16px;
+  background: var(--bg-panel);
+
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 20px;
+}
+
+/* -------- LEFT -------- */
+
+.controls-left {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.controls-left label {
+  font-size: 12px;
+  color: var(--text-soft);
+}
+
+.controls-left select {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 12px;
+  padding: 10px 14px;
+  border-radius: 12px;
+
+  background: linear-gradient(180deg, #e0e7ff, #c7d2fe);
+  color: #020617;
+  border: 1px solid rgba(99,102,241,0.6);
+}
+
+.controls-left select option {
+  background: #020617;
+  color: #e5e7eb;
+}
+
+/* -------- RIGHT (PARAMS) -------- */
+
+.controls-right {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Title */
+.params-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  color: var(--text-soft);
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  padding-bottom: 4px;
+}
+
+/* Grid params */
+#sliders {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px 16px;
+}
+
+/* ====== EACH PARAM ====== */
+
+.slider-container {
+  display: grid;
+  grid-template-rows: auto auto; /* TEXT / SLIDER */
+  row-gap: 6px;
+  background: none;
+  padding: 2px 0;
+}
+
+/* Label row */
+.slider-container label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+}
+
+.param-name {
+  color: var(--text-soft);
+}
+
+.param-value {
+  color: #a5b4fc;
+  font-size: 11px;
+}
+
+/* ===== SLIDER TRACK ===== */
+
+.slider-container input[type="range"] {
+  width: 100%;
+  appearance: none;
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #7c3aed, #38bdf8);
+  outline: none;
+}
+
+/* ===== SLIDER THUMB ===== */
+
+.slider-container input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+
+  background: radial-gradient(circle at 30% 30%, #93c5fd, #2563eb);
+  border: 1px solid rgba(255,255,255,0.5);
+
+  box-shadow:
+    0 0 8px rgba(59,130,246,0.8),
+    0 0 16px rgba(99,102,241,0.4);
+}
+
+.slider-container input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #93c5fd, #2563eb);
+  border: none;
+}
+
+/* ================= CANVAS ================= */
+canvas {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  background: radial-gradient(circle at center, #102687, #000);
+}
+
+.canvas-wrap {
+  margin-top: 16px;
+  position: relative;
+  padding: 10px;
+  border-radius: 14px;
+  background: radial-gradient(circle at center, #061b7b, #000 95%);
+}
+
+/* chữ in chìm */
+.watermark {
+  position: absolute;
+  right: 12px;
+  bottom: 10px;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.6px;
+  color: rgba(229, 143, 143, 0.854);
+  pointer-events: none; /* no need to click */
+  user-select: none;
+}
+
+/* ================= MOBILE ================= */
+@media (max-width: 480px) {
+  .controls {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  #sliders {
+    grid-template-columns: 1fr;
+  }
+  h1 {
+    font-size: 20px;
+  }
+}

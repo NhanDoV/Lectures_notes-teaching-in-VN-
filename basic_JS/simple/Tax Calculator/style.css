@@ -1,0 +1,126 @@
+/* ===== Import Inter font ===== */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+/* ===== Global background (dark + glass vibe) ===== */
+body {
+    margin: 0;
+    height: 100vh;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+
+    /* Dark gradient background */
+    background: radial-gradient(
+        circle at top,
+        #2e2a4f,
+        #121124
+    );
+
+    color: #eaeaf0;
+}
+
+/* ===== Main glass card ===== */
+.container {
+    width: 360px;
+    padding: 28px;
+
+    /* Glassmorphism */
+    background: radial-gradient(
+        circle at top,
+        rgba(255, 255, 255, 0.12),
+        rgba(255, 255, 255, 0.04)
+    );
+
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    box-shadow:
+        0 10px 35px rgba(0, 0, 0, 0.45),
+        inset 0 0 20px rgba(255, 255, 255, 0.05);
+}
+
+/* ===== Title ===== */
+h2 {
+    text-align: center;
+    margin-bottom: 22px;
+    font-weight: 600;
+
+    /* Gradient text */
+    background: linear-gradient(135deg, #a5b4fc, #c084fc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* ===== Labels ===== */
+label {
+    display: block;
+    margin-top: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #cfd3ff;
+}
+
+/* ===== Inputs ===== */
+input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 6px;
+
+    font-size: 14px;
+    color: #ffffff;
+
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    outline: none;
+    transition: 0.25s;
+}
+
+input::placeholder {
+    color: #a8aedf;
+}
+
+input:focus {
+    border-color: #a5b4fc;
+    box-shadow: 0 0 0 2px rgba(165, 180, 252, 0.35);
+    background: rgba(255, 255, 255, 0.12);
+}
+
+/* ===== Main button ===== */
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 22px;
+
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+
+    background: linear-gradient(135deg, #6366f1, #a855f7);
+    border: none;
+    border-radius: 12px;
+
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 22px rgba(99, 102, 241, 0.45);
+}
+
+/* ===== Result text ===== */
+#result {
+    margin-top: 22px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #e6e7ff;
+}

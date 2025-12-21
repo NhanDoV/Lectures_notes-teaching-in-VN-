@@ -1,0 +1,125 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  margin: 0;
+  background: #e2dfeb;
+}
+
+/* HEADER */
+.header {
+  background: linear-gradient(135deg, #7ec5ff, #75a5ff);
+  color: white;
+  text-align: center;
+  padding: 40px 20px 80px;
+}
+
+.logo {
+  font-size: 42px;
+}
+
+.header h1 {
+  margin: 10px 0 5px;
+}
+
+.note-green {
+  color: #25c1f1; /* xanh lá */
+}
+
+.subtitle {
+  opacity: 0.9;
+}
+
+/* DASHBOARD */
+.dashboard {
+  display: flex;
+  gap: 20px;
+  width: 90%;
+  max-width: 1100px;
+  margin: -60px auto 40px;
+}
+
+/* CARD */
+.card {
+  background: #fff5f5;
+  flex: 1;
+  padding: 25px;
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.stat {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.money {
+  font-size: 34px;
+  color: #ff5a5f;
+  font-weight: bold;
+}
+
+.red {
+  color: #e74c3c;
+}
+
+.green {
+  color: #2ecc71;
+}
+
+/* PROGRESS */
+.progress-box {
+  margin-top: 20px;
+}
+
+.progress {
+  width: 100%;
+  height: 14px;
+  background: #e0e0e0;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #00c853, #b2ff59);
+  transition: width 0.6s ease;
+}
+
+/* TOP DONATE */
+.top-donate h3 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.top-donate ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.top-donate li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 14px;
+  margin-bottom: 10px;
+  background: white;
+  border-radius: 12px;
+  font-size: 14px;
+}
+
+.top-donate .rank {
+  font-weight: bold;
+  color: #ff7675;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .dashboard {
+    flex-direction: column;
+  }
+}

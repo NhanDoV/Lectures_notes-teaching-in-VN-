@@ -1,0 +1,109 @@
+/* =====================
+   RESET & GLOBAL
+===================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    background-image: url('image.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: #fff;
+}
+
+/* =====================
+   CONTAINER
+===================== */
+.container {
+    width: 1000px;
+    max-width: 95%;
+    margin: 20px auto; /* giảm margin top/bottom */
+    border: 2px solid rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.1);
+    min-height: auto; /* không bắt buộc full height */
+    backdrop-filter: blur(10px);
+    padding: 20px 20px 30px 20px; /* padding nhỏ hơn */
+    border-radius: 10px;
+}
+
+/* =====================
+   TITLE BOX
+===================== */
+.title-box {
+    padding: 15px 20px; /* giảm padding */
+    background-color: rgba(0, 0, 0, 0.85);
+    border-bottom: 2px solid #fff;
+    text-align: center;
+    border-radius: 6px;
+}
+
+.title-box h2 {
+    color: #ffffff !important;
+    font-size: 1.8rem; /* nhỏ hơn 2rem */
+    font-weight: bold;
+    text-shadow: 1px 1px 5px rgba(0,0,0,1);
+    margin: 0 !important;
+    letter-spacing: 1px;
+}
+
+/* =====================
+   CHART BOX
+===================== */
+.chart-box {
+    display: flex;
+    justify-content: center;
+    padding: 20px; /* giảm từ 30px */
+    background: rgba(0,0,0,0.5);
+    margin: 15px; /* giảm margin từ 20px */
+    border-radius: 10px;
+}
+
+#chart {
+    width: 880px; /* giảm từ 900px */
+    height: 400px; /* giảm từ 450px */
+    max-width: 100%;
+    border-radius: 6px;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.5); /* bớt bóng đổ */
+}
+
+/* =====================
+   RESPONSIVE
+===================== */
+@media (max-width: 1200px) {
+    .container {
+        margin: 15px auto;
+    }
+    
+    #chart {
+        width: 100%;
+        height: 350px; /* giảm */
+    }
+}
+
+@media (max-width: 768px) {
+    .title-box h2 {
+        font-size: 1.4rem; /* giảm */
+    }
+    
+    .chart-box {
+        padding: 15px;
+        margin: 8px;
+    }
+}
+
+/* ==== fontsize ===== */
+.outside {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.inside {
+    font-size: 16px;
+}

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <title>ĐịtMẹTàuLoz</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <!-- TITLE -->
+    <div class="title">
+      中國 婊子 貓 (GAME CHỬI TÀU +)
+    </div>
+    
+    <!-- TABS -->
+    <div class="tabs-container">
+      <div class="tab-headers">
+        <button class="tab-btn active" data-tab="tab1">Chửi Tàu</button>
+        <button class="tab-btn" data-tab="tab2">Vòng quay chửi chó</button>
+      </div>
+      
+      <!-- TAB CONTENTS -->
+      <div class="tab-contents">
+        <!-- TAB 1: GAME GỐC -->
+        <div class="tab-content active" id="tab1">
+          <div class="main-grid">
+            
+            <div class="left-panel">
+              <div class="left-inner">
+                <div class="tube">
+                  <div class="ball" id="ball"></div>
+                </div>
+                <button id="triggerBtn">launch</button>
+              </div>
+            </div>
+
+            <div class="right-panel">
+              <div class="instruction-box">
+                <h5>Bấm nút "launch" để chửi bọn Tàu chó dưới nhiều ngôn ngữ <br> Tùy thuộc cao độ quả cầu thì cường độ chửi cũng tương ứng!</h5>
+              </div>
+              <div class="text-box" id="result"></div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- TAB 2: LUCKY SPIN -->
+        <div class="tab-content" id="tab2">
+          <div class="spin-wrapper">
+
+            <div id="wheel-container">
+              <div id="wheel"></div>
+              <button id="center-button">Start</button>
+            </div>
+
+            <!-- ⚠️ PHẢI là spin-result, KHÔNG dùng id="result" -->
+            <div id="spin-result"></div>
+
+          </div>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  
+  <audio id="whooshSound" src="sounds/whoosh.mp3"></audio>
+  <audio id="tingSound" src="sounds/ting.mp3"></audio>
+  <script src="script.js"></script>
+</body>
+</html>

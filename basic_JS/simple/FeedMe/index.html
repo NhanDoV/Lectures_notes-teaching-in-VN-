@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Nuôi TAO</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="logo">🌱</div>
+    <h1>NUÔI TAO..., KO!</h1>
+    <p class="subtitle">Hãy nuôi tao. Tao hứa sẽ cố gắng ... sao kê, ko để bị đi tò 💯</p>
+    <h5 class="note-green">"Tao là Đảng Viên, ko đi tò (lâu) đâu!!!"</h5>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="dashboard">
+
+    <!-- BOX TRÁI -->
+    <div class="card">
+      <div class="stat">
+        <h3>Tổng đã nhận được</h3>
+        <p class="money" id="total">0 đ</p>
+        <small>Từ 13 lượt donate</small>
+      </div>
+
+      <div class="stat">
+        <p>Thu: <b id="thu">0 đ</b></p>
+        <p>Chi: <b class="red">10.000.000 đ</b></p>
+        <p>Còn lại: <b class="green" id="conlai">0 đ</b></p>
+      </div>
+
+      <div class="progress-box">
+        <div class="progress">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <small>Mục tiêu tháng này: 100.000.000 đ</small>
+      </div>
+    </div>
+
+    <!-- BOX PHẢI -->
+    <div class="card top-donate">
+      <h3>🏆 Top 5 Donate</h3>
+      <ul id="topList"></ul>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

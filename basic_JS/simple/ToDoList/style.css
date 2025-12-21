@@ -1,0 +1,105 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #d4f5e2, #a8e6cf);
+    display: flex;
+    justify-content: center;
+    padding-top: 50px;
+}
+
+/* Hộp chính */
+.todo-container {
+    background: linear-gradient(135deg, #e3f2fd, #90caf9);
+    padding: 20px;
+    border-radius: 10px;
+    width: 666px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #0d47a1;
+}
+
+#today {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #0d47a1;
+    margin-bottom: 15px;
+}
+
+/* Input */
+input[type="text"] {
+    width: 87%;
+    padding: 8px;
+    border: 1px solid #90caf9;
+    border-radius: 4px;
+    outline: none;
+}
+
+/* Nút Add */
+button {
+    padding: 8px 14px;
+    border: none;
+    background: linear-gradient(135deg, #43cea2, #185a9d);
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+button:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}
+
+/* Danh sách */
+ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 20px;
+}
+
+/* Box task */
+li {
+    padding: 10px;
+    margin-bottom: 8px;
+    background: #ffffff;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+li.done span.task-text {
+    text-decoration: line-through;
+    color: #999;
+}
+
+.task-left {
+    display: flex;
+    align-items: center;
+}
+
+.task-left input[type="checkbox"] {
+    margin-right: 10px;
+    width: 18px;
+    height: 18px;
+}
+
+/* Nút Delete */
+.delete-btn {
+    background: linear-gradient(135deg, #ff6a6a, #d32f2f);
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+.delete-btn:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}
