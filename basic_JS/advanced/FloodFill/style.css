@@ -1,0 +1,128 @@
+/* ----- BASE ----- */
+* { box-sizing: border-box; margin:0; padding:0; }
+
+body {
+    font-family: 'Inter', Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: radial-gradient(#9ba4ac, #153a96);
+}
+
+.container {
+    text-align: center;
+    background: radial-gradient(#d0d2e2cc, #d5dae8cc);
+    padding: 20px 30px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    max-width: 500px;
+    width: 95%;
+    transition: all 0.3s ease;
+}
+
+.container:hover { transform: translateY(-2px); }
+
+h1 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    background: linear-gradient(90deg, #096384, #513aa2, #0c24ba);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 1px;
+    letter-spacing: 1px;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 15px 0 10px 0;
+    font-size: 1em;
+    font-weight: 600;
+    color: #555;
+}
+
+.stats div { flex: 1; }
+
+#board {
+    display: grid;
+    grid-template-columns: repeat(15, 1fr);
+    width: 100%;
+    max-width: 450px;
+    aspect-ratio: 1;
+    margin: 15px auto;
+    gap: 3px;
+    background: #ccc;
+    padding: 6px;
+    border-radius: 14px;
+}
+
+.cell {
+    aspect-ratio: 1;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.2s, filter 0.2s;
+}
+
+.cell:hover { transform: scale(1.08); filter: brightness(1.1); }
+
+.cell.p1 { outline: 2px solid #4a90e2; }
+.cell.p2 { outline: 2px solid #e26a6a; }
+
+#reset {
+    padding: 10px 22px;
+    font-size: 1em;
+    background: linear-gradient(135deg, #6c8cff, #5676ff);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+#reset:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, #5676ff, #3e5edf);
+}
+
+.colors { margin-top: 12px; font-style: italic; color: #666; font-size: 0.9em; }
+
+.mode-select {
+    margin-bottom: 12px;
+    font-size: 0.95em;
+    color: #444;
+}
+.mode-select select {
+    padding: 4px 6px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    cursor: pointer;
+    margin-left: 6px;
+}
+
+/* Player 1 (you) */
+.stats div:first-child {
+    color: #4a90e2; /* màu xanh dương pastel */
+    font-weight: bold;
+}
+
+/* Player 2 / Computer */
+.stats div:nth-child(2) {
+    color: #1b1084; /* màu đỏ pastel */
+    font-weight: bold;
+}
+
+/* status text */
+#status {
+    color: #381255; /* màu chữ thông tin lượt */
+    font-weight: 600;
+    font-size: 0.95em;
+}
+
+@media(max-width: 500px) {
+    .stats { flex-direction: column; gap: 6px; font-size: 0.9em; }
+    h1 { font-size: 1.5em; }
+    #board { gap: 2px; }
+}

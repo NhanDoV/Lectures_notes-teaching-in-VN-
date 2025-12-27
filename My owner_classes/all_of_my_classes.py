@@ -1615,6 +1615,49 @@ class ProbaStatSims:
             times.append(max_t)
 
         return times.mean() / (n_ants + 1)
+    
+    # Problem 23.
+    def expectation_perpendicular_distance(self, N_sims: int) -> float:
+        """
+            Triangle ABC has sides of length 45, 60, and 75. Place a point D randomly and uniformly inside the triangle. 
+            What is the expected value of the sum of perpendicular distances from point D to the triangle's three sides?
+        """
+        import math
+        # vertices
+        A = (0.0, 0.0)
+        B = (60.0, 0.0)
+        C = (0.0, 45.0)
+
+        def dist_point_to_line(P, X, Y):
+            # distance from point P to line XY
+            x0, y0 = P
+            x1, y1 = X
+            x2, y2 = Y
+            num = abs((y2 - y1)*x0 - (x2 - x1)*y0 + x2*y1 - y2*x1)
+            den = math.hypot(y2 - y1, x2 - x1)
+            return num / den
+
+        def random_point_in_triangle():
+            u = random.random()
+            v = random.random()
+            if u + v > 1:
+                u = 1 - u
+                v = 1 - v
+            x = u * B[0] + v * C[0]
+            y = u * B[1] + v * C[1]
+            return (x, y)
+
+        N = 2_000_000
+        total = 0.0
+
+        for _ in range(N):
+            D = random_point_in_triangle()
+            d1 = dist_point_to_line(D, A, B)
+            d2 = dist_point_to_line(D, B, C)
+            d3 = dist_point_to_line(D, C, A)
+            total += (d1 + d2 + d3)
+
+        return total / N    
 
 # ========================================== MARKOV CHAIN & MCMC ===============================================
 import scipy.linalg

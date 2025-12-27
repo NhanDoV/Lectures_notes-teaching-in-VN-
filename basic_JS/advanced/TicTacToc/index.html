@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tic Tac Toe Game</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Game Title -->
+        <h1 class="game-title">Tic Tac Toe</h1>
+
+        <!-- Mode Selector -->
+        <div class="mode-selector">
+            <label>Play vs:</label>
+            <select id="gameMode">
+                <option value="human">Human</option>
+                <option value="computer">Computer</option>
+            </select>
+        </div>
+
+        <!-- Status -->
+        <div id="status">Player X's turn</div>
+
+        <!-- Game Board -->
+        <div id="board"></div>
+
+        <!-- Reset Button -->
+        <button id="reset">New Game</button>
+    </div>
+
+    <!-- Game Script -->
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flood Fill Color Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1> Color Conquest</h1>
+
+        <!-- OPTION HUMAN / COMPUTER -->
+        <div class="mode-select">
+            <label for="modePicker">Play vs:</label>
+            <select id="modePicker">
+                <option value="computer">Computer</option>
+                <option value="human">Human</option>
+            </select>
+        </div>
+
+        <div class="stats">
+            <div>You: <span id="p1-score">0</span>%</div>
+            <div><span id="p2-name">Computer</span>: <span id="p2-score">0</span>%</div>
+            <div id="status">Your turn</div>
+        </div>
+
+        <div id="board"></div>
+
+        <button id="reset">New Game</button>
+
+        <div class="colors">
+            <span>Click a cell to conquer!</span>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

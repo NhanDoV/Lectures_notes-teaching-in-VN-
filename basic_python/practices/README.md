@@ -2,6 +2,10 @@ This repository was originally created for practicing problems from `LeetCode`, 
 
 ![https://neetcode.io/roadmap](image.png)
 
+# Table of contents
+
+
+
 ```python
 # -*- coding: utf-8 -*-
 

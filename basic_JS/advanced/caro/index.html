@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Caro Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="container">
+    <h1>🎮 CARO GAME 🎮</h1>
+
+    <!-- Options Panel -->
+    <div id="options-panel" class="options-panel">
+        <div class="options-grid">
+            <div class="option-column">
+                <label>Board Size</label>
+                <select id="board-size">
+                    <option value="9">9x9</option>
+                    <option value="12">12x12</option>
+                    <option value="15" selected>15x15</option>
+                </select>
+
+                <label>Play With</label>
+                <select id="play-mode">
+                    <option value="human">Human</option>
+                    <option value="computer">Computer</option>
+                </select>
+            </div>
+
+            <div class="option-column">
+                <label>Symbol Color</label>
+                <select id="symbol-color">
+                    <option value="black">Black</option>
+                    <option value="white">White</option>
+                </select>
+
+                <label>Symbol Type</label>
+                <select id="symbol-type">
+                    <option value="X">X</option>
+                    <option value="O">O</option>
+                </select>
+            </div>
+        </div>
+
+        <button id="start-game" class="start-btn">Start</button>
+    </div>
+
+    <!-- Game Container -->
+    <div id="game-container" class="game-container hide">
+        <div id="status"></div>
+        <div id="board" class="board"></div>
+
+        <div class="game-controls">
+            <button id="restart-btn">Play again</button>
+            <button id="back-btn">Back</button>
+            <button id="new-game-btn">New game</button>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
