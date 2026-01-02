@@ -14,7 +14,7 @@ home, graphs = st.tabs((
 # List of shapes
 SHAPES = {
     "2D": {
-        "Tam giác": [
+        "Tam giác": [\
             "Tam giác thường",
             "Tam giác vuông",
             "Tam giác cân",

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <title>Toán Trắc Nghiệm - Quiz Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    />
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+    <!-- ========== MENU SCREEN (LAYOUT 1) ========== -->
+    <div id="menu-screen" class="screen active">
+        <h1><i class="fa-solid fa-gamepad"></i> Game Câu Đố</h1>
+        <p>Chọn bộ đề để bắt đầu</p>
+
+        <div class="quiz-sets">
+            <button class="set-btn" data-set="0">📉 Đạo hàm & Tích phân</button>
+            <button class="set-btn" data-set="1">🧠 Mệnh đề - Tập hợp - Logic</button>
+            <button class="set-btn" data-set="2">📐 Hình học phẳng</button>
+            <button class="set-btn" data-set="3">📦 Hình học không gian</button>
+            <button class="set-btn" data-set="4">⚖️ Bất phương trình & Bất đẳng thức</button>
+            <button class="set-btn" data-set="5">📊 Hàm số - Phương trình & Hệ</button>
+            <button class="set-btn" data-set="6">📐 Lượng giác & Quỹ tích</button>
+            <button class="set-btn" data-set="7">🔢 Số học - CSC & CSN</button>
+            <button class="set-btn" data-set="8">🎲 Xác suất & Thống kê</button>
+            <button class="set-btn" data-set="9">🧮 Tổ hợp - Chỉnh hợp</button>
+            <button class="set-btn" data-set="10">💠 Số phức</button>
+            <button class="set-btn" data-set="11">🧭 Vector & Tọa độ</button>
+        </div>
+
+        <p style="margin-top:20px">
+            Try to complete all the questions to see your score
+        </p>
+    </div>
+
+    <!-- ========== GAME SCREEN (LAYOUT 2) ========== -->
+    <div id="game-screen" class="screen">
+
+        <div class="progress">
+            <div id="set-name"></div>
+            <div id="question-progress">Câu 1/2</div>
+            <div class="score">Điểm: <span id="score">0</span></div>
+        </div>
+
+        <div id="question-image" class="question-image">?</div>
+        <div id="question-text" class="question-text"></div>
+
+        <div id="options" class="options"></div>
+
+        <button id="next-btn" class="next-btn" style="display:none;">
+            Tiếp tục
+        </button>
+    </div>
+
+    <!-- ========== END SCREEN (LAYOUT 3) ========== -->
+    <div id="end-screen" class="screen">
+        <h2>🎉 Hoàn Thành!</h2>
+
+        <div class="final-score-box">
+            <span id="final-score">1/2</span>
+            <span class="percent"></span>
+        </div>
+
+        <p id="final-message">👌 Khá ổn! Cố lên nhé!</p>
+
+        <button id="restart-btn" class="big-btn">Chơi lại</button>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
