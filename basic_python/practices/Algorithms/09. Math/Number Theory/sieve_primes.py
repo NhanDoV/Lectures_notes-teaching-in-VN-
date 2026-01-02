@@ -19,7 +19,7 @@ def sieve(n):
             primes.append(num)
     return primes
 
-# Ví dụ test
+# run
 if __name__ == "__main__":
     limit = int(input('input an integer limit : '))
     print(f"Primes up to {limit}: {sieve(limit)}")
