@@ -1,0 +1,120 @@
+/* Ẩn header/footer Streamlit */
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+header {visibility: hidden;}
+
+/* Sidebar (cột bên trái chứa các page) - làm đồng bộ màu xanh */
+section[data-testid="stSidebar"] {
+    background-color: #2563EB !important;  /* xanh đậm hơn tí cho nổi bật */
+    background-image: linear-gradient(180deg, #3B82F6, #1D4ED8);
+}
+
+section[data-testid="stSidebar"] .css-1d391kg {  /* text trong sidebar */
+    color: white !important;
+}
+
+section[data-testid="stSidebar"] .css-1v3fvcr {  /* hover item */
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+section[data-testid="stSidebar"] .css-1v3fvcr:hover {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Page active trong sidebar nổi bật hơn */
+div[data-testid="stSidebarNav"] li div[role="button"][aria-selected="true"] {
+    background-color: #FF4B4B !important;
+    border-radius: 8px;
+    color: white !important;
+}
+
+/* Main background (nền chính) - xanh nhạt như cũ */
+.stApp {
+    background-color: #60A5FA;
+    background-image: linear-gradient(to bottom, #93C5FD, #60A5FA);
+    /* Fix wide mode bị hẹp */
+    max-width: 100% !important;
+    width: 100% !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+}
+
+/* Làm đẹp selectbox một chút */
+.stSelectbox > div > div {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    border-radius: 12px !important;
+    color: white !important;
+}
+
+/* Success message */
+.stSuccess {
+    background-color: rgba(34, 197, 94, 0.2) !important;
+    border-radius: 12px;
+    border: 1px solid #22C55E;
+}
+
+/* Plot container */
+.stPyplot, .stPlotlyChart {
+    background-color: white;
+    border-radius: 16px;
+    padding: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Ẩn header/footer Streamlit */
+#MainMenu {visibility: hidden;}
+footer {visibility: hidden;}
+header {visibility: hidden;}
+
+/* Sidebar (cột bên trái chứa các page) - làm đồng bộ màu xanh */
+section[data-testid="stSidebar"] {
+    background-color: #2563EB !important;  /* xanh đậm hơn tí cho nổi bật */
+    background-image: linear-gradient(180deg, #3B82F6, #1D4ED8);
+}
+
+section[data-testid="stSidebar"] .css-1d391kg {  /* text trong sidebar */
+    color: white !important;
+}
+
+section[data-testid="stSidebar"] .css-1v3fvcr {  /* hover item */
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+section[data-testid="stSidebar"] .css-1v3fvcr:hover {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Page active trong sidebar nổi bật hơn */
+div[data-testid="stSidebarNav"] li div[role="button"][aria-selected="true"] {
+    background-color: #FF4B4B !important;
+    border-radius: 8px;
+    color: white !important;
+}
+
+/* Main background (nền chính) - xanh nhạt như cũ */
+.stApp {
+    background-color: #60A5FA;
+    background-image: linear-gradient(to bottom, #93C5FD, #60A5FA);
+}
+
+/* Làm đẹp selectbox một chút */
+.stSelectbox > div > div {
+    background-color: rgba(0, 0, 0, 0.3) !important;
+    border-radius: 12px !important;
+    color: white !important;
+}
+
+/* Success message */
+.stSuccess {
+    background-color: rgba(34, 197, 94, 0.2) !important;
+    border-radius: 12px;
+    border: 1px solid #22C55E;
+}
+
+/* Plot container */
+.stPyplot, .stPlotlyChart {
+    background-color: white;
+    border-radius: 16px;
+    padding: 10px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}

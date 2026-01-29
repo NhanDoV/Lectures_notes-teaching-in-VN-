@@ -98,6 +98,32 @@ class Distribution:
         y = A[1] + u * (B[1] - A[1]) + v * (C[1] - A[1])
         return x, y
 
+    def point_in_polygon(n_edges: int) -> Tuple[float, float]:
+        """
+            Uniform random point trong đa giác đều n-cạnh
+        """
+        # Step 1: pick triangle
+        i = random.randint(0, n_edges - 1)
+
+        theta1 = 2 * math.pi * i / n_edges
+        theta2 = 2 * math.pi * (i + 1) / n_edges
+
+        v1 = (math.cos(theta1), math.sin(theta1))
+        v2 = (math.cos(theta2), math.sin(theta2))
+
+        # Step 2: uniform point in triangle (0, v1, v2)
+        u = random.random()
+        v = random.random()
+
+        if u + v > 1:
+            u = 1 - u
+            v = 1 - v
+
+        x = u * v1[0] + v * v2[0]
+        y = u * v1[1] + v * v2[1]
+
+        return (x, y)
+
     # =========================
     # Geometry helpers
     # =========================

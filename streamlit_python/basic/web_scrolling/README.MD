@@ -9,6 +9,8 @@ pip install streamlit
 streamlit run web_scrolling.py
 ```
 
+**Results.**
+
 <video controls width="640" height="360">
-  <source src="streamlit_python/basic/web_scrolling/demo.mp4" type="video/mp4">
+  <source src="demo.mp4" type="video/mp4">
 </video>

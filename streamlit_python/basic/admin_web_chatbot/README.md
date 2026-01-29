@@ -1,7 +1,9 @@
 #### Step 1.
+```python
+pip install -r requirements.txt
+```
 
 #### Step 2.
-
-![image](data/images/image_run_web.png)
-
-![image](data/images/image_get_web.png)
+```python
+streamlit run server.py
+```
